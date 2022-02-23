@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import News from "../News/News.js";
-import './NewsManager.style.css';
 const NewsManager = ({newsList}) => {
   return (
   <div className="allNews">
