@@ -9,7 +9,6 @@ const LoginPage = ()=>{
     const {isAuthenticate, setIsAuthenticate} = React.useContext(IsAuthenticateContext);
     const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
     const [userDetails, setUserDetails] = useState({email:"", password: ""});
-    const [error, setError] = useState(null);
     const history = useHistory();
 
     const submitHandle = e=>{
@@ -29,8 +28,7 @@ const LoginPage = ()=>{
                         history.push("/UsersHomePage");
                     }
                 }else{
-                    setError("details do not match!");
-
+                    alert('שם משתמש או סיסמא שגויים');
                 }
         })
     }
@@ -42,7 +40,6 @@ const LoginPage = ()=>{
                         <Form onSubmit={submitHandle}>
                             <img className='mb-5' src={require('../../images/wolfsonBuddyLogo.jpg')} width="100%"
                                  height="100%" alt="wolfsonBuddyLogo"/>
-                            <b>{error ? error : ""}</b>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Control type="email" placeholder="Enter email"
                                               onChange={e=>setUserDetails({...userDetails, email: e.target.value})}/>
