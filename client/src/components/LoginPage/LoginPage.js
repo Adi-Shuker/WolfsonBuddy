@@ -13,6 +13,7 @@ const LoginPage = ()=>{
                 if(data.length === 1){
                     console.log("Logged in!");
                 }else{
+                    alert('שם משתמש או סיסמא שגויים');
                     console.log("details do not match!");
                 }
         })
