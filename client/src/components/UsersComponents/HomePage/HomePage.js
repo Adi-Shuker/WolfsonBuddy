@@ -13,4 +13,5 @@ const UsersHomePage = () => {
         </div>
     )
 }
+
 export default UsersHomePage;
