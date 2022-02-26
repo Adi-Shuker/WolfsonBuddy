@@ -5,7 +5,7 @@ import {Redirect} from "react-router-dom";
 const UsersHomePage = () => {
     const {isAuthenticate, setIsAuthenticate} = React.useContext(IsAuthenticateContext);
     if (!isAuthenticate){
-        return <Redirect to="login"/>
+        return <Redirect to="/"/>
     }
     return(
         <div className="Users home page">

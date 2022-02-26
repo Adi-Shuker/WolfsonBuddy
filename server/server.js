@@ -33,7 +33,6 @@ app.get("/api", (req, res) => {
 
 // check if the user exist
 app.post("/isExist", (req, res) => {
-    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
     executeQuery("SELECT * FROM users WHERE user_name =" + "'" + email + "'" + " AND user_password =" + "'" + password + "'")
