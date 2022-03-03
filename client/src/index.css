@@ -1,4 +1,14 @@
 .App {
   text-align: center;
 }
+.LoginPage {
+  text-align: center;
+}
 
+.text-right{
+  text-align: right;
+}
+.text-center{
+  justify-content: center;
+  align-items: center;
+}
