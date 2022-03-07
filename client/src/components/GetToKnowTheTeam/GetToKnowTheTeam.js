@@ -9,6 +9,7 @@ import React,{useState} from 'react';
 //let doctorsList = [{name: "doc1", department: "dep1"}, {name: "doc2", department: "dep1"}, {name: "doc3", department: "dep2"},]
 //
 const GetToKnowTheTeam = ({departmentsList, doctorsList}) => {
+
     const [value,setValue]=useState(doctorsList);
     const handleSelect=(e)=>{
         setValue(doctorsList.filter(
