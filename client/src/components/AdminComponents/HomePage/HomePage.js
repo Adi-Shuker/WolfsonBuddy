@@ -2,9 +2,9 @@ import { Redirect } from "react-router-dom"
 import React from "react";
 import {IsAdminContext, IsAuthenticateContext} from "../../../App";
 const AdminHomePage = () => {
-    const {isAuthenticate, setIsAuthenticate} = React.useContext(IsAuthenticateContext);
+    const {isAuthenticated, setIsAuthenticated} = React.useContext(IsAuthenticateContext);
     const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
-    if (!isAuthenticate || !isAdmin){
+    if (!isAuthenticated || !isAdmin){
         return <Redirect to="/"/>
     }
     return(

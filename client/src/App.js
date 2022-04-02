@@ -1,35 +1,57 @@
 import './index.css';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from "./components/LoginPage/LoginPage";
 import AdminHomePage from "./components/AdminComponents/HomePage/HomePage";
 import UsersHomePage from "./components/UsersComponents/HomePage/HomePage";
-import {BrowserRouter,Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
 
-export const IsAuthenticateContext = React.createContext();
-export const IsAdminContext = React.createContext();
+export const IsAuthenticateContext = React.createContext({});
+export const IsAdminContext = React.createContext({});
 
 function App() {
-    const [isAuthenticate, setIsAuthenticate] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [data, setData] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false);
-    return(
-        <IsAuthenticateContext.Provider value={{ isAuthenticate, setIsAuthenticate }}>
-        <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken")
+        fetch('/api/verify-token', {
+            method: 'GET',
+            headers: {"Content-Type": "application/json", "x-access-token": token}
+        }).then(res => res.json()).then(res => {
+            console.log(res)
+            setIsAuthenticated(res.isAuthenticated)
+            setData(true)
+
+        }).catch(err => {
+            setIsAuthenticated(false)
+            setData(true)
+        })
+    }, [])
+
+    return (
+        <IsAuthenticateContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
+            <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
                 <div className="app">
                     <BrowserRouter>
-                        <Switch>
-                            <Route exact path="/" component={LoginPage}/>
-                            <Route exact path="/usersHomePage" component={UsersHomePage}/>
-                            <Route exact path="/adminHomePage" component={AdminHomePage}/>
-                            <Route exact path="/createNewAccount" component={CreateNewAccount}/>
-                            <Route exact path="/forgotPassword" component={ForgotPassword}/>
-                        </Switch>
+                        {data ? <Switch>
+                                <Route exact path="/usersHomePage" component={UsersHomePage}/>
+                                <Route exact path="/adminHomePage" component={AdminHomePage}/>
+                                <Route exact path="/createNewAccount" component={CreateNewAccount}/>
+                                <Route exact path="/forgotPassword" component={ForgotPassword}/>
+                                <Route exact path="/" component={LoginPage}/>
+                            </Switch>
+                            : null}
                     </BrowserRouter>
+
                 </div>
-        </IsAdminContext.Provider>
+            </IsAdminContext.Provider>
         </IsAuthenticateContext.Provider>
     )
+
 }
+
+
 export default App;
