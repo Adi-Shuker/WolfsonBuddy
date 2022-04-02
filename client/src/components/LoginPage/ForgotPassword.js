@@ -9,11 +9,24 @@ const ForgotPassword = ()=>{
 
     const submitHandle = e=>{
         e.preventDefault();
-        if(userDetails.email !== null){
-            history.push("/");
-        }else{
-            alert('אירעה שגיאה');
-        }
+        fetch('/api/update_password', {
+            method: 'POST',
+            headers:{"Content-Type": "application/json"},
+            body: JSON.stringify(userDetails)
+        }).then((res) => {
+            if(res.status !== 200){
+                alert('דואר אלקטרוני לא קיים במערכת');
+                return;
+            }
+            return res.json();
+        }).then((data)=>{
+            if(data[0].row_count === 1){
+                history.push("/");
+                alert('הסיסמא שונתה בהצלחה');
+            }else{
+                alert('דואר אלקטרוני לא קיים במערכת');
+            }
+        })
     }
     return (
         <>
