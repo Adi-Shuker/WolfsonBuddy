@@ -6,22 +6,23 @@ import {Link, useHistory} from "react-router-dom";
 
 const LoginPage = ()=>{
 
-    const {isAuthenticate, setIsAuthenticate} = React.useContext(IsAuthenticateContext);
+    const {isAuthenticated, setIsAuthenticated} = React.useContext(IsAuthenticateContext);
     const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
     const [userDetails, setUserDetails] = useState({email:"", password: ""});
     const history = useHistory();
 
     const submitHandle = e=>{
         e.preventDefault();
-        fetch('/isExist', {
+        fetch('/api/auth/signin', {
             method: 'POST',
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify(userDetails)
         }).then((res) => res.json())
             .then((data)=>{
-                if(data.length === 1){
-                    setIsAuthenticate(true);
-                    if(data[0].is_admin === 1){
+                if(data.id !== undefined){
+                    localStorage.setItem('accessToken',data.accessToken);
+                    setIsAuthenticated(true);
+                    if(data.role === 'Admin'){
                         setIsAdmin(true);
                         history.push("/adminHomePage");
                     }else{

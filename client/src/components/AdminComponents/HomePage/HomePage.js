@@ -7,9 +7,9 @@ import AddNewsAndUpdates from '../AddNewsAndUpdates/AddNewsAndUpdates.js';
 import SurveyResults from '../SurveyResults/SurveyResults.js';
 import TabContent from 'react-bootstrap/TabContent'
 const AdminHomePage = () => {
-    const {isAuthenticate, setIsAuthenticate} = React.useContext(IsAuthenticateContext);
+    const {isAuthenticated, setIsAuthenticated} = React.useContext(IsAuthenticateContext);
     const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
-    if (!isAuthenticate || !isAdmin){
+    if (!isAuthenticated || !isAdmin){
         return <Redirect to="/"/>
     }
     let departmentsList = ["dep1","dep2","dep3"]

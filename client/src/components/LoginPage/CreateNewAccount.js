@@ -4,16 +4,25 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 const CreateNewAccount = ()=>{
-    const [userDetails, setUserDetails] = useState({email:"", password: ""});
+    const [userDetails, setUserDetails] = useState({username: '', email:'', password: '', role: 'user'});
     const history = useHistory();
 
     const submitHandle = e=>{
         e.preventDefault();
-        if(userDetails.email !== null){
-            history.push("/");
-        }else{
-            alert('אירעה שגיאה');
-        }
+        fetch('/api/auth/signup', {
+            method: 'POST',
+            headers:{"Content-Type": "application/json"},
+            body: JSON.stringify(userDetails)
+        }).then((res) => {
+            if(res.status === 200){
+                alert('הרישום בוצע בהצלחה!');
+                history.push("/");
+            }else if(res.status === 400){
+                alert('דואר אלקטרוני כבר קיים במערכת');
+            }else{
+                alert('יש למלא את כל השדות');
+            }
+        })
     }
     return (
         <>
@@ -24,12 +33,8 @@ const CreateNewAccount = ()=>{
                             <img className='mb-5' src={require('../../images/wolfsonBuddyLogo.jpg')} width="100%"
                                  height="100%" alt="wolfsonBuddyLogo"/>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Control className="text-right"  type="text" placeholder="שם פרטי"
-                                                  onChange={e=>setUserDetails({...userDetails, password: e.target.value})}/>
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Control className="text-right" type="text" placeholder="שם משפחה"
-                                              onChange={e=>setUserDetails({...userDetails, password: e.target.value})}/>
+                                <Form.Control className="text-right"  type="text" placeholder="שם מלא"
+                                                  onChange={e=>setUserDetails({...userDetails, username: e.target.value})}/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
