@@ -34,7 +34,6 @@ const DoctorsByDepartment = ({setData, departmentsList, doctorsList}) => {
     console.log('DoctorsByDepartment render')
     return(
         <div className="DoctorsByDepartment">
-            <h2>Doctors By Department</h2>
             <DropdownButton id="dropdown-departments" onSelect={departmentSelect} title={departmentsTitle}>
                 {
                     departmentsList.map(function(name, index){

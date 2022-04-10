@@ -19,11 +19,17 @@ const AdminHomePage = () => {
         {title:"תוצאות סקרים", componentName:"SurveyResults"},
     ]
     var component = null;
-    const [componentName, setComponentName] = useState (null)
+    var componentName;
+    var setComponentName;
+    const tabSelected =(e)=>{
+             console.log(e)
+
+        }
+/*    const [componentName, setComponentName] = useState ("")
     const tabSelected =(e)=>{
          console.log(e)
          setComponentName(e)
-    }
+    }*/
     const createComponent = () => {
         if (componentName==="AddNewsAndUpdates")
               return <AddNewsAndUpdates/>
