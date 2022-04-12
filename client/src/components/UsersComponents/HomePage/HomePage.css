@@ -1,0 +1,33 @@
+.users-home-page{
+    position: fixed;
+    width: 100%;
+    heigth: 100%;
+}
+
+.navigation-popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    heigth: 100vh;
+    background-color: rgba(0,0,0,0.2);
+
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+}
+
+.navigation-popup-inner {
+    position :relative;
+    pandding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: #FFF;
+}
+
+.navigation-popup-inner.close-bth {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}

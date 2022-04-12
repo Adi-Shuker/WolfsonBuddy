@@ -7,14 +7,17 @@ import UsersHomePage from "./components/UsersComponents/HomePage/HomePage";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
+import "./App.css"
 
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
+export const UserDetailsContext = React.createContext({});
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [data, setData] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         fetch('/api/verify-token', {
@@ -24,7 +27,6 @@ function App() {
             console.log(res)
             setIsAuthenticated(res.isAuthenticated)
             setData(true)
-
         }).catch(err => {
             setIsAuthenticated(false)
             setData(true)
@@ -34,6 +36,7 @@ function App() {
     return (
         <IsAuthenticateContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
             <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
+                <UserDetailsContext.Provider value={{userDetails, setUserDetails}}>
                 <div className="app">
                     <BrowserRouter>
                         {data ? <Switch>
@@ -47,6 +50,7 @@ function App() {
                     </BrowserRouter>
 
                 </div>
+                </UserDetailsContext.Provider>
             </IsAdminContext.Provider>
         </IsAuthenticateContext.Provider>
     )
