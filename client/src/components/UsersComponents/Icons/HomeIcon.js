@@ -11,9 +11,9 @@ const Home = styled.div`
   }
 `;
 
-const HomeIcon = ({ onClick }) => {
+const HomeIcon = () => {
   return (
-    <Home onClick={onClick}>
+    <Home>
       <svg version="1.1" viewBox="0 0 330.242 330.242">
         <path
           d="M324.442,129.811l-41.321-33.677V42.275c0-6.065-4.935-11-11-11h-26c-6.065,0-11,4.935-11,11v14.737l-55.213-44.999

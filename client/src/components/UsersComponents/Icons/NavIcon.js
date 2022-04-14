@@ -9,9 +9,9 @@ const Nav = styled.div`
   }
 `;
 
-const NavIcon = ({ onClick }) => {
+const NavIcon = () => {
   return (
-    <Nav onClick={onClick}>
+    <Nav>
       <svg
         version="1.1"
         viewBox="-70 -70 650 650

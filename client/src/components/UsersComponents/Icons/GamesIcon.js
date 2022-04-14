@@ -9,9 +9,9 @@ const Game = styled.div`
   }
 `;
 
-const GameIcon = ({ onClick }) => {
+const GameIcon = () => {
   return (
-    <Game onClick={onClick}>
+    <Game>
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

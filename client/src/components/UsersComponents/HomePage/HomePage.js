@@ -20,6 +20,8 @@ const Hello = styled.div`
 `;
 
 const Content = styled.div`
+  margin-right: 5%;
+  margin-left: 5%;
   .visualMenuDiv {
     display: flex;
     justify-content: center;
@@ -57,8 +59,9 @@ const UsersHomePage = () => {
         </Hello>
         <Content>
           <UpcomingAppointment></UpcomingAppointment>
+          <VisualMenu className="visualMenuDiv"></VisualMenu>
         </Content>
-        <VisualMenu className="visualMenuDiv"></VisualMenu>
+
         <div className="users-home-page">
           <button onClick={() => setButtonNavigationPopup(true)}>open</button>
           <NavigationPopup

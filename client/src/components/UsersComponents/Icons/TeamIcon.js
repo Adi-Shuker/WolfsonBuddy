@@ -9,9 +9,9 @@ const Team = styled.div`
   }
 `;
 
-const TeamIcon = ({ onClick }) => {
+const TeamIcon = () => {
   return (
-    <Team onClick={onClick}>
+    <Team>
       <svg viewBox="-40 -40 450 450">
         <path
           d="M372.482,263.045c0-21.796-6.527-42.842-18.877-60.863c-8.883-12.962-20.322-23.726-33.578-31.725

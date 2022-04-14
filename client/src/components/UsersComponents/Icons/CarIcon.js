@@ -9,9 +9,9 @@ const Car = styled.div`
   }
 `;
 
-const CarIcon = ({ onClick }) => {
+const CarIcon = () => {
   return (
-    <Car onClick={onClick}>
+    <Car>
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

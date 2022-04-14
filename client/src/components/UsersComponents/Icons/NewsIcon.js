@@ -9,9 +9,9 @@ const News = styled.div`
   }
 `;
 
-const NewsIcon = ({ onClick }) => {
+const NewsIcon = () => {
   return (
-    <News onClick={onClick}>
+    <News>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -30 300 300">
         <path
           d="M235.437,60.699h-31.709V30.927c0-4.142-3.358-7.5-7.5-7.5H7.5c-4.142,0-7.5,3.358-7.5,7.5v161.478

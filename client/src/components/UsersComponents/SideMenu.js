@@ -32,7 +32,7 @@ const SideMenu = () => {
     console.log(option[index].path);
   };
   const option = [
-    { className: "main", text: "ראשי", path: "/HomePage", icon: HomeIcon },
+    { className: "main", text: "ראשי", path: "/HomePage", icon: GameIcon },
     {
       className: "getToKnowTheTeam",
       text: "הכר את הצוות",

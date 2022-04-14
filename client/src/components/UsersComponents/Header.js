@@ -77,7 +77,6 @@ const Header = () => {
           onHide={() => setShowSideMenu(false)}
         >
           <SideMenu />
-          <SideMenu />
         </Modal>
       </div>
     </HeaderDiv>
