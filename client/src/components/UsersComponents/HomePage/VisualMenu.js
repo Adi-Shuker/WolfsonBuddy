@@ -4,56 +4,63 @@ import TeamIcon from "../Icons/TeamIcon";
 import NavIcon from "../Icons/NavIcon";
 import NewsIcon from "../Icons/NewsIcon";
 import styled from "styled-components";
-const IconsCollection = styled.div`
-    text-align: center;
-    display: flex;
-    justify-content: center;
-        padding: 50px,50px,50px,50px;
-    
-    .iconWrapper{
-    margin: 50px,50px,50px,50px;
+import React from "react";
+import { Grid } from "@mui/material";
+const IconsCollection = styled.div``;
+const Line = styled.div`
+  display: flex;
+  item-align: center;
+  justify-content: center;
+  .iconWrapper {
     border-radius: 10px;
-        border-size: 2px;
-        border-style: solid;
-        border-color:#2E388D;
-        
-        margin-left: 20px;
-        
-    }
+    border-size: 1px;
+    border-style: solid;
+    border-color: #2e388d;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
 `;
+const VisualMenu = () => {
+  const handleMenuItemClick = ({ iconClicked }) => {
+    console.log({ iconClicked });
+  };
 
-const VisualMenu =() =>
-{
-    return (
-        <div>
-            תפריט ויזואלי
-            <IconsCollection>
-                <div className="iconWrapper">
-                    <CarIcon onClick={()=>{console.log("CarClicked")}}/>
-                </div>
-                <div className="iconWrapper">
-                    <GameIcon/>
-                </div>
-                <div className="iconWrapper">
-                    <TeamIcon/>
-                </div>
-                <div className="iconWrapper">
-                    <NewsIcon/>
-                </div>
-                <div className="iconWrapper">
-                    <NavIcon/>
-                </div>
+  return (
+    <div>
+      <IconsCollection className="IconsCollection">
+        <Line className="first line">
+          <div className="iconWrapper">
+            <CarIcon
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "CarClicked" });
+              }}
+            />
+          </div>
+          <div className="iconWrapper">
+            <GameIcon
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "GameClicked" });
+              }}
+            />
+          </div>
+          <div className="iconWrapper">
+            <TeamIcon />
+          </div>
+        </Line>
 
-
-
-
-
-            </IconsCollection>
-
-
-        </div>
-    )
-
-}
+        <Line className="second line">
+          <div className="iconWrapper">
+            <NewsIcon />
+          </div>
+          <div className="iconWrapper">
+            <NavIcon />
+          </div>
+        </Line>
+      </IconsCollection>
+    </div>
+  );
+};
 
 export default VisualMenu;
