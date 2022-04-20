@@ -4,7 +4,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 const CreateNewAccount = ()=>{
-    const [userInput, setUserInput] = useState({username: '', email:'', password: '', role: 'user'});
+    const [userDetails, setUserDetails] = useState({username: '', email:'', password: '', role: 'user'});
     const history = useHistory();
 
     const submitHandle = e=>{
@@ -12,7 +12,7 @@ const CreateNewAccount = ()=>{
         fetch('/api/auth/signup', {
             method: 'POST',
             headers:{"Content-Type": "application/json"},
-            body: JSON.stringify(userInput)
+            body: JSON.stringify(userDetails)
         }).then((res) => {
             if(res.status === 200){
                 alert('הרישום בוצע בהצלחה!');
@@ -34,21 +34,21 @@ const CreateNewAccount = ()=>{
                                  height="100%" alt="wolfsonBuddyLogo"/>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Control className="text-right"  type="text" placeholder="שם מלא"
-                                                  onChange={e=>setUserInput({...userInput, username: e.target.value})}/>
+                                                  onChange={e=>setUserDetails({...userDetails, username: e.target.value})}/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Control className="text-right" type="email" placeholder="דואר אלקטרוני"
-                                              onChange={e=>setUserInput({...userInput, email: e.target.value})}/>
+                                              onChange={e=>setUserDetails({...userDetails, email: e.target.value})}/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Control className="text-right"  type="password" placeholder="סיסמא"
-                                              onChange={e=>setUserInput({...userInput, password: e.target.value})}/>
+                                              onChange={e=>setUserDetails({...userDetails, password: e.target.value})}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Control className="text-right"  type="password" placeholder="אימות סיסמא"
-                                              onChange={e=>setUserInput({...userInput, password: e.target.value})}/>
+                                              onChange={e=>setUserDetails({...userDetails, password: e.target.value})}/>
                             </Form.Group>
 
                             <Button variant="success btn-block" type="submit">

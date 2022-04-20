@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Dropdown, DropdownButton} from "react-bootstrap";
 import DoctorsByDepartment from "../DoctorsByDepartment";
 import PresentDoctor from "../PresentDoctor";
+import "./style"
 
 const GetToKnowTheTeam = ({departmentsList, doctorsList}) => {
     const [data, setData] = useState('');
@@ -13,7 +14,6 @@ const GetToKnowTheTeam = ({departmentsList, doctorsList}) => {
     console.log('GetToKnowTheTeam render')
     return(
     <div>
-        <h2>GetToKnowTheTeam</h2>
         <DoctorsByDepartment id="something" setData={setData} departmentsList={departmentsList} doctorsList={doctorsList}/>
         {renderDoctor()}
         <h2>end</h2>

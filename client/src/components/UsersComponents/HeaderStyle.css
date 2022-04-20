@@ -1,0 +1,9 @@
+.something {
+    /*position: absolute;*/
+
+    width: 250px;
+    padding-top: 10px;
+    left: calc(100% - 250px);
+}
+
+
