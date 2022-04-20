@@ -5,7 +5,7 @@ import React, { useCallback } from "react";
 import { Modal } from "react-bootstrap";
 import { useSpring, animated as a } from "react-spring";
 
-import "./style.css";
+import "./HeaderStyle.css";
 const HeaderDiv = styled.div`
   .modal.custom .modal-dialog {
     width: 50%;
@@ -21,6 +21,7 @@ const Title = styled.div`
   background-color: #feb914;
   text-align: center;
   width: 100%;
+  padding: 10px;
 `;
 
 const MenuLine = styled.div`

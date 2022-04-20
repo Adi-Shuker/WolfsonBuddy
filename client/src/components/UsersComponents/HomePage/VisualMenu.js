@@ -4,8 +4,10 @@ import TeamIcon from "../Icons/TeamIcon";
 import NavIcon from "../Icons/NavIcon";
 import NewsIcon from "../Icons/NewsIcon";
 import styled from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
+import NavigationDiv from "./NavigationDiv";
+import { Modal } from "react-bootstrap";
 const IconsCollection = styled.div``;
 const Line = styled.div`
   display: flex;
@@ -25,40 +27,67 @@ const Line = styled.div`
 const VisualMenu = () => {
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
+    if (iconClicked == "CarClicked") {
+      setButtonNavigationPopup(true);
+    }
   };
-
+  const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
   return (
     <div>
       <IconsCollection className="IconsCollection">
         <Line className="first line">
-          <div className="iconWrapper">
-            <CarIcon
-              onClick={() => {
-                handleMenuItemClick({ iconClicked: "CarClicked" });
-              }}
-            />
+          <div
+            className="iconWrapper"
+            onClick={() => {
+              handleMenuItemClick({ iconClicked: "CarClicked" });
+            }}
+          >
+            <CarIcon />
           </div>
-          <div className="iconWrapper">
-            <GameIcon
-              onClick={() => {
-                handleMenuItemClick({ iconClicked: "GameClicked" });
-              }}
-            />
+          <div
+            className="iconWrapper"
+            onClick={() => {
+              handleMenuItemClick({ iconClicked: "GameClicked" });
+            }}
+          >
+            <GameIcon />
           </div>
-          <div className="iconWrapper">
+          <div
+            className="iconWrapper"
+            onClick={() => {
+              handleMenuItemClick({ iconClicked: "TeamClicked" });
+            }}
+          >
             <TeamIcon />
           </div>
         </Line>
 
         <Line className="second line">
-          <div className="iconWrapper">
+          <div
+            className="iconWrapper"
+            onClick={() => {
+              handleMenuItemClick({ iconClicked: "NewsClicked" });
+            }}
+          >
             <NewsIcon />
           </div>
-          <div className="iconWrapper">
+          <div
+            className="iconWrapper"
+            onClick={() => {
+              handleMenuItemClick({ iconClicked: "NavClicked" });
+            }}
+          >
             <NavIcon />
           </div>
         </Line>
       </IconsCollection>
+      <Modal
+        className="navModal"
+        show={buttonNavigationPopup}
+        onHide={() => setButtonNavigationPopup(false)}
+      >
+        <NavigationDiv />
+      </Modal>
     </div>
   );
 };

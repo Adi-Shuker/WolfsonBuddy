@@ -6,8 +6,9 @@ import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
 import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
-import NavigationPopup from "./NavigationPopup.js";
-import SideMenu from "../SideMenu";
+import NavigationDiv from "./NavigationDiv.js";
+import "./HomePage.css";
+import { Modal } from "react-bootstrap";
 
 const UserIconWrapper = styled.div`
   text-align: center;
@@ -27,6 +28,8 @@ const Content = styled.div`
     justify-content: center;
   }
 `;
+const NavModal = styled.div``;
+
 const UsersHomePage = () => {
   const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
 
@@ -50,7 +53,7 @@ const UsersHomePage = () => {
   return (
     console.log(userDetails) || (
       <div className="Users home page">
-        <Header />
+        {<Header />}
         <Hello>
           <UserIconWrapper>
             <UserIcon />
@@ -61,14 +64,6 @@ const UsersHomePage = () => {
           <UpcomingAppointment></UpcomingAppointment>
           <VisualMenu className="visualMenuDiv"></VisualMenu>
         </Content>
-
-        <div className="users-home-page">
-          <button onClick={() => setButtonNavigationPopup(true)}>open</button>
-          <NavigationPopup
-            trigger={buttonNavigationPopup}
-            setTrigger={setButtonNavigationPopup}
-          />
-        </div>
       </div>
     )
   );
