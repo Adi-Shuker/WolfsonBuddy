@@ -14,6 +14,8 @@ import NewsManager from "./components/NewsManager/NewsManager";
 import GetToKnowTheTeam from "./components/GetToKnowTheTeam/GetToKnowTheTeam";
 import EditGetToKnowTheTeam from "./components/AdminComponents/EditGetToKnowTheTeam/EditGetToKnowTheTeam.js";
 import Header from "./components/UsersComponents/Header.js";
+import Game from "./components/Game/Game";
+import News from "./components/News/News";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
@@ -72,6 +74,13 @@ function App() {
                     path="/forgotPassword"
                     component={ForgotPassword}
                   />
+                  <Route
+                    exact
+                    path="/GetToKnowTheTeam"
+                    component={GetToKnowTheTeam}
+                  />
+                  <Route exact path="/Game" component={Game} />
+                  <Route exact path="/News" component={News} />
                   <Route exact path="/" component={LoginPage} />
                 </Switch>
               ) : null}

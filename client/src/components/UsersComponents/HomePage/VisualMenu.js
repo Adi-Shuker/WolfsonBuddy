@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import NavigationDiv from "./NavigationDiv";
 import { Modal } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 const IconsCollection = styled.div``;
 const Line = styled.div`
   display: flex;
@@ -21,10 +22,13 @@ const Line = styled.div`
   }
 `;
 const VisualMenu = () => {
+  const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
       setButtonNavigationPopup(true);
+    } else {
+      history.push(iconClicked);
     }
   };
   const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
@@ -43,7 +47,7 @@ const VisualMenu = () => {
           <div
             className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "GameClicked" });
+              handleMenuItemClick({ iconClicked: "/Game" });
             }}
           >
             <GameIcon />
@@ -51,7 +55,7 @@ const VisualMenu = () => {
           <div
             className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "TeamClicked" });
+              handleMenuItemClick({ iconClicked: "/GetToKnowTheTeam" });
             }}
           >
             <TeamIcon />
@@ -62,7 +66,7 @@ const VisualMenu = () => {
           <div
             className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "NewsClicked" });
+              handleMenuItemClick({ iconClicked: "/News" });
             }}
           >
             <NewsIcon />
@@ -70,7 +74,7 @@ const VisualMenu = () => {
           <div
             className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "NavClicked" });
+              handleMenuItemClick({ iconClicked: "/NavInHospital" });
             }}
           >
             <NavIcon />
