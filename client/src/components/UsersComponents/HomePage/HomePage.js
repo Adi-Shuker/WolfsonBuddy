@@ -9,17 +9,24 @@ import styled, { css } from "styled-components";
 import NavigationDiv from "./NavigationDiv.js";
 import "./HomePage.css";
 import { Modal } from "react-bootstrap";
-
-const UserIconWrapper = styled.div`
-  text-align: center;
-  display: flex;
-  justify-content: center;
-`;
+import Survey from "./Survey";
 
 const Hello = styled.div`
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
 `;
 
+const RightDiv = styled.div`
+  width: 50%;
+  position: relative;
+`;
+const LeftDiv = styled.div`
+  width: 50%;
+`;
 const Content = styled.div`
   margin-right: 5%;
   margin-left: 5%;
@@ -31,8 +38,7 @@ const Content = styled.div`
 const NavModal = styled.div``;
 
 const UsersHomePage = () => {
-  const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
-
+  const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
@@ -53,12 +59,17 @@ const UsersHomePage = () => {
   return (
     console.log(userDetails) || (
       <div className="Users home page">
-        {<Header />}
         <Hello>
-          <UserIconWrapper>
-            <UserIcon />
-          </UserIconWrapper>
-          <h2>שלום {userName}</h2>
+          <LeftDiv className="leftDivSurvey">
+            {" "}
+            {surveyAvailable ? <Survey /> : null}
+          </LeftDiv>
+          <RightDiv className="rightDiv vertical-center">
+            <div className="IconWrapper">
+              <UserIcon />
+            </div>
+            <h2>שלום {userName}</h2>
+          </RightDiv>
         </Hello>
         <Content>
           <UpcomingAppointment></UpcomingAppointment>

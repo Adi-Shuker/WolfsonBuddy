@@ -8,16 +8,13 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import NavigationDiv from "./NavigationDiv";
 import { Modal } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 const IconsCollection = styled.div``;
 const Line = styled.div`
   display: flex;
   item-align: center;
   justify-content: center;
   .iconWrapper {
-    border-radius: 10px;
-    border-size: 1px;
-    border-style: solid;
-    border-color: #2e388d;
     margin-right: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
@@ -25,10 +22,13 @@ const Line = styled.div`
   }
 `;
 const VisualMenu = () => {
+  const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
       setButtonNavigationPopup(true);
+    } else {
+      history.push(iconClicked);
     }
   };
   const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
@@ -37,7 +37,7 @@ const VisualMenu = () => {
       <IconsCollection className="IconsCollection">
         <Line className="first line">
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "CarClicked" });
             }}
@@ -45,17 +45,17 @@ const VisualMenu = () => {
             <CarIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "GameClicked" });
+              handleMenuItemClick({ iconClicked: "/Game" });
             }}
           >
             <GameIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "TeamClicked" });
+              handleMenuItemClick({ iconClicked: "/GetToKnowTheTeam" });
             }}
           >
             <TeamIcon />
@@ -64,17 +64,17 @@ const VisualMenu = () => {
 
         <Line className="second line">
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "NewsClicked" });
+              handleMenuItemClick({ iconClicked: "/News" });
             }}
           >
             <NewsIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
-              handleMenuItemClick({ iconClicked: "NavClicked" });
+              handleMenuItemClick({ iconClicked: "/NavInHospital" });
             }}
           >
             <NavIcon />
