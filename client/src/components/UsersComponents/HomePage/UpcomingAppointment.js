@@ -40,7 +40,6 @@ const UpcomingAppointment = () => {
   const departmentName = "אף אוזן גרון";
   return (
     <UpcomingAppointmentDiv className="UpcomingAppointmentDiv">
-      <span>:תורים קרובים</span>
       <Appointment>
         <h1>{doctorName}</h1>
         <h2>{departmentName}</h2>

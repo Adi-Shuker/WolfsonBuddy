@@ -14,10 +14,6 @@ const Line = styled.div`
   item-align: center;
   justify-content: center;
   .iconWrapper {
-    border-radius: 10px;
-    border-size: 1px;
-    border-style: solid;
-    border-color: #2e388d;
     margin-right: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
@@ -37,7 +33,7 @@ const VisualMenu = () => {
       <IconsCollection className="IconsCollection">
         <Line className="first line">
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "CarClicked" });
             }}
@@ -45,7 +41,7 @@ const VisualMenu = () => {
             <CarIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "GameClicked" });
             }}
@@ -53,7 +49,7 @@ const VisualMenu = () => {
             <GameIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "TeamClicked" });
             }}
@@ -64,7 +60,7 @@ const VisualMenu = () => {
 
         <Line className="second line">
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "NewsClicked" });
             }}
@@ -72,7 +68,7 @@ const VisualMenu = () => {
             <NewsIcon />
           </div>
           <div
-            className="iconWrapper"
+            className="iconWrapper blueBorder"
             onClick={() => {
               handleMenuItemClick({ iconClicked: "NavClicked" });
             }}

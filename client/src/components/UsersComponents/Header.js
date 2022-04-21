@@ -33,15 +33,12 @@ const MenuLine = styled.div`
   }
   .modalWrapper {
     width: 0px;
-    .modalSideMenu modal right fade {
-      background-color: pink;
-    }
   }
 `;
 
 const Modal2 = styled.div``;
 
-const Header = () => {
+const Header = ({ isAdmin }) => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
 
   const onClickMenu = () => {
@@ -59,18 +56,20 @@ const Header = () => {
       <Title className="title">
         <div>המרכז הרפואי על שם אידת וולפסון</div>
       </Title>
-      <MenuLine className="MenuLineDiv">
-        <img
-          className="logo"
-          src={require("../../images/wolfsonBuddyLogo.jpg")}
-          width="40%"
-          alt="wolfsonBuddyLogo"
-        />
+      {isAdmin ? null : (
+        <MenuLine className="MenuLineDiv">
+          <img
+            className="logo"
+            src={require("../../images/wolfsonBuddyLogo.jpg")}
+            width="40%"
+            alt="wolfsonBuddyLogo"
+          />
+          <div>
+            <MenuIcon onClick={onClickMenu} />
+          </div>
+        </MenuLine>
+      )}
 
-        <div>
-          <MenuIcon onClick={onClickMenu} />
-        </div>
-      </MenuLine>
       <div className="wrapping">
         <Modal
           className="something"

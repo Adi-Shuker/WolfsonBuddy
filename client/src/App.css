@@ -1,8 +1,22 @@
 body {
     background-color: #FFF;
-
     font-family: Arial;
     text-align: center;
     height: 100%;
     width: 100%;
+}
+
+.lightGreyBorder {
+    border-radius: 15px;
+    border-size: 1px;
+    border-style: solid;
+    border-color: lightgray;
+
+}
+
+.blueBorder {
+    border-radius: 10px;
+    border-size: 1px;
+    border-style: solid;
+    border-color: #2e388d;
 }
