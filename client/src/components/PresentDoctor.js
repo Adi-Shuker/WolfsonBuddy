@@ -6,13 +6,12 @@ import {Dropdown, DropdownButton} from "react-bootstrap";
 
 //maybe instead of doing import it will be better
 //to ask the DB for picture and pragraph
-import myImage from '../images/doctorsImages/doc1.png'
+//import myImage from '../images/doctorsImages/doc1.png'
 
 const PresentDoctor = ({doctor}) => {
     return(
     <div>
         <h2> hey, I am {doctor} </h2>
-        <img src={myImage}></img>
     </div>
 
     )
