@@ -4,7 +4,7 @@ import mysql from "mysql";
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "wolfson148",
+    password: "123456",  // "wolfson148",
     database: "sql_hello_world"
 });
 
