@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import CalendarIcon from "../Icons/CaIendarcon";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
+import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
+import React from "react";
 
 const UpcomingAppointmentDiv = styled.div`
   .span {
@@ -21,11 +22,6 @@ const Appointment = styled.div`
   }
 `;
 
-const WrapperCalendarIcon = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const ButtonsLine = styled.div`
   .btn {
     margin-right: 10px;
@@ -43,9 +39,7 @@ const UpcomingAppointment = () => {
       <Appointment>
         <h1>{doctorName}</h1>
         <h2>{departmentName}</h2>
-        <WrapperCalendarIcon>
-          <CalendarIcon />
-        </WrapperCalendarIcon>
+        <AddGoogleCalenderEvent/>
         <ButtonsLine>
           <Button className="btn" onClick={console.log("nav to office")}>
             נווט לחדר הטיפול

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
 import DoctorsByDepartment from "../DoctorsByDepartment";
 import PresentDoctor from "../PresentDoctor";
 //import "./style";

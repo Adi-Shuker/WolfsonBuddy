@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { IsAuthenticateContext, UserDetailsContext } from "../../../App";
 import { Redirect } from "react-router-dom";
-import Header from "../Header.js";
 import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
 import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
-import NavigationDiv from "./NavigationDiv.js";
 import "./HomePage.css";
-import { Modal } from "react-bootstrap";
 import Survey from "./Survey";
 
 const Hello = styled.div`
@@ -72,8 +69,8 @@ const UsersHomePage = () => {
           </RightDiv>
         </Hello>
         <Content>
-          <UpcomingAppointment></UpcomingAppointment>
-          <VisualMenu className="visualMenuDiv"></VisualMenu>
+          <UpcomingAppointment />
+          <VisualMenu className="visualMenuDiv"/>
         </Content>
       </div>
     )
