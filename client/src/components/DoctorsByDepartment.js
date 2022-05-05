@@ -34,13 +34,13 @@ const DoctorsByDepartment = ({setData, departmentsList, doctorsList}) => {
     console.log('DoctorsByDepartment render')
     return(
         <div className="DoctorsByDepartment">
-            <DropdownButton id="dropdown-departments" onSelect={departmentSelect} title={departmentsTitle}>
+            <DropdownButton id="dropdown-departments" onSelect={departmentSelect} title={departmentsTitle} dir="rtl">
                 {
                     departmentsList.map(function(name, index){
                     return <Dropdown.Item key = {index} eventKey={name}>{name}</Dropdown.Item>;
                 })}
             </DropdownButton>
-            <DropdownButton id="dropdown-doctores"  onSelect={doctorSelect} title={doctorsTitle}>
+            <DropdownButton id="dropdown-doctores"  onSelect={doctorSelect} title={doctorsTitle} dir="rtl">
                 {value.map(function(anObjectMapped, index){
                     return (
                         <Dropdown.Item key = {index} eventKey={anObjectMapped.name}>{anObjectMapped.name}</Dropdown.Item>

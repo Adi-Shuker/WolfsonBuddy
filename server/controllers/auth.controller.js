@@ -9,11 +9,11 @@ const executeQuery = dbconfig.executeQuery;
 
 const signup = (req, res) => {
     // Save User to Database
-    const userName = req.body.username;
+    const username = req.body.username;
     const email = req.body.email;
     const role = req.body.role;
     const password = CryptoJS.AES.encrypt(req.body.password, config.passwordKey).toString();
-    executeQuery("INSERT INTO users (user_name, email, password, role) VALUES ('" + userName + "', '" + email + "', '" + password + "', '" + role +"')")
+    executeQuery("INSERT INTO users (user_name, email, password, role) VALUES ('" + username + "', '" + email + "', '" + password + "', '" + role +"')")
         .then(data => {
             res.status(200).send({ message: "User was registered successfully!" })
         })

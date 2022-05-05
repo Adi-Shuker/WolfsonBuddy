@@ -1,9 +1,23 @@
 .something {
     /*position: absolute;*/
-
     width: 250px;
     padding-top: 10px;
     left: calc(100% - 250px);
 }
 
+.wolfsonLogo{
+    position: relative;
+    display: inline;
+    margin-left: auto;
+    padding-left: 5px;
+    float: right;
+}
 
+.title{
+    float: right;
+}
+
+.header-title{
+    display: inline;
+    float: right;
+}
