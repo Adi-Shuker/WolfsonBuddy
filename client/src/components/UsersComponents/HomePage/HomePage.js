@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IsAuthenticateContext, UserDetailsContext } from "../../../App";
+import {IsAdminContext, IsAuthenticateContext, UserDetailsContext} from "../../../App";
 import { Redirect } from "react-router-dom";
 import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
@@ -7,6 +7,7 @@ import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
 import "./HomePage.css";
 import Survey from "./Survey";
+import Header from '../Header.js';
 
 const Hello = styled.div`
   padding: 10px;
@@ -36,9 +37,8 @@ const NavModal = styled.div``;
 
 const UsersHomePage = () => {
   const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(
-    IsAuthenticateContext
-  );
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
+  const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
@@ -51,11 +51,11 @@ const UsersHomePage = () => {
   })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-  const { userName, email } = userDetails;
+  const { username, email, id } = userDetails;
 
   return (
     console.log(userDetails) || (
-      <div className="Users home page">
+      <div className="Users-home-page">
         <Hello>
           <LeftDiv className="leftDivSurvey">
             {" "}
@@ -65,7 +65,7 @@ const UsersHomePage = () => {
             <div className="IconWrapper">
               <UserIcon />
             </div>
-            <h2>שלום {userName}</h2>
+            <h2>שלום {username}</h2>
           </RightDiv>
         </Hello>
         <Content>

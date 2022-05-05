@@ -18,9 +18,6 @@ const NavAppIcon = styled.div`
 const NavigationDiv = (props) => {
   return (
     <div className="navIconLine">
-      {/*<button className="close-bth" onClick={() => props.setTrigger(false)}>*/}
-      {/*  close*/}
-      {/*</button>*/}
       <NavAppIcon>
         <a
           href="https://ul.waze.com/ul?preview_venue_id=22806848.227806340.13314&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
