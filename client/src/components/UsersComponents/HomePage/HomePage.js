@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import {IsAdminContext, IsAuthenticateContext, UserDetailsContext} from "../../../App";
+import { IsAuthenticateContext, UserDetailsContext } from "../../../App";
 import { Redirect } from "react-router-dom";
+import Header from "../Header.js";
 import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
 import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
+import NavigationDiv from "./NavigationDiv.js";
 import "./HomePage.css";
 import Survey from "./Survey";
-import Header from '../Header.js';
+import { useHistory } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+
+export const IsAdminContext = React.createContext({});
 
 const Hello = styled.div`
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
+  .survey-true {
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const RightDiv = styled.div`
@@ -36,9 +43,12 @@ const Content = styled.div`
 const NavModal = styled.div``;
 
 const UsersHomePage = () => {
+  const history = useHistory();
   const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
-  const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(
+    IsAuthenticateContext
+  );
+  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
@@ -51,26 +61,37 @@ const UsersHomePage = () => {
   })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-  const { username, email, id } = userDetails;
+  const { userName, email, id } = userDetails;
 
+  const clickedSurvey = () => {
+    console.log("onClickSurvey");
+  };
   return (
     console.log(userDetails) || (
-      <div className="Users-home-page">
-        <Hello>
-          <LeftDiv className="leftDivSurvey">
-            {" "}
-            {surveyAvailable ? <Survey /> : null}
-          </LeftDiv>
-          <RightDiv className="rightDiv vertical-center">
-            <div className="IconWrapper">
-              <UserIcon />
-            </div>
-            <h2>שלום {username}</h2>
-          </RightDiv>
+      <div className="UsersHomePage">
+        <Header />
+        <Hello className="helloDiv">
+          <div className={"survey-" + surveyAvailable}>
+            <LeftDiv className="leftDivSurvey">
+              {surveyAvailable ? (
+                <Survey
+                  onClick={() => {
+                    clickedSurvey({ iconClicked: "/Game" });
+                  }}
+                />
+              ) : null}
+            </LeftDiv>
+            <RightDiv className="rightDiv vertical-center">
+              <div className="IconWrapper">
+                <UserIcon />
+              </div>
+              <h2>שלום {userName}</h2>
+            </RightDiv>
+          </div>
         </Hello>
         <Content>
           <UpcomingAppointment />
-          <VisualMenu className="visualMenuDiv"/>
+          <VisualMenu className="visualMenuDiv" />
         </Content>
       </div>
     )

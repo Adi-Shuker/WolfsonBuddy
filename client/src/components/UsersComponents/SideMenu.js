@@ -9,6 +9,7 @@ import NavIcon from "./Icons/NavIcon";
 import HomeIcon from "./Icons/HomeIcon";
 import Divider from "@mui/material/Divider";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const SideMenuDiv = styled.div`
   border-color: solid, 1px, grey;
@@ -23,16 +24,14 @@ const SideMenuDiv = styled.div`
 `;
 const OneMenuItem = styled.div``;
 
-const SideMenu = () => {
-  const handleMenuItemClick = (
-    event: React.MouseEvent<HTMLElement>,
-    index: number
-  ) => {
+const SideMenu = ({ setShowSideMenu, onMenuItemSelection }) => {
+  const handleMenuItemClick = (index: number) => {
     console.log(index);
-    console.log(option[index].path);
+    onMenuItemSelection(option[index].path);
+    setShowSideMenu(false);
   };
   const option = [
-    { className: "main", text: "ראשי", path: "/HomePage", icon: HomeIcon },
+    { className: "main", text: "ראשי", path: "/usersHomePage", icon: HomeIcon },
     {
       className: "getToKnowTheTeam",
       text: "הכר את הצוות",
@@ -42,19 +41,19 @@ const SideMenu = () => {
     {
       className: "navigation",
       text: "דרכי הגעה",
-      path: "/getToKnowTheTeam",
+      path: "/car",
       icon: CarIcon,
     },
     {
       className: "navigationInHospital",
       text: "ניווט בבית החולים",
-      path: "/getToKnowTheTeam",
+      path: "/navInHospital",
       icon: NavIcon,
     },
     {
       className: "entertainment",
       text: "פעילות לזמן המתנה",
-      path: "/getToKnowTheTeam",
+      path: "/game",
       icon: GameIcon,
     },
   ];
@@ -68,7 +67,7 @@ const SideMenu = () => {
               <MenuItem
                 key={index}
                 className={anObjectMapped.className}
-                onClick={(event) => handleMenuItemClick(event, index)}
+                onClick={(event) => handleMenuItemClick(index)}
               >
                 {anObjectMapped.icon()}
                 <ListItemText key={index}>{anObjectMapped.text}</ListItemText>

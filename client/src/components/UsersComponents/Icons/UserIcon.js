@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 const User = styled.div`
   width: 80px;
   height: 80px;
-  fill: #2e388d;
+  fill: rgba(112, 112, 112, 0.51);
 `;
 
 const UserIcon = () => {

@@ -1,6 +1,18 @@
+.UsersHomePage{
+    color: #2e388d;
+}
+
 .navModal {
 
 
+}
+.iconTitle {
+    font-size: 14px;
+}
+.iconWithText {
+    width: 70px;
+    margin-right: 8px;
+    margin-left: 8px;
 }
 
 .navIconLine {
