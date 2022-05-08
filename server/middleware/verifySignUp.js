@@ -3,6 +3,7 @@ import dbConfig from '../config/db.config.js';
 const executeQuery = dbConfig.executeQuery;
 
 const checkDuplicateEmail = (req, res, next) => {
+    console.log ("in checkDuplicateEmail")
     const email = req.body.email;
     executeQuery("SELECT * FROM users WHERE email = '" + email + "'")
         .then(user => {
@@ -15,6 +16,7 @@ const checkDuplicateEmail = (req, res, next) => {
             next();
         })
         .catch(err => {
+            console.log("18", err.message)
             res.status(500).send({ message: err.message });
         });
 };

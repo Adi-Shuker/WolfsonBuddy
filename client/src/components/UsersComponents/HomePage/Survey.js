@@ -1,17 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import SurveyIcon from "../Icons/SurveyIcon";
+import { useHistory } from "react-router-dom";
 const SurveyDiv = styled.div`
   padding: 5px;
-  border-radius: 10px;
-  border-size: 1px;
-  border-style: solid;
-  border-color: #2e388d;
+  cursor: pointer;
 `;
 const Survey = (props) => {
+  const history = useHistory();
+  const clickedSurvey = () => {
+    history.push("/survey");
+  };
+  const handleMenuItemClick = ({ iconClicked }) => {
+    console.log({ iconClicked });
+  };
   const text = "חשוב לנו לשמוע את דעתך! למילוי סקר שביעות רצון לחצו כאן";
   return (
-    <SurveyDiv className="SurveyDiv">
+    <SurveyDiv
+      className="SurveyDiv lightGreyBorder"
+      onClick={() => {
+        clickedSurvey({ iconClicked: "/survey" });
+      }}
+    >
       {text}
       <div className="IconWrapper">
         <SurveyIcon />

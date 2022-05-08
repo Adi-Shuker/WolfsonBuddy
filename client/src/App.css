@@ -8,15 +8,15 @@ body {
 
 .lightGreyBorder {
     border-radius: 15px;
-    border-size: 1px;
+    border-width: 1px;
     border-style: solid;
-    border-color: lightgray;
+    border-color: rgba(112, 112, 112, 0.51);
 
 }
 
 .blueBorder {
     border-radius: 10px;
-    border-size: 1px;
+    border-width: 1px;
     border-style: solid;
     border-color: #2e388d;
 }

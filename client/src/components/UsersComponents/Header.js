@@ -1,11 +1,13 @@
 import MenuIcon from "./Icons/MenuIcon.js";
 import styled from "styled-components";
 import SideMenu from "./SideMenu";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { useSpring, animated as a } from "react-spring";
-
+import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
+import { withRouter } from "react-router";
+
 const HeaderDiv = styled.div`
   .modal.custom .modal-dialog {
     width: 50%;
@@ -40,17 +42,19 @@ const Modal2 = styled.div``;
 
 const Header = ({ isAdmin }) => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
-
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
     console.log("onClickMenu", showSideMenu);
   };
-  const styleModal = {
-    content: {
-      background: "#FFFF00",
-      color: "#FFFF00",
-    },
+  const history = useHistory();
+  const onMenuItemSelection = (path) => {
+    console.log(path);
+    if (path != "/car") {
+      history.push(path);
+    } else {
+    }
   };
+
   return (
     <HeaderDiv className="Header">
       <Title className="title">
@@ -76,11 +80,14 @@ const Header = ({ isAdmin }) => {
           show={showSideMenu}
           onHide={() => setShowSideMenu(false)}
         >
-          <SideMenu />
+          <SideMenu
+            setShowSideMenu={setShowSideMenu}
+            onMenuItemSelection={(path) => onMenuItemSelection(path)}
+          />
         </Modal>
       </div>
     </HeaderDiv>
   );
 };
 
-export default Header;
+export default withRouter(Header);

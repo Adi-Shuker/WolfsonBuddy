@@ -3,21 +3,36 @@ import CalendarIcon from "../Icons/CaIendarcon";
 import { Button } from "react-bootstrap";
 
 const UpcomingAppointmentDiv = styled.div`
-  .span {
+  .textInfo-appointment {
+    display: grid;
     text-align: right;
+    padding-top: 10px;
   }
-`;
-
-const Appointment = styled.div`
-  border-radius: 10px;
-  border-size: 2px;
-  border-style: solid;
-  border-color: #2e388d;
-
+  .InfoAndCalenderDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
   .btn {
     background-color: white;
     color: #2e388d;
-    border-color: #2e388d;
+  }
+  .span {
+    color: pink;
+  }
+  .doctorName-appointment {
+    font-weight: bold;
+  }
+  .btn {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-primary:focus {
+    color: #2e388d;
+    box-shadow: 0px 0px;
+    border: 1px solid #2e388d;
   }
 `;
 
@@ -26,38 +41,39 @@ const WrapperCalendarIcon = styled.div`
   justify-content: center;
 `;
 
-const ButtonsLine = styled.div`
-  .btn {
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-`;
-
 const UpcomingAppointment = () => {
   const doctorName = 'ד"ר שגית שושן';
   const departmentName = "אף אוזן גרון";
+  const time = "18:30";
+  const date = "14.12.2022";
   return (
-    <UpcomingAppointmentDiv className="UpcomingAppointmentDiv">
-      <Appointment>
-        <h1>{doctorName}</h1>
-        <h2>{departmentName}</h2>
+    <UpcomingAppointmentDiv className="UpcomingAppointmentDiv lightGreyBorder">
+      <div className="InfoAndCalenderDiv">
         <WrapperCalendarIcon>
           <CalendarIcon />
         </WrapperCalendarIcon>
-        <ButtonsLine>
-          <Button className="btn" onClick={console.log("nav to office")}>
-            נווט לחדר הטיפול
-          </Button>
-          <Button
-            className="btn"
-            onClick={console.log("get to know the doctor", doctorName)}
-          >
-            הכר את הרופא
-          </Button>
-        </ButtonsLine>
-      </Appointment>
+
+        <div className="textInfo-appointment">
+          <span className="doctorName-appointment">{doctorName}</span>
+          <span className="departmentName-appointment">{departmentName}</span>
+          <span className="timeAndDate-appointment">
+            {time + "  "}|{"  " + date}
+          </span>
+        </div>
+      </div>
+
+      <Button
+        className="btn lightGreyBorder"
+        onClick={console.log("nav to office")}
+      >
+        נווט לחדר הטיפול
+      </Button>
+      <Button
+        className="btn lightGreyBorder"
+        onClick={console.log("get to know the doctor", doctorName)}
+      >
+        הכר את הרופא
+      </Button>
     </UpcomingAppointmentDiv>
   );
 };

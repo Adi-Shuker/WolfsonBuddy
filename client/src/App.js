@@ -16,11 +16,14 @@ import EditGetToKnowTheTeam from "./components/AdminComponents/EditGetToKnowTheT
 import Header from "./components/UsersComponents/Header.js";
 import Game from "./components/Game/Game";
 import News from "./components/News/News";
+import SurveyForm from "./components/UsersComponents/SurveyForm/SurveyForm";
+import { useHistory } from "react-router-dom";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
 
 function App() {
+  const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [data, setData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -50,8 +53,8 @@ function App() {
       <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
         <UserDetailsContext.Provider value={{ userDetails, setUserDetails }}>
           <div className="app">
-            <Header isAdmin={isAdmin} />
             <BrowserRouter>
+              <Header isAdmin={isAdmin} history={history} />
               {data ? (
                 <Switch>
                   <Route
@@ -76,11 +79,12 @@ function App() {
                   />
                   <Route
                     exact
-                    path="/GetToKnowTheTeam"
+                    path="/getToKnowTheTeam"
                     component={GetToKnowTheTeam}
                   />
-                  <Route exact path="/Game" component={Game} />
-                  <Route exact path="/News" component={News} />
+                  <Route exact path="/game" component={Game} />
+                  <Route exact path="/news" component={News} />
+                  <Route exact path="/survey" component={SurveyForm} />
                   <Route exact path="/" component={LoginPage} />
                 </Switch>
               ) : null}
