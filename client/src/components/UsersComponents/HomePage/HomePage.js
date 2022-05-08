@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { IsAuthenticateContext, UserDetailsContext } from "../../../App";
+import { IsAuthenticateContext, UserDetailsContext} from "../../../App";
 import { Redirect } from "react-router-dom";
-import Header from "../Header.js";
 import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
 import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
-import NavigationDiv from "./NavigationDiv.js";
 import "./HomePage.css";
 import { useHistory } from "react-router-dom";
-import { Modal } from "react-bootstrap";
 import Survey from "./Survey";
+import Header from '../Header.js';
 
 const Hello = styled.div`
   .survey-true {
@@ -57,7 +55,7 @@ const UsersHomePage = () => {
   })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-  const { userName, email } = userDetails;
+  const { username, email, id } = userDetails;
 
   const clickedSurvey = () => {
     console.log("onClickSurvey");
@@ -69,24 +67,20 @@ const UsersHomePage = () => {
           <div className={"survey-" + surveyAvailable}>
             <LeftDiv className="leftDivSurvey">
               {surveyAvailable ? (
-                <Survey
-                  onClick={() => {
-                    clickedSurvey({ iconClicked: "/Game" });
-                  }}
-                />
+                <Survey />
               ) : null}
             </LeftDiv>
             <RightDiv className="rightDiv vertical-center">
               <div className="IconWrapper">
                 <UserIcon />
               </div>
-              <h2>שלום {userName}</h2>
+              <h2>שלום {username}</h2>
             </RightDiv>
           </div>
         </Hello>
         <Content>
-          <UpcomingAppointment></UpcomingAppointment>
-          <VisualMenu className="visualMenuDiv" history={history}></VisualMenu>
+          <UpcomingAppointment />
+          <VisualMenu className="visualMenuDiv" />
         </Content>
       </div>
     )

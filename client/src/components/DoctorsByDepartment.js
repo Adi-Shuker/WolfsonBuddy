@@ -1,12 +1,8 @@
-//import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { DropdownButton } from "react-bootstrap";
 import { Dropdown } from "react-bootstrap";
 import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
-//need to get the list in that form
-//let departmentsList = ["dep1","dep2","dep3"]
-//let doctorsList = [{name: "doc1", department: "dep1"}, {name: "doc2", department: "dep1"}, {name: "doc3", department: "dep2"},]
-//
+
 const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
   let defaultDoctorsTitle = "בחר רופא";
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
@@ -36,7 +32,7 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
         id="dropdown-departments"
         onSelect={departmentSelect}
         title={departmentsTitle}
-      >
+      dir="rtl">
         {departmentsList.map(function (name, index) {
           return (
             <Dropdown.Item key={index} eventKey={name}>
@@ -49,6 +45,7 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
         id="dropdown-doctores"
         onSelect={doctorSelect}
         title={doctorsTitle}
+        dir="rtl"
       >
         {value.map(function (anObjectMapped, index) {
           return (

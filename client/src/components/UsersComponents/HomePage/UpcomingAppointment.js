@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import CalendarIcon from "../Icons/CaIendarcon";
 import { Button } from "react-bootstrap";
+import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
 
 const UpcomingAppointmentDiv = styled.div`
   .textInfo-appointment {
@@ -50,7 +51,7 @@ const UpcomingAppointment = () => {
     <UpcomingAppointmentDiv className="UpcomingAppointmentDiv lightGreyBorder">
       <div className="InfoAndCalenderDiv">
         <WrapperCalendarIcon>
-          <CalendarIcon />
+            <AddGoogleCalenderEvent/>
         </WrapperCalendarIcon>
 
         <div className="textInfo-appointment">

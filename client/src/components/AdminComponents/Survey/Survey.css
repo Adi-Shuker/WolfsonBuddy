@@ -1,0 +1,32 @@
+.sv-question__num{
+    color:white;
+}
+.sv-question__title{
+    float: right;
+    display: block;
+}
+.sv-question__num{
+    float: right;
+    color:white;
+}
+.sv-footer__complete-btn{
+    float: left;
+}
+.sv-rating__max-text{
+    padding: 15px;
+}
+.sv-rating__min-text{
+    padding: 15px;
+}
+.sv-question{
+    direction: rtl;
+}
+.sv-question__header{
+    display: flex;
+}
+
+
+
+
+
+
