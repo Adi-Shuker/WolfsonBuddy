@@ -23,9 +23,9 @@ const LoginPage = ()=>{
             .then((user)=>{
                 if(user.id !== undefined){
                     localStorage.setItem('accessToken',user.accessToken);
-                    setUserDetails({userName: user.userName, email: user.email});
+                    setUserDetails({username: user.username, email: user.email, id: user.id});
                     setIsAuthenticated(true);
-                    if(user.role === 'Admin'){
+                    if(user.role === 'admin'){
                         setIsAdmin(true);
                         history.push("/adminHomePage");
                     }else{

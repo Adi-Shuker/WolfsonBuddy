@@ -53,8 +53,8 @@ function App() {
       <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
         <UserDetailsContext.Provider value={{ userDetails, setUserDetails }}>
           <div className="app">
+            <Header isAdmin={isAdmin} />
             <BrowserRouter>
-              <Header isAdmin={isAdmin} history={history} />
               {data ? (
                 <Switch>
                   <Route
@@ -79,12 +79,11 @@ function App() {
                   />
                   <Route
                     exact
-                    path="/getToKnowTheTeam"
+                    path="/GetToKnowTheTeam"
                     component={GetToKnowTheTeam}
                   />
-                  <Route exact path="/game" component={Game} />
-                  <Route exact path="/news" component={News} />
-                  <Route exact path="/survey" component={SurveyForm} />
+                  <Route exact path="/Game" component={Game} />
+                  <Route exact path="/News" component={News} />
                   <Route exact path="/" component={LoginPage} />
                 </Switch>
               ) : null}
@@ -95,5 +94,6 @@ function App() {
     </IsAuthenticateContext.Provider>
   );
 }
+
 
 export default App;

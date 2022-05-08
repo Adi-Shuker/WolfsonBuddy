@@ -104,8 +104,11 @@ const VisualMenu = ({ history }) => {
         className="navModal"
         show={buttonNavigationPopup}
         onHide={() => setButtonNavigationPopup(false)}
+        centered
       >
-        <NavigationDiv />
+        <Modal.Header className="border-0" closeButton>
+          </Modal.Header>
+        <NavigationDiv setTrigger={setButtonNavigationPopup}/>
       </Modal>
     </div>
   );
