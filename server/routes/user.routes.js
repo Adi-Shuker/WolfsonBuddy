@@ -14,6 +14,16 @@ const userRoutes = function(app) {
         userController.updatePassword(req, res)
     });
     app.get(
+        "/api/get_all_departments",
+        [authJwt.verifyTokenMiddleware],
+        userController.getAllDepartments
+    );
+    app.get(
+        "/api/get_all_survey_questions_types",
+        [authJwt.verifyTokenMiddleware],
+        userController.getAllSurveyQuestionsTypes
+    );
+    app.get(
         "/api/example/user",
         [authJwt.verifyTokenMiddleware],
         userController.userBoard

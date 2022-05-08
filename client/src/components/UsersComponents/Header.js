@@ -3,10 +3,8 @@ import styled from "styled-components";
 import SideMenu from "./SideMenu";
 import React, { useCallback, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { useSpring, animated as a } from "react-spring";
 import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
-import { withRouter } from "react-router";
 
 const HeaderDiv = styled.div`
   .modal.custom .modal-dialog {
@@ -14,7 +12,7 @@ const HeaderDiv = styled.div`
     position: absolute;
 
     .modal-content {
-      margin-left: "500px";
+      margin-left: 500px;
     }
   }
 `;
@@ -90,4 +88,4 @@ const Header = ({ isAdmin }) => {
   );
 };
 
-export default withRouter(Header);
+export default Header;
