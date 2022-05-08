@@ -19,10 +19,14 @@ const Line = styled.div`
     margin-bottom: 10px;
     margin-left: 10px;
     margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
 `;
-const VisualMenu = () => {
-  const history = useHistory();
+const VisualMenu = ({ history }) => {
+  //const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
@@ -36,48 +40,63 @@ const VisualMenu = () => {
     <div>
       <IconsCollection className="IconsCollection">
         <Line className="first line">
-          <div
-            className="iconWrapper blueBorder"
-            onClick={() => {
-              handleMenuItemClick({ iconClicked: "CarClicked" });
-            }}
-          >
-            <CarIcon />
+          <div className="iconWithText">
+            <div
+              className="iconWrapper lightGreyBorder"
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "CarClicked" });
+              }}
+            >
+              <CarIcon />
+            </div>
+            <span className="iconTitle">דרכי הגעה</span>
           </div>
-          <div
-            className="iconWrapper blueBorder"
-            onClick={() => {
-              handleMenuItemClick({ iconClicked: "/Game" });
-            }}
-          >
-            <GameIcon />
+          <div className="iconWithText">
+            <div
+              className="iconWrapper lightGreyBorder"
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "/game" });
+              }}
+            >
+              <GameIcon />
+            </div>
+            <span className="iconTitle">פעילוית לזמן ההמתנה</span>
           </div>
-          <div
-            className="iconWrapper blueBorder"
-            onClick={() => {
-              handleMenuItemClick({ iconClicked: "/GetToKnowTheTeam" });
-            }}
-          >
-            <TeamIcon />
+          <div className="iconWithText">
+            <div
+              className="iconWrapper lightGreyBorder"
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "/getToKnowTheTeam" });
+              }}
+            >
+              <TeamIcon />
+            </div>
+            <span className="iconTitle">הכר את הצוות</span>
           </div>
         </Line>
 
         <Line className="second line">
-          <div
-            className="iconWrapper blueBorder"
-            onClick={() => {
-              handleMenuItemClick({ iconClicked: "/News" });
-            }}
-          >
-            <NewsIcon />
+          <div className="iconWithText">
+            <div
+              className="iconWrapper lightGreyBorder"
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "/news" });
+              }}
+            >
+              <NewsIcon />
+            </div>
+            <span className="iconTitle">חדשות ועדכונים</span>
           </div>
-          <div
-            className="iconWrapper blueBorder"
-            onClick={() => {
-              handleMenuItemClick({ iconClicked: "/NavInHospital" });
-            }}
-          >
-            <NavIcon />
+          <div className="iconWithText">
+            <div
+              className="iconWrapper lightGreyBorder"
+              onClick={() => {
+                handleMenuItemClick({ iconClicked: "/navInHospital" });
+              }}
+            >
+              <NavIcon />
+            </div>
+            <span className="iconTitle">ניווט בבית החולים</span>
           </div>
         </Line>
       </IconsCollection>
