@@ -1,8 +1,8 @@
 import { Redirect } from "react-router-dom"
 import 'react-bootstrap/dist/react-bootstrap.min.js';
 import "bootstrap/dist/css/bootstrap.min.css";
-import React ,{useState} from "react";
-import {IsAdminContext, IsAuthenticateContext, UserDetailsContext} from "../../../App";
+import React, {useEffect, useState} from "react";
+import {IsAdminContext, IsAuthenticateContext, UserDetailsContext, DepartmentsContext} from "../../../App";
 import { Tabs, Tab} from 'react-bootstrap';
 import EditGetToKnowTheTeam from '../EditGetToKnowTheTeam/EditGetToKnowTheTeam.js';
 import AddNewsAndUpdates from '../AddNewsAndUpdates/AddNewsAndUpdates.js';
@@ -18,6 +18,7 @@ const AdminHomePage = () => {
     if (!isAuthenticated || !isAdmin){
         return <Redirect to="/"/>
     }
+
     const tabList = [
         {title:"הוספת/מחיקת עדכונים", componentName:"AddNewsAndUpdates"},
         {title:"הוספת איש צוות", componentName:"AddTeamMember"},

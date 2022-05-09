@@ -3,9 +3,9 @@ import styled from "styled-components";
 import SideMenu from "./SideMenu";
 import React, { useCallback, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { useSpring, animated as a } from "react-spring";
 import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
+
 const HeaderDiv = styled.div`
   display: grid;
   .modal.custom .modal-dialog {

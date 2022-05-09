@@ -4,6 +4,20 @@ import CryptoJS from "crypto-js";
 
 const executeQuery = dbconfig.executeQuery;
 //return public & protected content
+const getAllDepartments = (req, res) => {
+    executeQuery("SELECT * FROM departments;")
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(err => console.log(err))
+};
+const getAllSurveyQuestionsTypes = (req, res) => {
+    executeQuery("SELECT * FROM survey_questions_types;")
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(err => console.log(err))
+};
 const userBoard = (req, res) => {
     res.status(200).send("User Content.");
 };
@@ -26,6 +40,8 @@ const userController = {
     userBoard,
     adminBoard,
     updatePassword,
+    getAllDepartments,
+    getAllSurveyQuestionsTypes,
 };
 
 

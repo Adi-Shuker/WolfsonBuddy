@@ -16,11 +16,13 @@ import EditGetToKnowTheTeam from "./components/AdminComponents/EditGetToKnowTheT
 import Header from "./components/UsersComponents/Header.js";
 import Game from "./components/Game/Game";
 import News from "./components/News/News";
+import UserSurvey from "./components/AdminComponents/Survey/UserSurvey";
 import SurveyForm from "./components/UsersComponents/SurveyForm/SurveyForm";
 import { useHistory } from "react-router-dom";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
+export const DepartmentsContext = React.createContext({});
 
 function App() {
   const history = useHistory();
@@ -28,6 +30,7 @@ function App() {
   const [data, setData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userDetails, setUserDetails] = useState({});
+  const [departments, setDepartments] = useState({})
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     fetch("/api/verify-token", {
@@ -44,55 +47,48 @@ function App() {
         setIsAuthenticated(false);
         setData(true);
       });
+      fetch('/api/get_all_departments', {
+          method: 'GET',
+          headers:{"Content-Type": "application/json","x-access-token": token},
+      }).then((res) => {
+          if(!(res.status === 200 || res.status === 304)){
+              alert('אירעה שגיאה');
+              return;
+          }
+          return res.json();
+      }).then((res) => {
+          setDepartments(res);
+      })
   }, []);
 
-  return (
-    <IsAuthenticateContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated }}
-    >
-      <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
-        <UserDetailsContext.Provider value={{ userDetails, setUserDetails }}>
-          <div className="app">
-            <Header isAdmin={isAdmin} />
-            <BrowserRouter>
-              {data ? (
-                <Switch>
-                  <Route
-                    exact
-                    path="/usersHomePage"
-                    component={UsersHomePage}
-                  />
-                  <Route
-                    exact
-                    path="/adminHomePage"
-                    component={AdminHomePage}
-                  />
-                  <Route
-                    exact
-                    path="/createNewAccount"
-                    component={CreateNewAccount}
-                  />
-                  <Route
-                    exact
-                    path="/forgotPassword"
-                    component={ForgotPassword}
-                  />
-                  <Route
-                    exact
-                    path="/GetToKnowTheTeam"
-                    component={GetToKnowTheTeam}
-                  />
-                  <Route exact path="/Game" component={Game} />
-                  <Route exact path="/News" component={News} />
-                  <Route exact path="/" component={LoginPage} />
-                </Switch>
-              ) : null}
-            </BrowserRouter>
-          </div>
-        </UserDetailsContext.Provider>
-      </IsAdminContext.Provider>
-    </IsAuthenticateContext.Provider>
-  );
+    return (
+        <IsAuthenticateContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
+            <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
+                <UserDetailsContext.Provider value={{userDetails, setUserDetails}}>
+                    <DepartmentsContext.Provider value={{departments, setDepartments}}>
+                <div className="app">
+                    <Header isAdmin={isAdmin} />
+                    <BrowserRouter>
+                        {data ? <Switch>
+                                <Route exact path="/usersHomePage" component={UsersHomePage}/>
+                                <Route exact path="/adminHomePage" component={AdminHomePage}/>
+                                <Route exact path="/createNewAccount" component={CreateNewAccount}/>
+                                <Route exact path="/forgotPassword" component={ForgotPassword}/>
+                                <Route exact path="/GetToKnowTheTeam" component={GetToKnowTheTeam}/>
+                                <Route exact path="/Game" component={Game} />
+                                <Route exact path="/News" component={News} />
+                                <Route exact path="/userSurvey" component={UserSurvey}/>
+                                <Route exact path="/" component={LoginPage}/>
+                            </Switch>
+                            : null}
+                    </BrowserRouter>
+                </div>
+                    </DepartmentsContext.Provider>
+                </UserDetailsContext.Provider>
+            </IsAdminContext.Provider>
+        </IsAuthenticateContext.Provider>
+    )
+
 }
 
 
