@@ -6,7 +6,6 @@ import { Modal } from "react-bootstrap";
 import { useSpring, animated as a } from "react-spring";
 import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
-
 const HeaderDiv = styled.div`
   display: grid;
   .modal.custom .modal-dialog {
@@ -14,9 +13,17 @@ const HeaderDiv = styled.div`
     position: absolute;
 
     .modal-content {
-      margin-left: "500px";
+      margin-left: 500px;
     }
   }
+`;
+
+const AdminTitle = styled.div`
+  background-color: #00138E;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
 `;
 
 const Title = styled.div`
@@ -36,13 +43,14 @@ const MenuLine = styled.div`
   .modalWrapper {
     width: 0px;
   }
+  float: right;
 `;
 
 const Modal2 = styled.div``;
 
-const Header = () => {
-  const isAdmin = false;
+const Header = ({ isAdmin }) => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
+
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
     console.log("onClickMenu", showSideMenu);

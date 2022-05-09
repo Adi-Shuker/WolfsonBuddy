@@ -25,8 +25,8 @@ const Line = styled.div`
     padding-left: 5px;
   }
 `;
-const VisualMenu = () => {
-  const history = useHistory();
+const VisualMenu = ({ history }) => {
+  //const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
