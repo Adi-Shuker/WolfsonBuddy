@@ -44,7 +44,7 @@ const NavModal = styled.div``;
 
 const UsersHomePage = () => {
   const history = useHistory();
-  const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
+  const [surveyAvailable, setSurveyAvailable] = useState(false); //TODO need to be taken from DB
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
@@ -61,8 +61,8 @@ const UsersHomePage = () => {
   })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-  const { userName, email, id } = userDetails;
-
+  let { username, email, id } = userDetails;
+  username = "abcdefghijabcdefghijabcdefghijabcdefghij";
   const clickedSurvey = () => {
     console.log("onClickSurvey");
   };
@@ -85,7 +85,7 @@ const UsersHomePage = () => {
               <div className="IconWrapper">
                 <UserIcon />
               </div>
-              <h2>שלום {userName}</h2>
+              <div className="helloAndUsername">שלום {username}</div>
             </RightDiv>
           </div>
         </Hello>

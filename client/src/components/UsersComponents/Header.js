@@ -6,9 +6,9 @@ import { Modal } from "react-bootstrap";
 import { useSpring, animated as a } from "react-spring";
 import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
-import { Route, Switch } from "react-router-dom";
-import { withRouter } from "react-router";
+
 const HeaderDiv = styled.div`
+  display: grid;
   .modal.custom .modal-dialog {
     width: 50%;
     position: absolute;
@@ -40,7 +40,8 @@ const MenuLine = styled.div`
 
 const Modal2 = styled.div``;
 
-const Header = ({ isAdmin }) => {
+const Header = () => {
+  const isAdmin = false;
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
@@ -60,19 +61,18 @@ const Header = ({ isAdmin }) => {
       <Title className="title">
         <div>המרכז הרפואי על שם אידת וולפסון</div>
       </Title>
-      {isAdmin ? null : (
-        <MenuLine className="MenuLineDiv">
-          <img
-            className="logo"
-            src={require("../../images/wolfsonBuddyLogo.jpg")}
-            width="40%"
-            alt="wolfsonBuddyLogo"
-          />
-          <div>
-            <MenuIcon onClick={onClickMenu} />
-          </div>
-        </MenuLine>
-      )}
+
+      <MenuLine className="MenuLineDiv">
+        <img
+          className="logoInHeader"
+          src={require("../../images/wolfsonBuddyLogo.jpg")}
+          width="40%"
+          alt="wolfsonBuddyLogo"
+        />
+        <div>
+          <MenuIcon onClick={onClickMenu} />
+        </div>
+      </MenuLine>
 
       <div className="wrapping">
         <Modal

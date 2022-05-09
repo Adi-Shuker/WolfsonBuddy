@@ -1,6 +1,15 @@
 .UsersHomePage{
     color: #2e388d;
 }
+.logoInHeader{
+    height: 50px;
+    width: 150px;
+}
+.helloAndUsername{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 .navModal {
 

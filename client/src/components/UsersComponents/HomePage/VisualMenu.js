@@ -25,8 +25,8 @@ const Line = styled.div`
     padding-left: 5px;
   }
 `;
-const VisualMenu = ({ history }) => {
-  //const history = useHistory();
+const VisualMenu = () => {
+  const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
     console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
@@ -106,9 +106,8 @@ const VisualMenu = ({ history }) => {
         onHide={() => setButtonNavigationPopup(false)}
         centered
       >
-        <Modal.Header className="border-0" closeButton>
-          </Modal.Header>
-        <NavigationDiv setTrigger={setButtonNavigationPopup}/>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
+        <NavigationDiv setTrigger={setButtonNavigationPopup} />
       </Modal>
     </div>
   );
