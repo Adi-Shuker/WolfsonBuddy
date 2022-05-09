@@ -67,7 +67,6 @@ function App() {
                 <UserDetailsContext.Provider value={{userDetails, setUserDetails}}>
                     <DepartmentsContext.Provider value={{departments, setDepartments}}>
                 <div className="app">
-                    <Header isAdmin={isAdmin} />
                     <BrowserRouter>
                         {data ? <Switch>
                                 <Route exact path="/usersHomePage" component={UsersHomePage}/>
