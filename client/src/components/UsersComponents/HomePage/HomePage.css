@@ -2,13 +2,19 @@
     color: #2e388d;
 }
 
-.navModal {
-
-
-}
 .iconTitle {
     font-size: 14px;
 }
+.logoInHeader{
+    height: 50px;
+    width: 150px;
+}
+.helloAndUsername{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .iconWithText {
     width: 70px;
     margin-right: 8px;

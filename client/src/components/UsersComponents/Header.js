@@ -7,6 +7,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
 
 const HeaderDiv = styled.div`
+  display: grid;
   .modal.custom .modal-dialog {
     width: 50%;
     position: absolute;
@@ -15,6 +16,14 @@ const HeaderDiv = styled.div`
       margin-left: 500px;
     }
   }
+`;
+
+const AdminTitle = styled.div`
+  background-color: #00138E;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
 `;
 
 const Title = styled.div`
@@ -34,12 +43,14 @@ const MenuLine = styled.div`
   .modalWrapper {
     width: 0px;
   }
+  float: right;
 `;
 
 const Modal2 = styled.div``;
 
 const Header = ({ isAdmin }) => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
+
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
     console.log("onClickMenu", showSideMenu);
@@ -58,19 +69,18 @@ const Header = ({ isAdmin }) => {
       <Title className="title">
         <div>המרכז הרפואי על שם אידת וולפסון</div>
       </Title>
-      {isAdmin ? null : (
-        <MenuLine className="MenuLineDiv">
-          <img
-            className="logo"
-            src={require("../../images/wolfsonBuddyLogo.jpg")}
-            width="40%"
-            alt="wolfsonBuddyLogo"
-          />
-          <div>
-            <MenuIcon onClick={onClickMenu} />
-          </div>
-        </MenuLine>
-      )}
+
+      <MenuLine className="MenuLineDiv">
+        <img
+          className="logoInHeader"
+          src={require("../../images/wolfsonBuddyLogo.jpg")}
+          width="40%"
+          alt="wolfsonBuddyLogo"
+        />
+        <div>
+          <MenuIcon onClick={onClickMenu} />
+        </div>
+      </MenuLine>
 
       <div className="wrapping">
         <Modal

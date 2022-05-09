@@ -106,9 +106,8 @@ const VisualMenu = () => {
         onHide={() => setButtonNavigationPopup(false)}
         centered
       >
-        <Modal.Header className="border-0" closeButton>
-          </Modal.Header>
-        <NavigationDiv setTrigger={setButtonNavigationPopup}/>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
+        <NavigationDiv setTrigger={setButtonNavigationPopup} />
       </Modal>
     </div>
   );

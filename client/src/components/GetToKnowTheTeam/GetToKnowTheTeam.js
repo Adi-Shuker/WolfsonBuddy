@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import DoctorsByDepartment from "../DoctorsByDepartment";
 import PresentDoctor from "../PresentDoctor";
+import Header from "../UsersComponents/Header";
+import BackIcon from "../UsersComponents/Icons/BackIcon";
+import styled from "styled-components";
 //import "./style";
+import { useHistory } from "react-router-dom";
+
+const GetToKnowTheTeamDiv = styled.div`
+  .BackIconDiv {
+    width: 60px;
+    height: 60px;
+    margin-left: 10%;
+    border-radius: 150px;
+    display: block;
+  }
+`;
 
 const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
   departmentsList = ["dep1", "dep2", "dep3"];
@@ -17,9 +31,10 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
       return <PresentDoctor doctor={data} />;
     }
   };
-  console.log("GetToKnowTheTeam render");
+  const history = useHistory();
   return (
-    <div>
+    <GetToKnowTheTeamDiv className="GetToKnowTheTeamDiv">
+      <Header />
       <DoctorsByDepartment
         id="something"
         setData={setData}
@@ -27,7 +42,13 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
         doctorsList={doctorsList}
       />
       {renderDoctor()}
-    </div>
+      <div
+        className="BackIconDiv iconWrapper lightGreyBorder"
+        onClick={() => history.push("/usersHomePage")}
+      >
+        <BackIcon />
+      </div>
+    </GetToKnowTheTeamDiv>
   );
 };
 export default GetToKnowTheTeam;

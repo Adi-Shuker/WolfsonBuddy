@@ -2,23 +2,23 @@
 import mysql from "mysql";
 
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "123456",
-    database: "wolfson_db"
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "abc",
+  database: "wolfson_buddy",
 });
 
 const executeQuery = (sqlQuery) => {
-    return new Promise((resolve, reject) => {
-            con.query(sqlQuery, (err, result) => {
-                if (err) return reject(err)
-                resolve(result)
-            })
-        }
-    )
-}
+  return new Promise((resolve, reject) => {
+    con.query(sqlQuery, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
 const dbConfig = {
-    executeQuery:executeQuery
-}
+  executeQuery: executeQuery,
+};
 
 export default dbConfig;

@@ -6,9 +6,15 @@ import UpcomingAppointment from "./UpcomingAppointment";
 import VisualMenu from "./VisualMenu.js";
 import styled, { css } from "styled-components";
 import "./HomePage.css";
+import Survey from "./Survey";
 import { useHistory } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+
+export const IsAdminContext = React.createContext({});
+
 import Survey from "./Survey";
 import Header from '../Header.js';
+
 
 const Hello = styled.div`
   .survey-true {
@@ -36,13 +42,15 @@ const Content = styled.div`
     justify-content: center;
   }
 `;
+const NavModal = styled.div``;
 
 const UsersHomePage = () => {
   const history = useHistory();
-  const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
+  const [surveyAvailable, setSurveyAvailable] = useState(false); //TODO need to be taken from DB
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
+  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
@@ -55,6 +63,7 @@ const UsersHomePage = () => {
   })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
+
   const { username, email, id } = userDetails;
 
   const clickedSurvey = () => {
@@ -63,6 +72,7 @@ const UsersHomePage = () => {
   return (
     console.log(userDetails) || (
       <div className="UsersHomePage">
+        <Header />
         <Hello className="helloDiv">
           <div className={"survey-" + surveyAvailable}>
             <LeftDiv className="leftDivSurvey">
@@ -74,7 +84,9 @@ const UsersHomePage = () => {
               <div className="IconWrapper">
                 <UserIcon />
               </div>
-              <h2>שלום {username}</h2>
+
+              <div className="helloAndUsername">שלום {username}</div>
+
             </RightDiv>
           </div>
         </Hello>
