@@ -9,12 +9,9 @@ import "./HomePage.css";
 import Survey from "./Survey";
 import { useHistory } from "react-router-dom";
 import { Modal } from "react-bootstrap";
-
-export const IsAdminContext = React.createContext({});
-
-import Survey from "./Survey";
 import Header from '../Header.js';
 
+export const IsAdminContext = React.createContext({});
 
 const Hello = styled.div`
   .survey-true {
