@@ -3,7 +3,7 @@ module.exports = function() {
     return {
         flywayArgs: {
             url: 'jdbc:mysql://localhost:3306',
-            schemas: 'wolfson_db',
+            schemas: 'sql_hello_world1',
             locations: 'conf/sql',
             user: 'root',
             password: '123456',
