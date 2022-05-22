@@ -5,8 +5,64 @@ body {
     height: 100%;
     width: 100%;
     color: #00138E;
+
+}
+.form-control {
+    margin-bottom: 10px;
+}
+.dropdown-menu {
+    transform: translate(431px, 50px);
+    min-width: auto;
+}
+.dropdown-item {
+    text-align: right;
+}
+.dropdown-toggle::after {
+    margin-right: 10px;
+}
+.btn-primary {
+    margin: 10px;
+    background-color: white;
+    color: #2e388d;
+    border-color: #2e388d;
+    box-shadow: 0px 0px;
+    width: 309px;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #2e388d;
+    border-color: #2e388d;
 }
 
+.btn-primary:active {
+    color: #fff;
+    background-color: #2e388d;
+    border-color: #2e388d;
+}
+.btn-primary:focus {
+    color: #fff;
+    background-color: #2e388d;
+    border-color: #2e388d;
+    box-shadow: 0 0 0 0.25rem rgb(46 56 141 / 30%);
+}
+
+.show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #2e388d;
+    border-color: #2e388d;
+    box-shadow: 0px 0px;
+}
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgb(46 56 141 / 30%);
+}
+.dropdown-toggle::after {
+    margin-right: 10px;
+}
+.dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #2e388d;
+}
 .lightGreyBorder {
     border-radius: 15px;
     border-width: 1px;

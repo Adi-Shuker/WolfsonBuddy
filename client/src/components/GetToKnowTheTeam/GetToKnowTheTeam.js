@@ -4,7 +4,6 @@ import PresentDoctor from "../PresentDoctor";
 import Header from "../UsersComponents/Header";
 import BackIcon from "../UsersComponents/Icons/BackIcon";
 import styled from "styled-components";
-//import "./style";
 import { useHistory } from "react-router-dom";
 
 const GetToKnowTheTeamDiv = styled.div`

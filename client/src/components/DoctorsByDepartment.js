@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
 
 const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
+  departmentsList = departmentsList || ["dep1"];
+  doctorsList = doctorsList || ["doc1"];
   let defaultDoctorsTitle = "בחר רופא";
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
   const [doctorsTitle, setDoctorsTitle] = useState(defaultDoctorsTitle);
@@ -32,7 +34,8 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
         id="dropdown-departments"
         onSelect={departmentSelect}
         title={departmentsTitle}
-      dir="rtl">
+        dir="rtl"
+      >
         {departmentsList.map(function (name, index) {
           return (
             <Dropdown.Item key={index} eventKey={name}>
