@@ -11,26 +11,21 @@ const HeaderDiv = styled.div`
   .modal.custom .modal-dialog {
     width: 50%;
     position: absolute;
-
     .modal-content {
       margin-left: 500px;
     }
   }
-`;
-
-const AdminTitle = styled.div`
-  background-color: #00138E;
-  color: #ffffff;
-  text-align: center;
-  width: 100%;
-  padding: 10px;
-`;
-
-const Title = styled.div`
-  background-color: #feb914;
-  text-align: center;
-  width: 100%;
-  padding: 10px;
+  .title {
+    padding: 10px;
+  }
+  .isAdmin-false {
+    background-color: #feb914;
+    color: #00138e;
+  }
+  .isAdmin-true {
+    background-color: #00138e;
+    color: white;
+  }
 `;
 
 const MenuLine = styled.div`
@@ -44,13 +39,19 @@ const MenuLine = styled.div`
     width: 0px;
   }
   float: right;
+  .helloAdmin {
+    padding-top: 4px;
+    font-size: 30px;
+    padding-right: 30px;
+  }
 `;
 
 const Modal2 = styled.div``;
 
-const Header = ({ isAdmin }) => {
+const Header = () => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
-
+  const isAdmin = true;
+  const adminName = "מיכל";
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
     console.log("onClickMenu", showSideMenu);
@@ -66,9 +67,9 @@ const Header = ({ isAdmin }) => {
 
   return (
     <HeaderDiv className="Header">
-      <Title className="title">
+      <div className={"title isAdmin-" + isAdmin}>
         <div>המרכז הרפואי על שם אידת וולפסון</div>
-      </Title>
+      </div>
 
       <MenuLine className="MenuLineDiv">
         <img
@@ -78,7 +79,11 @@ const Header = ({ isAdmin }) => {
           alt="wolfsonBuddyLogo"
         />
         <div>
-          <MenuIcon onClick={onClickMenu} />
+          {isAdmin ? (
+            <div className="helloAdmin">!שלום {adminName} </div>
+          ) : (
+            <MenuIcon onClick={onClickMenu} />
+          )}
         </div>
       </MenuLine>
 
