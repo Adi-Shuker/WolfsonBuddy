@@ -1,33 +1,51 @@
-import {Dropdown, Container, Button, Row, Col, DropdownButton} from "react-bootstrap";
-import React, {useState} from "react";
+import {Dropdown, Container, Button, Row, Col, DropdownButton, Modal, Form} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
 import "./Survey.css"
 import UserSurvey from './UserSurvey.js';
 import {DoctorsByDepartmentDiv} from "../../style-DoctorsByDepartment";
+import NavigationDiv from "../../UsersComponents/HomePage/NavigationDiv";
+import {DepartmentsContext} from "../../../App";
+import AddQuestion from "./AddQuestion";
+import DeleteQuestion from "./DeleteQuestion";
 
 const EditSurvey = ()=>{
     const [showUserSurvey, setShowUserSurvey] = useState(false);
-    const questionTypes = [
-        {
-            "id": 1,
-            "type": "matrix",
-            "name": "מטריצה"
-        },
-        {
-            "id": 2,
-            "type": "dropdown",
-            "name": "בחירה מתוך רשימה"
-        },
-        {
-            "id": 3,
-            "type": "rating",
-            "name": "דירוג 1-5"
-        },
-        {
-            "id": 4,
-            "type": "comment",
-            "name": "שאלה פתוחה"
-        }
-    ];
+    const [addQuestionModal, setAddQuestionModal] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [questionTypes, setQuestionTypes] = useState([]);
+    const [selectedDepartment, setSelectedDepartment] = useState(1);
+    const { departments, setDepartments } = React.useContext(DepartmentsContext);
+
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        fetch(`/api/survey/${selectedDepartment}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", "x-access-token": token },
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setQuestions(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [questions, selectedDepartment]);
+
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        fetch(`/api/survey/question_types`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json", "x-access-token": token },
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setQuestionTypes(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
 
     return (
         <div className="edit-survey" style={{ display: 'block', padding: 30 }}>
@@ -39,36 +57,33 @@ const EditSurvey = ()=>{
                     <Button onClick={()=>{setShowUserSurvey(!showUserSurvey);}} className="button" variant="outline-primary">תצוגה מקדימה</Button>{' '}
                 </Col>
                 <Col>
+
                     <DoctorsByDepartmentDiv className="DoctorsByDepartment">
-                    <DropdownButton
-                        className="DropdownButton"
-                        id="dropdown-question-type"
-                        title='בחר סוג שאלה'
-                        dir="rtl">
-                        {
-                            questionTypes.map((item)=>{
-                                return (
-                                    <Dropdown.Item className="dropdown"  key = {item.id} eventKey={item.name}>{item.name}</Dropdown.Item>
-                                )
-                            })
-                        }
-                    </DropdownButton>
-                        <DropdownButton
-                            className="DropdownButton"
-                            id="dropdown-question-type"
-                            title='בחר שאלה'
-                            dir="rtl">
-                            {
-                                questionTypes.map((item)=>{
-                                    return (
-                                        <Dropdown.Item className="dropdown"  key = {item.id} eventKey={item.name}>{item.name}</Dropdown.Item>
-                                    )
-                                })
-                            }
-                        </DropdownButton>
-                    <Button className="button-add-question" variant="outline-primary">הוסף שאלה</Button>{' '}
-                    <Button className="button-remove-question" variant="outline-primary">מחק שאלה</Button>{' '}
+                        <Form>
+                            <Form.Group className="mb-3">
+                                <Form.Label>בחר מחלקה</Form.Label>
+                                <Form.Select aria-label="Default select example" onChange={(e)=> {
+                                    setSelectedDepartment(e.target.value)
+                                }} dir="rtl">
+                                    {departments.map((department) =>{
+                                        return <option value={department.id}>{department.name}</option>;
+                                    })}
+                                </Form.Select>
+                            </Form.Group>
+                        </Form>
+                        <AddQuestion questionTypes={questionTypes} selectedDepartment={selectedDepartment}/>
+                        <DeleteQuestion questions={questions} setQuestions={setQuestions}/>
                     </DoctorsByDepartmentDiv>
+                    <Modal
+                        className="navModal"
+                        show={addQuestionModal}
+                        onHide={() => setAddQuestionModal(false)}
+                        centered
+                    >
+                        <Modal.Header className="border-0" closeButton></Modal.Header>
+                        <NavigationDiv setTrigger={setAddQuestionModal} />
+                    </Modal>
+
                 </Col>
 
             </Row>

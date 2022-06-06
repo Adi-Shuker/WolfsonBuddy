@@ -8,7 +8,6 @@ import styled, { css } from "styled-components";
 import "./HomePage.css";
 import Survey from "./Survey";
 import { useHistory } from "react-router-dom";
-import { Modal } from "react-bootstrap";
 import Header from '../Header.js';
 
 export const IsAdminContext = React.createContext({});
@@ -43,7 +42,7 @@ const NavModal = styled.div``;
 
 const UsersHomePage = () => {
   const history = useHistory();
-  const [surveyAvailable, setSurveyAvailable] = useState(false); //TODO need to be taken from DB
+  const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
@@ -53,14 +52,6 @@ const UsersHomePage = () => {
     return <Redirect to="/" />;
   }
   const token = localStorage.getItem("accessToken");
-
-  fetch("/api/example/user", {
-    method: "GET",
-    headers: { "Content-Type": "application/json", "x-access-token": token },
-  })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-
   const { username, email, id } = userDetails;
 
   const clickedSurvey = () => {

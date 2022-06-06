@@ -9,23 +9,16 @@ import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
 import "./App.css";
 
-import DoctorsByDepartment from "./components/DoctorsByDepartment";
-import NewsManager from "./components/NewsManager/NewsManager";
 import GetToKnowTheTeam from "./components/GetToKnowTheTeam/GetToKnowTheTeam";
-import EditGetToKnowTheTeam from "./components/AdminComponents/EditGetToKnowTheTeam/EditGetToKnowTheTeam.js";
-import Header from "./components/UsersComponents/Header.js";
 import Game from "./components/Game/Game";
 import News from "./components/News/News";
 import UserSurvey from "./components/AdminComponents/Survey/UserSurvey";
-import SurveyForm from "./components/UsersComponents/SurveyForm/SurveyForm";
-import { useHistory } from "react-router-dom";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
 export const DepartmentsContext = React.createContext({});
 
 function App() {
-  const history = useHistory();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [data, setData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -47,7 +40,7 @@ function App() {
         setIsAuthenticated(false);
         setData(true);
       });
-      fetch('/api/get_all_departments', {
+      fetch('/api/departments', {
           method: 'GET',
           headers:{"Content-Type": "application/json","x-access-token": token},
       }).then((res) => {
