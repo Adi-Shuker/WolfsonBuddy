@@ -21,7 +21,7 @@ body {
     margin-right: 10px;
 }
 .btn-primary {
-    margin: 10px;
+
     background-color: white;
     color: #2e388d;
     border-color: #2e388d;
@@ -76,4 +76,10 @@ body {
     border-width: 1px;
     border-style: solid;
     border-color: #2e388d;
+}
+
+
+.secretariatInfoModal {
+    width: 64%;
+    left: calc(20%);
 }

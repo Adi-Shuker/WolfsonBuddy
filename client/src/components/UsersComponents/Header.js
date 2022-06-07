@@ -1,10 +1,11 @@
 import MenuIcon from "./Icons/MenuIcon.js";
 import styled from "styled-components";
 import SideMenu from "./SideMenu";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
+import NavigationDiv from "./HomePage/NavigationDiv";
 
 const HeaderDiv = styled.div`
   display: grid;
@@ -46,11 +47,10 @@ const MenuLine = styled.div`
   }
 `;
 
-const Modal2 = styled.div``;
-
 const Header = () => {
+  const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
-  const isAdmin = true;
+  const isAdmin = false;
   const adminName = "מיכל";
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
@@ -58,10 +58,13 @@ const Header = () => {
   };
   const history = useHistory();
   const onMenuItemSelection = (path) => {
-    console.log(path);
-    if (path != "/car") {
+    if (path !== "/car" && path !== "/logout") {
       history.push(path);
     } else {
+      if (path === "/car") {
+        setButtonNavigationPopup(true);
+      } else if (path === "/logout") {
+      }
     }
   };
 
@@ -99,6 +102,15 @@ const Header = () => {
           />
         </Modal>
       </div>
+      <Modal
+        className="navModal"
+        show={buttonNavigationPopup}
+        onHide={() => setButtonNavigationPopup(false)}
+        centered
+      >
+        <Modal.Header className="border-0" closeButton />
+        <NavigationDiv setTrigger={setButtonNavigationPopup} />
+      </Modal>
     </HeaderDiv>
   );
 };

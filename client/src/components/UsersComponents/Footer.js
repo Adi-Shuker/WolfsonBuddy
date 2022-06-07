@@ -14,7 +14,13 @@ import YoutubeIcon from "./Icons/SocialMedia/YoutubeIcon";
 import { Link } from "@mui/material";
 
 const FooterDiv = styled.div`
-  margin-top: 15px;
+  position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+  
+  
   display: grid;
 
   direction: rtl;

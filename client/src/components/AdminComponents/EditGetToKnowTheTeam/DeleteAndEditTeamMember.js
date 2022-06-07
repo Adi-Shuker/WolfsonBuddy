@@ -15,6 +15,7 @@ import styled from "styled-components";
 import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
 import DoctorsByDepartment from "../../DoctorsByDepartment";
+import LogoutIcon from "../../UsersComponents/Icons/LogoutIcon";
 
 const DeleteAndEditTeamMemberDiv = styled.div`
   justify-content: space-evenly;
