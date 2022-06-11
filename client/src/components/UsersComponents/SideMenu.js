@@ -7,6 +7,7 @@ import GameIcon from "./Icons/GamesIcon";
 import CarIcon from "./Icons/CarIcon";
 import NavIcon from "./Icons/NavIcon";
 import HomeIcon from "./Icons/HomeIcon";
+import LogoutIcon from "./Icons/LogoutIcon";
 import Divider from "@mui/material/Divider";
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -26,7 +27,6 @@ const OneMenuItem = styled.div``;
 
 const SideMenu = ({ setShowSideMenu, onMenuItemSelection }) => {
   const handleMenuItemClick = (index: number) => {
-    console.log(index);
     onMenuItemSelection(option[index].path);
     setShowSideMenu(false);
   };
@@ -55,6 +55,12 @@ const SideMenu = ({ setShowSideMenu, onMenuItemSelection }) => {
       text: "פעילות לזמן המתנה",
       path: "/game",
       icon: GameIcon,
+    },
+    {
+      className: "logout",
+      text: "התנתקות",
+      path: "/logout",
+      icon: LogoutIcon,
     },
   ];
   return (
