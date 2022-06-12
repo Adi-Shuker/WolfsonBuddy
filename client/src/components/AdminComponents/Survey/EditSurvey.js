@@ -2,7 +2,6 @@ import {Dropdown, Container, Button, Row, Col, DropdownButton, Modal, Form} from
 import React, {useEffect, useState} from "react";
 import "./Survey.css"
 import UserSurvey from './UserSurvey.js';
-import {DoctorsByDepartmentDiv} from "../../style-DoctorsByDepartment";
 import NavigationDiv from "../../UsersComponents/HomePage/NavigationDiv";
 import {DepartmentsContext} from "../../../App";
 import AddQuestion from "./AddQuestion";
@@ -29,7 +28,7 @@ const EditSurvey = ()=>{
             .catch((err) => {
                 console.log(err);
             });
-    }, [questions, selectedDepartment]);
+    }, [selectedDepartment]);
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -58,7 +57,7 @@ const EditSurvey = ()=>{
                 </Col>
                 <Col>
 
-                    <DoctorsByDepartmentDiv className="DoctorsByDepartment">
+                    <div>
                         <Form>
                             <Form.Group className="mb-3">
                                 <Form.Label>בחר מחלקה</Form.Label>
@@ -73,7 +72,7 @@ const EditSurvey = ()=>{
                         </Form>
                         <AddQuestion questionTypes={questionTypes} selectedDepartment={selectedDepartment}/>
                         <DeleteQuestion questions={questions} setQuestions={setQuestions}/>
-                    </DoctorsByDepartmentDiv>
+                    </div>
                     <Modal
                         className="navModal"
                         show={addQuestionModal}

@@ -1,13 +1,19 @@
 import {Modal, Button, Dropdown, DropdownButton, Form} from "react-bootstrap";
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 
 const AddQuestion = ({questionTypes, selectedDepartment})=>{
     const [show, setShow] = useState(false);
     const [selectedQuestionType, setSelectedQuestionType] = useState("1");
     const [text, setText] = useState("");
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [answersList, setAnswersList] = useState([{ answer: "" }]);
+
+    const handleClose = () => {
+        setShow(false);
+        setSelectedQuestionType("1");
+        handleSelectedQuestionTypeChange("1");
+    };
+
+    const handleShow = () => setShow(true);
 
     const handleAnswersChange = (e, index) => {
         const { name, value } = e.target;
@@ -15,6 +21,26 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
         list[index][name] = value;
         setAnswersList(list);
     };
+
+    const handleSelectedQuestionTypeChange = (value) => {
+        setSelectedQuestionType(value);
+        let list = [];
+        if(value=="3"){ //case question type is rating
+            ['1','2','3','4','5'].forEach((item,index)=>{
+                list[index] = { answer: item };
+            })
+            setAnswersList(list);
+        }else if(value=="1"){ //case question type is matrix
+            ['בכלל לא','במידה מועטה','במידה בינונית','במידה רבה','במידה רבה מאוד', 'לא רלוונטי'].forEach((item,index)=>{
+                list[index] = { answer: item };
+            })
+            setAnswersList(list);
+        }else if(value=="4"){ //case question type is comment
+            setAnswersList([]);
+        }else{
+            setAnswersList([{ answer: "" }]);
+        }
+    }
 
     const handleRemoveAnswer = (index) => {
         const list = [...answersList];
@@ -60,7 +86,7 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Select aria-label="Default select example" onChange={(e)=> {
-                                setSelectedQuestionType(e.target.value)
+                                handleSelectedQuestionTypeChange(e.target.value);
                             }}>
                                 {questionTypes.map((type) =>
                                         <option value={type.id}>{type.name}</option>
@@ -75,6 +101,7 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
                                 setText(e.target.value)
                             }}/>
                         </Form.Group>
+                        {answersList.length>0?
                         <div className="form-field">
                             <label htmlFor="answer">תשובות לבחירה</label>
                             {answersList.map((answer, index) => (
@@ -109,7 +136,7 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
                             >
                                 <span>הוסף תשובה</span>
                             </Button>
-                        </div>
+                        </div>:null}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

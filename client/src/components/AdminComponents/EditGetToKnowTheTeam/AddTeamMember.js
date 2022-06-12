@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import Header from "../../UsersComponents/Header";
-import EditForm from "../EditForm";
 import {
   Button,
-  Col,
-  Container,
   Dropdown,
   DropdownButton,
   Form,
-  Row,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
 
 const AddTeamMemberDiv = styled.div`
@@ -51,7 +44,7 @@ const AddTeamMemberDiv = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.div`{
     display: flex;
     justify-content: space-around;
     direction: rtl;
@@ -85,7 +78,6 @@ const AddTeamMember = () => {
   ];
   return (
     <div className="allcomponent">
-      <Header />
       <AddTeamMemberDiv className="AddTeamMember">
         <div className="leftDiv">
           <div className="title">תצוגה מקדימה:</div>
