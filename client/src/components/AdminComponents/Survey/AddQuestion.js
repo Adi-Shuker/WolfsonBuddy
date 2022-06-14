@@ -101,7 +101,7 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
                                 setText(e.target.value)
                             }}/>
                         </Form.Group>
-                        {answersList.length>0?
+                        {answersList.length>0&&selectedQuestionType==="2"?
                         <div className="form-field">
                             <label htmlFor="answer">תשובות לבחירה</label>
                             {answersList.map((answer, index) => (

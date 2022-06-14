@@ -62,6 +62,7 @@ const EditSurvey = ()=>{
                             <Form.Group className="mb-3">
                                 <Form.Label>בחר מחלקה</Form.Label>
                                 <Form.Select aria-label="Default select example" onChange={(e)=> {
+                                     console.log(e.target.value);
                                     setSelectedDepartment(e.target.value)
                                 }} dir="rtl">
                                     {departments.map((department) =>{

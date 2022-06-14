@@ -12,7 +12,7 @@ const Survey = (props) => {
     console.log({ iconClicked });
   };
     const clickedSurvey = () => {
-        history.push("/userSurvey");
+        history.push("/userSurvey/1");
     };
 
     const text = "חשוב לנו לשמוע את דעתך! למילוי סקר שביעות רצון לחצו כאן";

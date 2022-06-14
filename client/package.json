@@ -58,6 +58,6 @@
     ]
   },
   "devDependencies": {
-    "survey-react": "^1.9.28"
+    "survey-react": "^1.9.34"
   }
 }

@@ -73,7 +73,7 @@ function App() {
                                 <Route exact path="/GetToKnowTheTeam" component={GetToKnowTheTeam}/>
                                 <Route exact path="/Game" component={Game} />
                                 <Route exact path="/News" component={News} />
-                                <Route exact path="/userSurvey" component={UserSurvey}/>
+                                <Route exact path="/userSurvey/:department_id" component={UserSurvey}/>
                                 <Route exact path="/" component={LoginPage}/>
                             `   <Route exact path="/deleteAndEditTeamMember" component={DeleteAndEditTeamMember}/>
                                 <Route exact path="/facebook" 
