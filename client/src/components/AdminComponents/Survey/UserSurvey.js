@@ -105,7 +105,9 @@ const UserSurvey = () => {
                         questions.push(CommentQuestion(item.question_id.toString(), item.question_text.toString()));
                     }
                 })
-                questions.push(MatrixQuestion(matrixRows));
+                if (matrixRows.length > 0) {
+                    questions.push(MatrixQuestion(matrixRows));
+                }
                 setSurveyQuestions(questions);
             })
             .catch((err) => {

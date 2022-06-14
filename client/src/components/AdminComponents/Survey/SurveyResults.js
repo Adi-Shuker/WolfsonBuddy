@@ -70,17 +70,14 @@ const SurveyResults = () => {
                 </Form.Group>
             </Form>
             <div> סה"כ ענו: {totalCount} מטופלים </div>
-            {/*<div className="d-inline-flex align-content-around flex-wrap bd-highlight example-parent justify-content-between"  >*/}
             <div className="d-flex justify-content-around flex-column">
                 {chartsData.length > 0 && chartsData.map((item, index) => {
-                        // return <div className="p-2 bd-highlight col-example w-50 s-1">
                     return <div className="w-50 col-6 md-6">
                             <QuestionChart title={item.title} question_type={item.question_type} labels={item.labels} values={item.values===undefined?[]:item.values}/>
                         </div>
                     }
                 )}
                 {commentUserAnswers.length>0 && commentUserAnswers.map(ans =>{
-                        // return <div className="p-2 bd-highlight col-example s-1">
                     return <div className="w-50 col-6 md-6">
                             <UserAnswersTable title={ans.title} answers={ans.answers.length>0?ans.answers:[]}/>
                             </div>

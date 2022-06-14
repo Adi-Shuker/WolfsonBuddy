@@ -1,14 +1,14 @@
-import {Dropdown, Container, Button, Row, Col, DropdownButton, Modal, Form} from "react-bootstrap";
+import {Container, Button, Row, Col, Modal, Form} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import "./Survey.css"
-import UserSurvey from './UserSurvey.js';
 import NavigationDiv from "../../UsersComponents/HomePage/NavigationDiv";
+import { MDBContainer, MDBIframe } from "mdbreact";
 import {DepartmentsContext} from "../../../App";
 import AddQuestion from "./AddQuestion";
 import DeleteQuestion from "./DeleteQuestion";
 
 const EditSurvey = ()=>{
-    const [showUserSurvey, setShowUserSurvey] = useState(false);
+    const [showUserSurvey, setShowUserSurvey] = useState(true);
     const [addQuestionModal, setAddQuestionModal] = useState(false);
     const [questions, setQuestions] = useState([]);
     const [questionTypes, setQuestionTypes] = useState([]);
@@ -51,7 +51,10 @@ const EditSurvey = ()=>{
             <Row>
                 <Col>
                     <Container>
-                        {showUserSurvey ? <UserSurvey/>:null}
+                        {showUserSurvey ?
+                            <MDBContainer className="text-center" style={{ height: '500px' }}>
+                                <MDBIframe src={"/userSurvey/"+selectedDepartment} style={{ height: '400px' }}/>
+                            </MDBContainer>:null}
                     </Container>
                     <Button onClick={()=>{setShowUserSurvey(!showUserSurvey);}} className="button" variant="outline-primary">תצוגה מקדימה</Button>{' '}
                 </Col>
