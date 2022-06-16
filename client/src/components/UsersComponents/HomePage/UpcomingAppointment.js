@@ -32,7 +32,6 @@ const UpcomingAppointmentDiv = styled.div`
   }
   .btn-primary:focus {
     color: #2e388d;
-    box-shadow: 0px 0px;
     border: 1px solid #2e388d;
   }
 `;
@@ -51,7 +50,7 @@ const UpcomingAppointment = () => {
     <UpcomingAppointmentDiv className="UpcomingAppointmentDiv lightGreyBorder">
       <div className="InfoAndCalenderDiv">
         <WrapperCalendarIcon>
-            <AddGoogleCalenderEvent/>
+          <AddGoogleCalenderEvent />
         </WrapperCalendarIcon>
 
         <div className="textInfo-appointment">

@@ -16,7 +16,6 @@ const checkDuplicateEmail = (req, res, next) => {
             next();
         })
         .catch(err => {
-            console.log("18", err.message)
             res.status(500).send({ message: err.message });
         });
 };

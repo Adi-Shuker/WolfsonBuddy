@@ -4,10 +4,6 @@ import styled from "styled-components";
 const NavAppIcon = styled.div`
   height: 60px;
   width: 60px;
-  // border-radius: 10px;
-  // border-size: 1px;
-  // border-style: solid;
-  // border-color: #2e388d;
   item-align: center;
   margin-right: 5px;
   margin-left: 5px;

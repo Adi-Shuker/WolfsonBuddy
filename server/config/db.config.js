@@ -5,8 +5,8 @@ const con = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "abc",
-  database: "wolfson_buddy",
+  password: "123456",
+  database: "wolfson_db",
 });
 
 const executeQuery = (sqlQuery) => {

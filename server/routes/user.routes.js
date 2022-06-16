@@ -14,24 +14,44 @@ const userRoutes = function(app) {
         userController.updatePassword(req, res)
     });
     app.get(
-        "/api/get_all_departments",
+        "/api/departments",
         [authJwt.verifyTokenMiddleware],
         userController.getAllDepartments
     );
     app.get(
-        "/api/get_all_survey_questions_types",
+        "/api/survey/question_types",
         [authJwt.verifyTokenMiddleware],
-        userController.getAllSurveyQuestionsTypes
+        userController.getQuestionTypes
     );
     app.get(
-        "/api/example/user",
+        "/api/survey/:department_id",
         [authJwt.verifyTokenMiddleware],
-        userController.userBoard
+        userController.getSurvey
     );
     app.get(
-        "/api/example/admin",
+        "/api/survey/result/:department_id",
         [authJwt.verifyTokenMiddleware],
-        userController.adminBoard
+        userController.getSurveyResult
+    );
+    app.post(
+        "/api/survey/questions",
+        [authJwt.verifyTokenMiddleware],
+        userController.addQuestion
+    );
+    app.delete(
+        "/api/survey/questions/:question_id",
+        [authJwt.verifyTokenMiddleware],
+        userController.deleteQuestion
+    );
+    app.post(
+        "/api/survey/result",
+        [authJwt.verifyTokenMiddleware],
+        userController.addSurveyResult
+    );
+    app.get(
+        "/api/survey/result/:department_id",
+        [authJwt.verifyTokenMiddleware],
+        userController.getSurveyResult
     );
 };
 
