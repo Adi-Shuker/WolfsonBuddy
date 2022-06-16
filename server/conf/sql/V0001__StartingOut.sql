@@ -54,7 +54,7 @@ values (1 ,'אגף ילדים'),
 
 
 CREATE TABLE staff (
-  id int NOT NULL,
+  id int NOT NULL AUTO_INCREMENT,
   name varchar(45) NOT NULL,
   department_id int NOT NULL,
   role varchar(45) DEFAULT NULL,
