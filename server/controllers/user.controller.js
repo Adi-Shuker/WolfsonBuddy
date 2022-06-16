@@ -124,6 +124,21 @@ const updatePassword = (req ,res) => {
     }).catch(err => console.log(err))
 }
 
+const addStaffMember =(req, res) => {
+    const {name, department_id, role, description, phone_number, clinical_practice,
+        scientific_practice, academic_experience, professional_unions,education } = req.body;
+
+    var query = "insert into staff(name, department_id, role, description, phone_number, clinical_practice,scientific_practice, academic_experience, professional_unions,education)" +
+        " values ('"+name+"', '"+ department_id+"', '"+
+        role+"', '"+ description+"', '"+ phone_number+"', '"+ clinical_practice+"', '"+
+        scientific_practice+"', '"+ academic_experience+"', '"+ professional_unions+"', '"+education+"')";
+        executeQuery(query)
+        .then(resData => {
+            res.status(200).json(resData);
+        })
+        .catch(err => console.log(err))
+}
+
 const userController = {
     updatePassword,
     getAllDepartments,
@@ -133,6 +148,7 @@ const userController = {
     getSurveyResult,
     addQuestion,
     deleteQuestion,
+    addStaffMember,
 };
 
 

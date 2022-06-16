@@ -53,6 +53,11 @@ const userRoutes = function(app) {
         [authJwt.verifyTokenMiddleware],
         userController.getSurveyResult
     );
+    app.post(
+        "/api/staff",
+        [authJwt.verifyTokenMiddleware],
+        userController.addStaffMember
+    );
 };
 
 export default userRoutes;
