@@ -71,7 +71,7 @@ const Header = () => {
   return (
     <HeaderDiv className="Header">
       <div className={"title isAdmin-" + isAdmin}>
-        <div>המרכז הרפואי על שם אידת וולפסון</div>
+        <div>המרכז הרפואי על שם אדית וולפסון</div>
       </div>
 
       <MenuLine className="MenuLineDiv">
