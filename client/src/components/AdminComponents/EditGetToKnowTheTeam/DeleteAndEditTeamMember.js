@@ -10,7 +10,7 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
@@ -48,7 +48,12 @@ const Title = styled.div`
 }`;
 
 const DeleteAndEditTeamMember = () => {
+  const history = useHistory();
   const departmentsList = ["doc1", "doc2", "doc3"];
+  function handleClick(path) {
+    history.push(path);
+  }
+
   return (
     <div className="allcomponent">
       <Header />
@@ -59,8 +64,20 @@ const DeleteAndEditTeamMember = () => {
         <div className="rightDiv">
           <DoctorsByDepartment />
           <div className={"buttonLine"}>
-            <Button> עריכת איש צוות </Button>
-            <Button> מחיקת איש צוות </Button>
+            <Button
+              onClick={() => {
+                handleClick("/editGetToKnowTheTeam");
+              }}
+            >
+              {" עריכת איש צוות"}
+            </Button>
+            <Button
+              onClick={() => {
+                //TO-DO delete it from DB
+              }}
+            >
+              {"מחיקת איש צוות"}
+            </Button>
           </div>
         </div>
       </DeleteAndEditTeamMemberDiv>

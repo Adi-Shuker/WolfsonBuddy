@@ -59,7 +59,8 @@ const Title = styled.div`
     direction: rtl;
 }`;
 
-const AddTeamMember = () => {
+const AddTeamMember = ({ choosenDoc }) => {
+  const choosenDep = "dep1";
   const departmentsList = [
     "dep1",
     "dep2",
@@ -67,7 +68,9 @@ const AddTeamMember = () => {
     "היחידה לאורוגינקולוגיה וכירורגית רצפת האגן",
   ];
   function submitHandle() {}
-  const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
+  const [departmentsTitle, setDepartmentsTitle] = useState(
+    choosenDep || "בחר מחלקה"
+  );
 
   const departmentSelect = (e) => {
     console.log(e);
