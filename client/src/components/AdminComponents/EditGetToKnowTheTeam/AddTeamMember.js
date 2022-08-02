@@ -20,6 +20,7 @@ const AddTeamMemberDiv = styled.div`
   }
   .rightDiv {
     .dropdown-toggle {
+      margin-right: 0px;
       margin-bottom: 10px;
       width: 100%;
       background-color: white;
@@ -39,6 +40,7 @@ const AddTeamMemberDiv = styled.div`
   }
   .leftDiv {
     display: grid;
+    margin-top: auto;
     .PresentDoctor {
       border: 1px solid black;
     }
