@@ -1,19 +1,13 @@
-import React, { useState } from "react";
-import Header from "../../UsersComponents/Header";
-import EditForm from "../EditForm";
+import React, {useEffect, useState} from "react";
 import {
   Button,
-  Col,
-  Container,
   Dropdown,
   DropdownButton,
   Form,
-  Row,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
+import {DepartmentsContext} from "../../../App";
 
 const AddTeamMemberDiv = styled.div`
   justify-content: space-evenly;
@@ -51,41 +45,96 @@ const AddTeamMemberDiv = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.div`{
     display: flex;
     justify-content: space-around;
     direction: rtl;
 }`;
 
 const AddTeamMember = () => {
-  const departmentsList = [
-    "dep1",
-    "dep2",
-    "dep3",
-    "היחידה לאורוגינקולוגיה וכירורגית רצפת האגן",
-  ];
-  function submitHandle() {}
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
+  const [selectedDepartment, setSelectedDepartment] = useState(1);
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [description, setDescription] = useState("");
+  const [phone_number, setPhone_number] = useState("");
+  const [clinical_practice, setClinical_practice] = useState("");
+  const [scientific_practice, setScientific_practice] = useState("");
+  const [academic_experience, setAcademic_experience] = useState("");
+  const [professional_unions, setProfessional_unions] = useState("");
+  const [education, setEducation] = useState("");
+  const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
-  const departmentSelect = (e) => {
-    console.log(e);
-    setDepartmentsTitle(e);
-  };
+
+  const submitHandle = (event)=>{
+    event.preventDefault();
+    const token = localStorage.getItem("accessToken");
+    fetch(`/api/staff`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-access-token": token },
+      body: JSON.stringify({
+        "name": name,
+        "department_id":selectedDepartment,
+        "role":role,
+        "description":description,
+        //"picture":,
+        "phone_number":phone_number,
+        "clinical_practice":clinical_practice,
+        "scientific_practice":scientific_practice,
+        "academic_experience":academic_experience,
+        "professional_unions":professional_unions,
+        "education":education,
+      }),
+    })
+        .then((res) => res.json())
+        .then((res) => {
+          alert("חבר צוות נוסף בהצלחה")
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
   const fields = [
-    "שם",
-    "מחלקה",
-    "תיאור",
-    "טלפון",
-    "תחומי עיסוקי קליני",
-    "תחומי עיסוק מדעי",
-    "ניסיון אקדמי",
-    "חברות באיגודים מקצועיים",
-    "השכלה",
-    "תמונה",
+    {name:"שם", evenHandler:(event) => {
+        setName(event.target.value);
+      } },
+    {name:"מחלקה", evenHandler:(event) => {
+        setSelectedDepartment(departments.filter((department)=> department.name === event)[0].id);
+        setDepartmentsTitle(event);
+      } },
+    {name:"תפקיד", evenHandler:(event) => {
+        setRole(event.target.value);
+      } },
+    {name:"תיאור", evenHandler:(event) => {
+        setDescription(event.target.value);
+      } },
+    {name:"טלפון", evenHandler:(event) => {
+        setPhone_number(event.target.value);
+      } },
+    {name:"תחומי עיסוקי קליני", evenHandler:(event) => {
+        setClinical_practice(event.target.value);
+      } },
+    {name:"תחומי עיסוק מדעי", evenHandler:(event) => {
+        setScientific_practice(event.target.value);
+      } },
+    {name:"ניסיון אקדמי", evenHandler:(event) => {
+        setAcademic_experience(event.target.value);
+      } },
+    {name:"חברות באיגודים מקצועיים", evenHandler:(event) => {
+        setProfessional_unions(event.target.value);
+      } },
+    {name:"השכלה", evenHandler:(event) => {
+        setEducation(event.target.value);
+      } },
+    {name:"תמונה", evenHandler:(event) => {
+      } }
   ];
+
+
+
   return (
     <div className="allcomponent">
-      <Header />
       <AddTeamMemberDiv className="AddTeamMember">
         <div className="leftDiv">
           <div className="title">תצוגה מקדימה:</div>
@@ -94,10 +143,10 @@ const AddTeamMember = () => {
         </div>
         <div className="rightDiv">
           <div className="title">הוספת איש צוות:</div>
-          <Form onSubmit={submitHandle}>
+          <Form onSubmit={(e) => submitHandle(e)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               {fields.map((item) => {
-                return item === "תמונה" ? (
+                return item.name === "תמונה" ? (
                   <div>
                     <Form.Label>תמונה</Form.Label>
                     <Form.Control
@@ -106,21 +155,22 @@ const AddTeamMember = () => {
                       label="abc"
                       title="efg"
                       placeholder="hij"
+                      onChange={item.evenHandler}
                     />
                   </div>
-                ) : item === "מחלקה" ? (
+                ) : item.name === "מחלקה" ? (
                   <div>
                     <DropdownButton
                       className="DropdownButton"
                       id="dropdown-departments"
-                      onSelect={departmentSelect}
+                      onSelect={item.evenHandler}
                       title={departmentsTitle}
                       dir="rtl"
                     >
-                      {departmentsList.map(function (name, index) {
+                      {departments.map(function (department, index) {
                         return (
-                          <Dropdown.Item key={index} eventKey={name}>
-                            {name}
+                          <Dropdown.Item key={department.id} eventKey={department.name}>
+                            {department.name}
                           </Dropdown.Item>
                         );
                       })}
@@ -131,13 +181,14 @@ const AddTeamMember = () => {
                     <Form.Control
                       className="text-right"
                       type="text"
-                      placeholder={item}
+                      placeholder={item.name}
+                      onChange={item.evenHandler}
                     />
                   </div>
                 );
               })}
             </Form.Group>
-
+            <Button  type="submit">הוסף חבר צוות</Button>
             <Button>תצוגה מקדימה</Button>
           </Form>
         </div>
