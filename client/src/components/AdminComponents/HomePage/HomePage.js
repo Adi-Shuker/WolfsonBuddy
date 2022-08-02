@@ -5,7 +5,7 @@ import React from "react";
 import {IsAdminContext, IsAuthenticateContext, UserDetailsContext, DepartmentsContext} from "../../../App";
 import { Tabs, Tab} from 'react-bootstrap';
 import EditGetToKnowTheTeam from '../EditGetToKnowTheTeam/EditGetToKnowTheTeam.js';
-import AddNewsAndUpdates from '../AddNewsAndUpdates/AddNewsAndUpdates.js';
+import AddNewsAndUpdates from '../NewsAndUpdates/AddNewsAndUpdates.js';
 import SurveyResults from '../Survey/SurveyResults.js';
 import AddTeamMember from '../EditGetToKnowTheTeam/AddTeamMember.js';
 import EditSurvey from '../Survey/EditSurvey.js';
