@@ -67,7 +67,6 @@ const AddTeamMember = () => {
   const [education, setEducation] = useState("");
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
-
   const submitHandle = (event)=>{
     event.preventDefault();
     const token = localStorage.getItem("accessToken");
@@ -96,7 +95,7 @@ const AddTeamMember = () => {
           console.log(err);
         });
   }
-
+  
   const fields = [
     {name:"שם", evenHandler:(event) => {
         setName(event.target.value);
@@ -132,8 +131,6 @@ const AddTeamMember = () => {
     {name:"תמונה", evenHandler:(event) => {
       } }
   ];
-
-
 
   return (
     <div className="allcomponent">
