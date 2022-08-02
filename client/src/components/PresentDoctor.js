@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 
 //maybe instead of doing import it will be better
 //to ask the DB for picture and pragraph
-import myImage from "../images/doctorsImages/doc1.png";
+import myImage from "../images/google-map-logo.jpg";
 
 const PresentDoctorDiv = styled.div`
   margin-bottom: 10px;
