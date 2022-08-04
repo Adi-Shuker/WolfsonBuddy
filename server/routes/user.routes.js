@@ -1,5 +1,11 @@
 import authJwt from '../middleware/authJwt.js';
 import userController from '../controllers/user.controller.js'
+import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 const userRoutes = function(app) {
@@ -58,6 +64,19 @@ const userRoutes = function(app) {
         [authJwt.verifyTokenMiddleware],
         userController.addStaffMember
     );
+    app.get(
+        "/api/staffMembers",
+        [authJwt.verifyTokenMiddleware],
+        userController.getStaffMembers
+    );
+    app.get('/images/teamMembersImages/:filename', (req, res) => {
+        try{
+            res.sendFile(req.params.filename, {root: path.join(__dirname, '../images/teamMembersImages/')});
+        }catch (error){
+
+        }
+    })
+
 };
 
 export default userRoutes;

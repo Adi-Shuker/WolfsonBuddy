@@ -5,9 +5,10 @@ import Header from "../UsersComponents/Header";
 import BackIcon from "../UsersComponents/Icons/BackIcon";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import {Button, Dropdown, DropdownButton} from "react-bootstrap";
 import SecretariatInfo from "../UsersComponents/secretariatInfo";
 import { Modal } from "react-bootstrap";
+import {DepartmentsContext, StaffMembersContext} from "../../App";
 
 const GetToKnowTheTeamDiv = styled.div`
   .BackIconDiv {
@@ -33,12 +34,16 @@ const GetToKnowTheTeamDiv = styled.div`
 `;
 
 const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
-  departmentsList = ["dep1", "dep2", "dep3"];
-  doctorsList = [
-    { name: "doc1", department: "dep1" },
-    { name: "doc2", department: "dep1" },
-    { name: "doc3", department: "dep2" },
-  ];
+  const { departments, setDepartments } = React.useContext(DepartmentsContext);
+  const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
+  const staffMembersList =staffMembers.map(function (member, index) {
+    return (
+        {name: member.member_name, department: member.department_name, image: member.picture, role:member.role,
+          description:member.description, phone_number:member.phone_number, clinical_practice:member.clinical_practice,
+          scientific_practice:member.scientific_practice, academic_experience:member.academic_experience,
+          professional_unions:member.professional_unions, education:member.education}
+    );
+  })
   const [showSecretariatInfo, setShowSecretariatInfo] = useState(false);
   const [data, setData] = useState("");
   const history = useHistory();
@@ -50,8 +55,8 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
           <DoctorsByDepartment
             id="something"
             setData={setData}
-            departmentsList={departmentsList}
-            doctorsList={doctorsList}
+            departmentsList={departments}
+            doctorsList={staffMembersList}
           />
           <div className={"PresentDoctorWrapper"}>
             <PresentDoctor doctor={data} />
@@ -60,10 +65,11 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
         <Button
           className={"secretariatInfoButton"}
           onClick={() => {
-            setShowSecretariatInfo(true);
+            //setShowSecretariatInfo(true);
           }}
+          href="https://www.gov.il/he/service/wolfson-book-medical-appointment" target="_blank"
         >
-          מזכירות וקבלה
+          לזימון תור
         </Button>
         <Modal
           className="secretariatInfoModal"
