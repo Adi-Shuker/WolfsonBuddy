@@ -1,6 +1,7 @@
 import dbconfig from '../config/db.config.js';
 import config from '../config/auth.config.js';
 import CryptoJS from "crypto-js";
+import { v4 as uuidv4 } from 'uuid';
 
 const executeQuery = dbconfig.executeQuery;
 
@@ -127,17 +128,43 @@ const updatePassword = (req ,res) => {
 const addStaffMember =(req, res) => {
     const {name, department_id, role, description, phone_number, clinical_practice,
         scientific_practice, academic_experience, professional_unions,education } = req.body;
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.');
 
-    var query = "insert into staff(name, department_id, role, description, phone_number, clinical_practice,scientific_practice, academic_experience, professional_unions,education)" +
-        " values ('"+name+"', '"+ department_id+"', '"+
-        role+"', '"+ description+"', '"+ phone_number+"', '"+ clinical_practice+"', '"+
-        scientific_practice+"', '"+ academic_experience+"', '"+ professional_unions+"', '"+education+"')";
-        executeQuery(query)
-        .then(resData => {
-            res.status(200).json(resData);
+    const file = req.files.picture;
+    const img_name = uuidv4().toString() + "." + file.name.split(".")[1];
+    if(file.mimetype === "image/jpeg" ||file.mimetype === "image/png"||file.mimetype === "image/gif" ){
+        file.mv('./images/teamMembersImages/'+img_name, function(err) {
+            if (err)
+                return res.status(500).send(err);
+            var query = "insert into staff(name, department_id, role, description, picture, phone_number, clinical_practice,scientific_practice, academic_experience, professional_unions,education)" +
+                " values ('"+name+"', '"+ department_id+"', '"+
+                role+"', '"+ description+"', '" + img_name+"', '"+ phone_number+"', '"+ clinical_practice+"', '"+
+                scientific_practice+"', '"+ academic_experience+"', '"+ professional_unions+"', '"+education+"')";
+            executeQuery(query)
+                .then(resData => {
+                    res.status(200).json(resData);
+                })
+                .catch(err => console.log(err))
+/*            var sql = "INSERT INTO `users_image`(`first_name`,`last_name`,`mob_no`,`user_name`, `password` ,`image`) VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "','" + img_name + "')";
+            var query = db.query(sql, function(err, result) {
+                res.redirect('profile/'+result.insertId);
+            });*/
+        });
+    } else {
+        res.status(400).send("This format is not allowed , please upload file with '.png','.gif','.jpg'");
+    }
+}
+
+const getStaffMembers = (req, res) => {
+    executeQuery("select s.name as member_name, d.name as department_name, s.role,description, s.picture as picture," +
+        " s.phone_number,s.clinical_practice,s.scientific_practice, s.academic_experience, s.professional_unions, s.education " +
+        "from departments as d join staff as s where d.id=s.department_id;")
+        .then(staffMembers => {
+            res.status(200).json(staffMembers);
         })
         .catch(err => console.log(err))
-}
+};
 
 const userController = {
     updatePassword,
@@ -149,6 +176,7 @@ const userController = {
     addQuestion,
     deleteQuestion,
     addStaffMember,
+    getStaffMembers,
 };
 
 

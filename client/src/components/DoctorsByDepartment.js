@@ -23,7 +23,7 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
     console.log(e);
     setDoctorsTitle(e);
     setSelectedDoctor(e);
-    setData(e);
+    setData(doctorsList.find(o => o.name === e));
   };
 
   console.log("DoctorsByDepartment render");
@@ -36,10 +36,10 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
         title={departmentsTitle}
         dir="rtl"
       >
-        {departmentsList.map(function (name, index) {
+        {departmentsList.map(function (department, index) {
           return (
-            <Dropdown.Item key={index} eventKey={name}>
-              {name}
+            <Dropdown.Item key={department.id} eventKey={department.name}>
+              {department.name}
             </Dropdown.Item>
           );
         })}

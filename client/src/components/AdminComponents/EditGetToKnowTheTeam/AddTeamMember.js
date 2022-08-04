@@ -59,6 +59,7 @@ const AddTeamMember = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [description, setDescription] = useState("");
+  const [picture, setPicture] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [clinical_practice, setClinical_practice] = useState("");
   const [scientific_practice, setScientific_practice] = useState("");
@@ -70,22 +71,22 @@ const AddTeamMember = () => {
   const submitHandle = (event)=>{
     event.preventDefault();
     const token = localStorage.getItem("accessToken");
+    const data = new FormData();
+    data.append('name', name);
+    data.append('department_id', selectedDepartment);
+    data.append('role', role);
+    data.append('description', description);
+    data.append('picture',picture );
+    data.append('phone_number',phone_number );
+    data.append('clinical_practice',clinical_practice );
+    data.append('scientific_practice',scientific_practice );
+    data.append('academic_experience',academic_experience );
+    data.append('professional_unions',professional_unions );
+    data.append('education',education );
     fetch(`/api/staff`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-access-token": token },
-      body: JSON.stringify({
-        "name": name,
-        "department_id":selectedDepartment,
-        "role":role,
-        "description":description,
-        //"picture":,
-        "phone_number":phone_number,
-        "clinical_practice":clinical_practice,
-        "scientific_practice":scientific_practice,
-        "academic_experience":academic_experience,
-        "professional_unions":professional_unions,
-        "education":education,
-      }),
+      headers: { "x-access-token": token },
+      body: data,
     })
         .then((res) => res.json())
         .then((res) => {
@@ -129,6 +130,7 @@ const AddTeamMember = () => {
         setEducation(event.target.value);
       } },
     {name:"תמונה", evenHandler:(event) => {
+        setPicture(event.target.files[0])
       } }
   ];
 
@@ -137,7 +139,10 @@ const AddTeamMember = () => {
       <AddTeamMemberDiv className="AddTeamMember">
         <div className="leftDiv">
           <div className="title">תצוגה מקדימה:</div>
-          <PresentDoctor className="preview" doctor={"doc1"} />
+          <PresentDoctor className="preview" doctor={{name: name, department: departmentsTitle, role:role, image:picture,
+            phone_number:phone_number, professional_unions:professional_unions, scientific_practice:scientific_practice,
+            academic_experience:academic_experience, clinical_practice:clinical_practice,
+          description:description, education:education}} />
           <Button>סיום</Button>
         </div>
         <div className="rightDiv">
@@ -151,6 +156,7 @@ const AddTeamMember = () => {
                     <Form.Control
                       className="text-right"
                       type="file"
+                      id="picture"
                       label="abc"
                       title="efg"
                       placeholder="hij"

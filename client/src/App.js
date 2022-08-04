@@ -20,6 +20,7 @@ export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
 export const DepartmentsContext = React.createContext({});
+export const StaffMembersContext = React.createContext({});
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,6 +28,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const [departments, setDepartments] = useState({});
+  const [staffMembers, setStaffMembers] = useState({});
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     fetch("/api/verify-token", {
@@ -35,7 +37,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setIsAuthenticated(res.isAuthenticated);
         setData(true);
       })
@@ -55,6 +56,20 @@ function App() {
       }).then((res) => {
           setDepartments(res);
       })
+      fetch('/api/staffMembers', {
+          method: 'GET',
+          headers:{"Content-Type": "application/json", "x-access-token": token},
+      }).then((res) => {
+          if(!(res.status === 200 || res.status === 304)){
+              alert('אירעה שגיאה');
+              return;
+          }
+          return res.json();
+      }).then((res) => {
+          setStaffMembers(res);
+      }).catch(err=>{
+          console.log(err)
+      })
   }, []);
 
     return (
@@ -62,6 +77,7 @@ function App() {
             <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
                 <UserDetailsContext.Provider value={{userDetails, setUserDetails}}>
                     <DepartmentsContext.Provider value={{departments, setDepartments}}>
+                        <StaffMembersContext.Provider value={{staffMembers, setStaffMembers}}>
                 <div className="app">
                     <BrowserRouter>
                         {data ? <div>
@@ -91,6 +107,7 @@ function App() {
                             : null}
                     </BrowserRouter>
                 </div>
+                        </StaffMembersContext.Provider>
                     </DepartmentsContext.Provider>
                 </UserDetailsContext.Provider>
             </IsAdminContext.Provider>

@@ -2,11 +2,8 @@
 // and in the admin side - in the preview
 import styled from "styled-components";
 import React, { useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import UserIcon from "./UsersComponents/Icons/UserIcon";
 
-//maybe instead of doing import it will be better
-//to ask the DB for picture and pragraph
-import myImage from "../images/google-map-logo.jpg";
 
 const PresentDoctorDiv = styled.div`
   margin-bottom: 10px;
@@ -19,20 +16,43 @@ const PresentDoctorDiv = styled.div`
 `;
 
 const PresentDoctor = ({ doctor }) => {
-  const name = "דוקטור שגית שושן";
-  const t1 = "רופאה מומחית";
-  const t2 = "אחראית מרפאות ריח";
+
+  const [src, setSrc] = useState("http://localhost:3001/images/teamMembersImages/default_profile.png");
+  if(doctor && doctor.image){
+    fetch(`/images/teamMembersImages/${doctor.image}`, {method: 'HEAD'})
+        .then(res => {
+          if (res.ok) { //case Image exists.
+            setSrc(`http://localhost:3001/images/teamMembersImages/${doctor.image}`);
+          }else{
+            setSrc("http://localhost:3001/images/teamMembersImages/default_profile.png");
+          }
+        }).catch(err => console.log('Error:', err))
+  }
+
   return (
     <PresentDoctorDiv className="PresentDoctor">
       {doctor ? (
         <div>
-          <h2> hey, I am {doctor} </h2>
-          <img src={myImage} />
+          <img src={src} alt="img" width={150} height={150} />
+          <h5> {doctor.name} </h5>
+          <h5> {doctor.department} </h5>
+          <h5> {doctor.role} </h5>
+          <h5> {doctor.description} </h5>
+          <h5> {doctor.phone_number} </h5>
+          <h5> {doctor.clinical_practice} </h5>
+          <h5> {doctor.scientific_practice} </h5>
+          <h5> {doctor.academic_experience} </h5>
+          <h5> {doctor.professional_unions} </h5>
+          <h5> {doctor.education} </h5>
         </div>
       ) : (
+          <img src={src} alt="img" width={150} height={150} />
+/*
         <div className={"emptySpace"} />
+*/
       )}
     </PresentDoctorDiv>
   );
 };
+
 export default PresentDoctor;
