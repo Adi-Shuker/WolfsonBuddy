@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import UserIcon from "./UsersComponents/Icons/UserIcon";
 
 const PresentDoctorDiv = styled.div`
-  max-width: 50px;
+  max-width: 319px;
   margin-bottom: 10px;
   border: 1px solid black;
   border-radius: 5px;

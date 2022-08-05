@@ -65,9 +65,8 @@ const AddTeamMember = () => {
   const [education, setEducation] = useState("");
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
-  const submitHandle = (event) => {
+  const submitHandle = () => {
     console.log("submitHandel of AddingTeamMember");
-    event.preventDefault();
     const token = localStorage.getItem("accessToken");
     console.log(token);
     const data = new FormData();
@@ -178,7 +177,8 @@ const AddTeamMember = () => {
             className="preview"
             doctor={{
               name: name,
-              department: departmentsTitle,
+              department:
+                departmentsTitle === "בחר מחלקה" ? "" : departmentsTitle,
               role: role,
               image: picture,
               phone_number: phone_number,
@@ -190,11 +190,11 @@ const AddTeamMember = () => {
               education: education,
             }}
           />
-          <Button>סיום</Button>
+          <Button onClick={submitHandle}>סיום</Button>
         </div>
         <div className="rightDiv">
           <div className="title">הוספת איש צוות:</div>
-          <Form onSubmit={(e) => submitHandle(e)}>
+          <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               {fields.map((item, i) => {
                 return item.name === "תמונה" ? (
@@ -243,8 +243,6 @@ const AddTeamMember = () => {
                 );
               })}
             </Form.Group>
-            <Button type="submit">הוסף חבר צוות</Button>
-            <Button>תצוגה מקדימה</Button>
           </Form>
         </div>
       </AddTeamMemberDiv>
