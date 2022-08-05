@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AdminHomePage from "./components/AdminComponents/HomePage/HomePage";
 import UsersHomePage from "./components/UsersComponents/HomePage/HomePage";
+import AddNewsAndUpdates from './components/AdminComponents/NewsAndUpdates/AddNewsAndUpdates'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
@@ -14,7 +15,6 @@ import GetToKnowTheTeam from "./components/GetToKnowTheTeam/GetToKnowTheTeam";
 import Game from "./components/Game/Game";
 import News from "./components/News/News";
 import UserSurvey from "./components/AdminComponents/Survey/UserSurvey";
-import Footer from "./components/UsersComponents/Footer";
 import DeleteAndEditTeamMember from "./components/AdminComponents/EditGetToKnowTheTeam/DeleteAndEditTeamMember";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
@@ -104,6 +104,7 @@ function App() {
                                 <Route exact path="/createNewAccount" component={CreateNewAccount}/>
                                 <Route exact path="/forgotPassword" component={ForgotPassword}/>
                                 <Route exact path="/GetToKnowTheTeam" component={GetToKnowTheTeam}/>
+                                    <Route exact path="/addNewsAndUpdates" component={AddNewsAndUpdates}/>
                                 <Route exact path="/Game" component={Game} />
                                 <Route exact path="/News" component={News} />
                                 <Route exact path="/userSurvey/:department_id" component={UserSurvey}/>

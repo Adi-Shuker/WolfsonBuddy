@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import {IsAdminContext, IsAuthenticateContext, UserDetailsContext, DepartmentsContext} from "../../../App";
 import { Tabs, Tab} from 'react-bootstrap';
-import EditGetToKnowTheTeam from '../EditGetToKnowTheTeam/EditGetToKnowTheTeam.js';
+import DeleteAndEditTeamMember from '../EditGetToKnowTheTeam/DeleteAndEditTeamMember'
 import AddNewsAndUpdates from '../NewsAndUpdates/AddNewsAndUpdates.js';
 import SurveyResults from '../Survey/SurveyResults.js';
 import AddTeamMember from '../EditGetToKnowTheTeam/AddTeamMember.js';
@@ -22,7 +22,7 @@ const AdminHomePage = () => {
     const tabList = [
         {title:"הוספת/מחיקת עדכונים", componentName:"AddNewsAndUpdates"},
         {title:"הוספת איש צוות", componentName:"AddTeamMember"},
-        {title:"מחיקת/עריכת איש צוות", componentName:"EditGetToKnowTheTeam"},
+        {title:"מחיקת/עריכת איש צוות", componentName:"DeleteAndEditTeamMember"},
         {title:"עריכת סקר שביעות רצון", componentName:"EditSurvey"},
         {title:"תוצאות הסקרים", componentName:"SurveyResults"},
     ]
@@ -43,8 +43,8 @@ const AdminHomePage = () => {
                 <Tab tabClassName="tab" eventKey="AddTeamMember" title="הוספת איש צוות" >
                     <AddTeamMember/>
                 </Tab>
-                <Tab tabClassName="tab" eventKey="EditGetToKnowTheTeam" title="מחיקת/עריכת איש צוות" >
-                    <EditGetToKnowTheTeam/>
+                <Tab tabClassName="tab" eventKey="DeleteAndEditTeamMember" title="מחיקת/עריכת איש צוות" >
+                    <DeleteAndEditTeamMember/>
                 </Tab>
                 <Tab tabClassName="tab" eventKey="EditSurvey" title="עריכת סקר שביעות רצון" >
                     <EditSurvey/>
