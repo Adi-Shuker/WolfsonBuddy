@@ -50,6 +50,7 @@ const Title = styled.div`
 const DeleteAndEditTeamMember = () => {
   const history = useHistory();
   const departmentsList = ["doc1", "doc2", "doc3"];
+  const [data, setData] = useState("");
   function handleClick(path) {
     history.push(path);
   }
@@ -61,7 +62,7 @@ const DeleteAndEditTeamMember = () => {
           <PresentDoctor className="preview" doctor={"doc1"} />
         </div>
         <div className="rightDiv">
-          <DoctorsByDepartment />
+          <DoctorsByDepartment setData={setData} />
           <div className={"buttonLine"}>
             <Button
               onClick={() => {
