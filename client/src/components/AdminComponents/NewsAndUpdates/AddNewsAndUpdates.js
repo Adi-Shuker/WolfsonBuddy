@@ -3,6 +3,10 @@ import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import React from "react";
 import PresentDoctor from "../../PresentDoctor";
 import styled from "styled-components";
+import DeleteNewAndUpdates from "./DeleteNewAndUpdates";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
+import {DepartmentsContext, NewsContext} from "../../../App";
 
 const AddNewAndUpdatesDiv = styled.div`
   justify-content: space-evenly;
@@ -43,35 +47,86 @@ const AddNewAndUpdatesDiv = styled.div`
 `;
 
 const AddNewsAndUpdates = () => {
-  function submitHandle() {}
-  const fields = ["כותרת", "תאריך", "תיאור", "קישור לאתר חיצוני"];
+
+  const [title, setTitle] = React.useState(null);
+  const [content, setContent] = React.useState(null);
+  const [link, setLink] = React.useState(null);
+  const [startDate, setStartDate] = React.useState(new Date());
+  const { news, setNews } = React.useContext(NewsContext);
+
+  function submitHandle(event) {
+    event.preventDefault();
+    const token = localStorage.getItem("accessToken");
+    fetch(`/api/add-news`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json", "x-access-token": token },
+        body: JSON.stringify({
+            "title":title,
+            "postDate":startDate,
+            "content":content,
+            "link":link,
+        }),
+    })
+        .then((res) => res.json())
+        .then((res) => {
+          alert("עדכון נשלח בהצלחה")
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
+
   return (
     <div>
-      <Header />
       <AddNewAndUpdatesDiv className="AddNewAndUpdates">
         <div className="leftDiv">
-          <div className="title">תצוגה מקדימה:</div>
+          <div className="title">מחיקת עדכון:</div>
+          <DeleteNewAndUpdates news={news} setNews={setNews}/>
           <PresentDoctor className="preview" doctor={"doc1"} />
-          <Button>סיום</Button>
         </div>
-
         <div className="rightDiv">
           <div className="title">הוספת עדכון:</div>
-          <Form onSubmit={submitHandle}>
+          <Form onSubmit={(e) => submitHandle(e)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              {fields.map((item) => {
-                return (
+
                   <div>
                     <Form.Control
                       className="text-right"
                       type="text"
-                      placeholder={item}
+                      placeholder={"כותרת"}
+                      onChange={(event) => {
+                        setTitle(event.target.value)
+                      }}
                     />
                   </div>
-                );
-              })}
+                <div>
+                    <h5>תאריך</h5>
+                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                </div>
+                  <div>
+                    <Form.Control
+                        className="text-right"
+                        type="text"
+                        placeholder={"תוכן"}
+                        onChange={(event) => {
+                          setContent(event.target.value)
+                        }}
+                    />
+                  </div>
+                  <div>
+                    <Form.Control
+                        className="text-right"
+                        type="text"
+                        placeholder={"קישור לאתר חיצוני"}
+                        onChange={(event) => {
+                          setLink(event.target.value)
+                        }}
+                    />
+                  </div>
+
             </Form.Group>
-            <Button>תצוגה מקדימה</Button>
+            <Button type="submit">הוסף עדכון</Button>
           </Form>
         </div>
       </AddNewAndUpdatesDiv>

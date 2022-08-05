@@ -4,8 +4,8 @@ const UserAnswersTable = ({ title, answers }) => {
             <h3 className="p-3 text-center">{title}</h3>
             <table className="table table-striped table-bordered">
                 <tbody>
-                {answers.map(user =>
-                    <tr>
+                {answers.map((user, i) =>
+                    <tr key={i}>
                         <td>{user} </td>
                     </tr>
                 )}

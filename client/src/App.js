@@ -20,6 +20,7 @@ export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
 export const UserDetailsContext = React.createContext({});
 export const DepartmentsContext = React.createContext({});
+export const NewsContext = React.createContext({});
 export const StaffMembersContext = React.createContext({});
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   const [userDetails, setUserDetails] = useState({});
   const [departments, setDepartments] = useState({});
   const [staffMembers, setStaffMembers] = useState({});
+  const [news, setNews] = useState({});
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     fetch("/api/verify-token", {
@@ -70,6 +72,20 @@ function App() {
       }).catch(err=>{
           console.log(err)
       })
+      fetch('/api/news', {
+          method: 'GET',
+          headers:{"Content-Type": "application/json", "x-access-token": token},
+      }).then((res) => {
+          if(!(res.status === 200 || res.status === 304)){
+              alert('אירעה שגיאה');
+              return;
+          }
+          return res.json();
+      }).then((res) => {
+          setNews(res);
+      }).catch(err=>{
+          console.log(err)
+      })
   }, []);
 
     return (
@@ -78,6 +94,7 @@ function App() {
                 <UserDetailsContext.Provider value={{userDetails, setUserDetails}}>
                     <DepartmentsContext.Provider value={{departments, setDepartments}}>
                         <StaffMembersContext.Provider value={{staffMembers, setStaffMembers}}>
+                            <NewsContext.Provider value={{news, setNews}}>
                 <div className="app">
                     <BrowserRouter>
                         {data ? <div>
@@ -107,6 +124,7 @@ function App() {
                             : null}
                     </BrowserRouter>
                 </div>
+                            </NewsContext.Provider>
                         </StaffMembersContext.Provider>
                     </DepartmentsContext.Provider>
                 </UserDetailsContext.Provider>

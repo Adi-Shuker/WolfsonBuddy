@@ -149,14 +149,14 @@ const AddTeamMember = () => {
           <div className="title">הוספת איש צוות:</div>
           <Form onSubmit={(e) => submitHandle(e)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              {fields.map((item) => {
+              {fields.map((item, i) => {
                 return item.name === "תמונה" ? (
-                  <div>
+                  <div key={i}>
                     <Form.Label>תמונה</Form.Label>
                     <Form.Control
                       className="text-right"
                       type="file"
-                      id="picture"
+                      // id="picture"
                       label="abc"
                       title="efg"
                       placeholder="hij"
@@ -164,7 +164,7 @@ const AddTeamMember = () => {
                     />
                   </div>
                 ) : item.name === "מחלקה" ? (
-                  <div>
+                  <div key={i}>
                     <DropdownButton
                       className="DropdownButton"
                       id="dropdown-departments"
@@ -172,7 +172,7 @@ const AddTeamMember = () => {
                       title={departmentsTitle}
                       dir="rtl"
                     >
-                      {departments.map(function (department, index) {
+                      {departments.map( (department, index) =>{
                         return (
                           <Dropdown.Item key={department.id} eventKey={department.name}>
                             {department.name}
@@ -182,7 +182,7 @@ const AddTeamMember = () => {
                     </DropdownButton>
                   </div>
                 ) : (
-                  <div>
+                  <div key={i}>
                     <Form.Control
                       className="text-right"
                       type="text"
