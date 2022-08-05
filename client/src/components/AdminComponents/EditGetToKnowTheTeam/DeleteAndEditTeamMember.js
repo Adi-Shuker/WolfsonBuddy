@@ -56,7 +56,6 @@ const DeleteAndEditTeamMember = () => {
 
   return (
     <div className="allcomponent">
-      <Header />
       <DeleteAndEditTeamMemberDiv className="DeleteAndEditTeamMember">
         <div className="leftDiv">
           <PresentDoctor className="preview" doctor={"doc1"} />

@@ -15,6 +15,7 @@
 
 .title{
     float: right;
+    direction: rtl;
 }
 
 .header-title{
