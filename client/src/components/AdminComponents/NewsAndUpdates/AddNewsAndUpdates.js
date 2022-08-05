@@ -1,12 +1,11 @@
-import Header from "../../UsersComponents/Header";
 import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import React from "react";
-import PresentDoctor from "../../PresentDoctor";
 import styled from "styled-components";
 import DeleteNewAndUpdates from "./DeleteNewAndUpdates";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import {DepartmentsContext, NewsContext} from "../../../App";
+import PresentOneNews from "../../News/PresentOneNews";
 
 const AddNewAndUpdatesDiv = styled.div`
   justify-content: space-evenly;
@@ -76,14 +75,13 @@ const AddNewsAndUpdates = () => {
         });
   }
 
-
   return (
     <div>
       <AddNewAndUpdatesDiv className="AddNewAndUpdates">
         <div className="leftDiv">
           <div className="title">מחיקת עדכון:</div>
           <DeleteNewAndUpdates news={news} setNews={setNews}/>
-          <PresentDoctor className="preview" doctor={"doc1"} />
+            <PresentOneNews title={title} content={content} link={link} date={startDate.toISOString().split('T')[0]}></PresentOneNews>
         </div>
         <div className="rightDiv">
           <div className="title">הוספת עדכון:</div>
