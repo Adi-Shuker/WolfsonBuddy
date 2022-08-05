@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-import myImage from "../images/doctorsImages/doc1.png";
+import React, { useState} from "react";
+import { Link } from "react-router-dom";
 
 const PresentOneNewsDiv = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border: 1px solid black;
   border-radius: 5px;
   overflow: hidden;
@@ -12,21 +12,19 @@ const PresentOneNewsDiv = styled.div`
   }
 `;
 
-const PresentOneNews = ({ doctor }) => {
-  const name = "דוקטור שגית שושן";
-  const t1 = "רופאה מומחית";
-  const t2 = "אחראית מרפאות ריח";
+const PresentOneNews = ({ title, date,content, link }) => {
+
   return (
     <PresentOneNewsDiv className="PresentDoctor">
-      {doctor ? (
         <div>
-          <h2> hey, I am {doctor} </h2>
-          <img src={myImage} />
+          <h5> {title} </h5>
+          <h5> {date} </h5>
+          <h5> {content} </h5>
+            <a href={link} target="_blank" rel="noopener noreferrer">
+                <h5> לעוד מידע לחץ כאן </h5>
+            </a>
         </div>
-      ) : (
-        <div className={"emptySpace"} />
-      )}
     </PresentOneNewsDiv>
   );
 };
-export default PresentDoctor;
+export default PresentOneNews;

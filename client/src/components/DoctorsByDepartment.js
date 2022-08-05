@@ -2,6 +2,7 @@ import { DropdownButton } from "react-bootstrap";
 import { Dropdown } from "react-bootstrap";
 import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
+import {DepartmentsContext} from "../App";
 
 const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
   departmentsList = departmentsList || ["dep1"];
@@ -31,21 +32,19 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
     <DoctorsByDepartmentDiv className="DoctorsByDepartment">
       <DropdownButton
         className="DropdownButton"
-        id="dropdown-departments"
         onSelect={departmentSelect}
         title={departmentsTitle}
         dir="rtl"
       >
         {departmentsList.map(function (department, index) {
           return (
-            <Dropdown.Item key={department.id} eventKey={department.name}>
+            <Dropdown.Item key={index} eventKey={department.name}>
               {department.name}
             </Dropdown.Item>
           );
         })}
       </DropdownButton>
       <DropdownButton
-        id="dropdown-doctores"
         onSelect={doctorSelect}
         title={doctorsTitle}
         dir="rtl"
