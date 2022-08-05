@@ -62,13 +62,9 @@ function App() {
           method: 'GET',
           headers:{"Content-Type": "application/json", "x-access-token": token},
       }).then((res) => {
-          if(!(res.status === 200 || res.status === 304)){
-              alert('אירעה שגיאה');
-              return;
-          }
-          return res.json();
-      }).then((res) => {
-          setStaffMembers(res);
+          return res.json()
+      }).then(resJson =>{
+        setStaffMembers(resJson);
       }).catch(err=>{
           console.log(err)
       })

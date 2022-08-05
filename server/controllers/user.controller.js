@@ -146,10 +146,6 @@ const addStaffMember =(req, res) => {
                     res.status(200).json(resData);
                 })
                 .catch(err => console.log(err))
-/*            var sql = "INSERT INTO `users_image`(`first_name`,`last_name`,`mob_no`,`user_name`, `password` ,`image`) VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "','" + img_name + "')";
-            var query = db.query(sql, function(err, result) {
-                res.redirect('profile/'+result.insertId);
-            });*/
         });
     } else {
         res.status(400).send("This format is not allowed , please upload file with '.png','.gif','.jpg'");

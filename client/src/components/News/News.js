@@ -14,7 +14,7 @@ const News = () => {
         <h3>חדשות ועדכונים</h3>
       <div className="BackIconDiv iconWrapper lightGreyBorder">
           {news.map((item)=>{
-             return <PresentOneNews key={item.id} title={item.title} date={item.date} content={item.content} link={item.link} />
+             return <PresentOneNews key={item.id} title={item.title} date={item.post_date.split('T')[0]} content={item.content} link={item.link} />
           })}
           <div onClick={() => history.push("/usersHomePage")}>
               <BackIcon />
