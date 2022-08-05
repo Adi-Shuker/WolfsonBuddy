@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AdminHomePage from "./components/AdminComponents/HomePage/HomePage";
 import UsersHomePage from "./components/UsersComponents/HomePage/HomePage";
-import AddNewsAndUpdates from './components/AdminComponents/NewsAndUpdates/AddNewsAndUpdates'
+import AddNewsAndUpdates from "./components/AdminComponents/NewsAndUpdates/AddNewsAndUpdates";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
@@ -60,26 +60,14 @@ function App() {
       .then((res) => {
         setDepartments(res);
       });
-    console.log("before fetch staffMember");
     fetch("/api/staffMembers", {
       method: "GET",
       headers: { "Content-Type": "application/json", "x-access-token": token },
     })
       .then((res) => {
         return res.json();
-
-      fetch('/api/staffMembers', {
-          method: 'GET',
-          headers:{"Content-Type": "application/json", "x-access-token": token},
-      }).then((res) => {
-          return res.json()
-      }).then(resJson =>{
-        setStaffMembers(resJson);
-      }).catch(err=>{
-          console.log(err)
       })
       .then((resJson) => {
-        console.log({ resJson });
         setStaffMembers(resJson);
       })
       .catch((err) => {
@@ -157,7 +145,8 @@ function App() {
                             path="/userSurvey/:department_id"
                             component={UserSurvey}
                           />
-                          <Route exact path="/" component={LoginPage} />`{" "}
+                          <Route exact path="/" component={LoginPage} />
+                          `{" "}
                           <Route
                             exact
                             path="/deleteAndEditTeamMember"
@@ -188,6 +177,5 @@ function App() {
     </IsAuthenticateContext.Provider>
   );
 }
-
 
 export default App;
