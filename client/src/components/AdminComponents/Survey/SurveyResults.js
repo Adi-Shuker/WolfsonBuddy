@@ -64,7 +64,7 @@ const SurveyResults = () => {
                         setSelectedDepartment(e.target.value)
                     }} dir="rtl">
                         {departments.map((department) =>{
-                            return <option value={department.id}>{department.name}</option>;
+                            return <option key={department.id} value={department.id}>{department.name}</option>;
                         })}
                     </Form.Select>
                 </Form.Group>
@@ -72,13 +72,13 @@ const SurveyResults = () => {
             <div> סה"כ ענו: {totalCount} מטופלים </div>
             <div className="d-flex justify-content-around flex-column">
                 {chartsData.length > 0 && chartsData.map((item, index) => {
-                    return <div className="w-50 col-6 md-6">
+                    return <div key={index} className="w-50 col-6 md-6">
                             <QuestionChart title={item.title} question_type={item.question_type} labels={item.labels} values={item.values===undefined?[]:item.values}/>
                         </div>
                     }
                 )}
-                {commentUserAnswers.length>0 && commentUserAnswers.map(ans =>{
-                    return <div className="w-50 col-6 md-6">
+                {commentUserAnswers.length>0 && commentUserAnswers.map((ans, i) =>{
+                    return <div key={i} className="w-50 col-6 md-6">
                             <UserAnswersTable title={ans.title} answers={ans.answers.length>0?ans.answers:[]}/>
                             </div>
                     }

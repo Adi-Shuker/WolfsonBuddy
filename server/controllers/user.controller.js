@@ -166,6 +166,37 @@ const getStaffMembers = (req, res) => {
         .catch(err => console.log(err))
 };
 
+const addUpdate =(req, res) => {
+    const {title, postDate, content, link } = req.body;
+    const date = postDate.slice(0, 19).replace('T', ' ');
+    const query = "insert into announcements_and_updates(title, post_date, content, link) values('"+title+"','"
+        +date+"','"+content+"','"+link+"')";
+    executeQuery(query)
+        .then(resData => {
+            res.status(200).json(resData);
+        })
+        .catch(err => console.log(err))
+}
+
+const getAllUpdates =(req, res) => {
+    const query = "select * from announcements_and_updates";
+    executeQuery(query)
+        .then(resData => {
+            res.status(200).json(resData);
+        })
+        .catch(err => console.log(err))
+}
+
+const deleteNews =(req, res) => {
+    const news_id = req.params.news_id;
+    const query = "delete from announcements_and_updates where id="+news_id+";";
+    executeQuery(query)
+        .then(resData => {
+            res.status(200).json(resData);
+        })
+        .catch(err => console.log(err))
+}
+
 const userController = {
     updatePassword,
     getAllDepartments,
@@ -177,6 +208,9 @@ const userController = {
     deleteQuestion,
     addStaffMember,
     getStaffMembers,
+    addUpdate,
+    getAllUpdates,
+    deleteNews
 };
 
 

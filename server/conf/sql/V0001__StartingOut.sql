@@ -10,12 +10,12 @@ CREATE TABLE users (
 );
 
 CREATE TABLE announcements_and_updates (
-    headline varchar(45) NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
+    title varchar(2048) NOT NULL,
     post_date date NOT NULL,
-    to_date date DEFAULT NULL,
     content mediumtext,
-    link varchar(45) DEFAULT NULL,
-    PRIMARY KEY (headline, post_date)
+    link varchar(2048) DEFAULT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE departments (

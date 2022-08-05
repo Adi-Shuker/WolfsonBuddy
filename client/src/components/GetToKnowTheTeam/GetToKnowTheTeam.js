@@ -36,7 +36,7 @@ const GetToKnowTheTeamDiv = styled.div`
 const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
   const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
-  const staffMembersList =staffMembers.map(function (member, index) {
+  const staffMembersList =staffMembers.map( (member, index) => {
     return (
         {name: member.member_name, department: member.department_name, image: member.picture, role:member.role,
           description:member.description, phone_number:member.phone_number, clinical_practice:member.clinical_practice,

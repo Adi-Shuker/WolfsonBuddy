@@ -76,6 +76,21 @@ const userRoutes = function(app) {
 
         }
     })
+    app.post(
+        "/api/add-news",
+        [authJwt.verifyTokenMiddleware],
+        userController.addUpdate
+    );
+    app.get(
+        "/api/news",
+        [authJwt.verifyTokenMiddleware],
+        userController.getAllUpdates
+    );
+    app.delete(
+        "/api/news/:news_id",
+        [authJwt.verifyTokenMiddleware],
+        userController.deleteNews
+    );
 
 };
 

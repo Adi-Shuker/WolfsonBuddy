@@ -88,8 +88,8 @@ const AddQuestion = ({questionTypes, selectedDepartment})=>{
                             <Form.Select aria-label="Default select example" onChange={(e)=> {
                                 handleSelectedQuestionTypeChange(e.target.value);
                             }}>
-                                {questionTypes.map((type) =>
-                                        <option value={type.id}>{type.name}</option>
+                                {questionTypes.map((type,i) =>
+                                        <option key={i} value={type.id}>{type.name}</option>
                                 )}
                             </Form.Select>
                         </Form.Group>

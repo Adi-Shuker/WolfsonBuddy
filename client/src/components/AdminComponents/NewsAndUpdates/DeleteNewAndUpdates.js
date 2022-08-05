@@ -30,19 +30,34 @@ const Title = styled.div`
     direction: rtl;
 }`;
 
-const DeleteNewAndUpdates = () => {
-  const history = useHistory();
-  const newsHeadlineList = ["news1", "news2", "news3"];
-  function handleClick(path) {
-    history.push(path);
+const DeleteNewAndUpdates = ({news, setNews}) => {
+  const [selectedNews, setSelectedNews] = React.useState();
+  const newsHeadlineList = news.map((item)=>{return item.title});
+  const token = localStorage.getItem("accessToken");
+  const handleDelete=()=>{
+    fetch(`/api/news/${selectedNews}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json", "x-access-token": token },
+        })
+      .then((res) => res.json())
+            .then((res) => {
+                setNews(news.filter((item) => item.id !==  selectedNews));
+              alert("נמחק בהצלחה")
+            })
+            .catch((err) => {
+              console.log(err);
+            });
   }
-
-  function newsSelect() {}
+  const newsSelect=(e)=> {
+      const newsId = news.filter((item)=> {
+          return item.title === e
+      });
+      setSelectedNews(newsId[0].id)
+  }
 
   let newsTitle = "בחר עדכון";
   return (
     <div className="allcomponent">
-      <Header />
       <DeleteNewAndUpdatesDiv className="DeleteNewAndUpdates">
         <DropdownButton
           className="DropdownButton"
@@ -59,11 +74,10 @@ const DeleteNewAndUpdates = () => {
             );
           })}
         </DropdownButton>
-
         <div className={"buttonLine"}>
           <Button
             onClick={() => {
-              //TO-DO delete it from DB
+              handleDelete();
             }}
           >
             {"מחיקת העדכון"}

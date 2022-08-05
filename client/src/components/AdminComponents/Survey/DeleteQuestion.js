@@ -36,7 +36,7 @@ const DeleteQuestion=({questions, setQuestions})=>{
                                 setSelectedQuestion(e.target.value)
                             }}>
                                 {questions.map((question, index) =>{
-                                    return <option value={question.question_id}>{question.question_text}</option>;
+                                    return <option key={index} value={question.question_id}>{question.question_text}</option>;
                                 })}
                             </Form.Select>
                         </Form.Group>

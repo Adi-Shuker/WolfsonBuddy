@@ -69,7 +69,7 @@ const EditSurvey = ()=>{
                                     setSelectedDepartment(e.target.value)
                                 }} dir="rtl">
                                     {departments.map((department) =>{
-                                        return <option value={department.id}>{department.name}</option>;
+                                        return <option key={department.id} value={department.id}>{department.name}</option>;
                                     })}
                                 </Form.Select>
                             </Form.Group>
