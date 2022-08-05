@@ -4,8 +4,8 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import UserIcon from "./UsersComponents/Icons/UserIcon";
 
-
 const PresentDoctorDiv = styled.div`
+  max-width: 50px;
   margin-bottom: 10px;
   border: 1px solid black;
   border-radius: 5px;
@@ -16,17 +16,24 @@ const PresentDoctorDiv = styled.div`
 `;
 
 const PresentDoctor = ({ doctor }) => {
-
-  const [src, setSrc] = useState("http://localhost:3001/images/teamMembersImages/default_profile.png");
-  if(doctor && doctor.image){
-    fetch(`/images/teamMembersImages/${doctor.image}`, {method: 'HEAD'})
-        .then(res => {
-          if (res.ok) { //case Image exists.
-            setSrc(`http://localhost:3001/images/teamMembersImages/${doctor.image}`);
-          }else{
-            setSrc("http://localhost:3001/images/teamMembersImages/default_profile.png");
-          }
-        }).catch(err => console.log('Error:', err))
+  const [src, setSrc] = useState(
+    "http://localhost:3001/images/teamMembersImages/default_profile.png"
+  );
+  if (doctor && doctor.image) {
+    fetch(`/images/teamMembersImages/${doctor.image}`, { method: "HEAD" })
+      .then((res) => {
+        if (res.ok) {
+          //case Image exists.
+          setSrc(
+            `http://localhost:3001/images/teamMembersImages/${doctor.image}`
+          );
+        } else {
+          setSrc(
+            "http://localhost:3001/images/teamMembersImages/default_profile.png"
+          );
+        }
+      })
+      .catch((err) => console.log("Error:", err));
   }
 
   return (
@@ -46,8 +53,8 @@ const PresentDoctor = ({ doctor }) => {
           <h5> {doctor.education} </h5>
         </div>
       ) : (
-          <img src={src} alt="img" width={150} height={150} />
-/*
+        <img src={src} alt="img" width={150} height={150} />
+        /*
         <div className={"emptySpace"} />
 */
       )}

@@ -1,13 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {
-  Button,
-  Dropdown,
-  DropdownButton,
-  Form,
-} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import styled from "styled-components";
 import PresentDoctor from "../../PresentDoctor";
-import {DepartmentsContext} from "../../../App";
+import { DepartmentsContext } from "../../../App";
 
 const AddTeamMemberDiv = styled.div`
   justify-content: space-evenly;
@@ -47,11 +42,13 @@ const AddTeamMemberDiv = styled.div`
   }
 `;
 
-const Title = styled.div`{
+const Title = styled.div`
+   {
     display: flex;
     justify-content: space-around;
     direction: rtl;
-}`;
+  }
+`;
 
 const AddTeamMember = () => {
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
@@ -68,70 +65,108 @@ const AddTeamMember = () => {
   const [education, setEducation] = useState("");
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
-  const submitHandle = (event)=>{
+  const submitHandle = (event) => {
+    console.log("submitHandel of AddingTeamMember");
     event.preventDefault();
     const token = localStorage.getItem("accessToken");
+    console.log(token);
     const data = new FormData();
-    data.append('name', name);
-    data.append('department_id', selectedDepartment);
-    data.append('role', role);
-    data.append('description', description);
-    data.append('picture',picture );
-    data.append('phone_number',phone_number );
-    data.append('clinical_practice',clinical_practice );
-    data.append('scientific_practice',scientific_practice );
-    data.append('academic_experience',academic_experience );
-    data.append('professional_unions',professional_unions );
-    data.append('education',education );
+    data.append("name", name);
+    data.append("department_id", selectedDepartment);
+    data.append("role", role);
+    data.append("description", description);
+    data.append("picture", picture);
+    data.append("phone_number", phone_number);
+    data.append("clinical_practice", clinical_practice);
+    data.append("scientific_practice", scientific_practice);
+    data.append("academic_experience", academic_experience);
+    data.append("professional_unions", professional_unions);
+    data.append("education", education);
     fetch(`/api/staff`, {
       method: "POST",
       headers: { "x-access-token": token },
       body: data,
     })
-        .then((res) => res.json())
-        .then((res) => {
-          alert("חבר צוות נוסף בהצלחה")
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }
-  
+      .then((res) => res.json())
+      .then((res) => {
+        alert("חבר צוות נוסף בהצלחה");
+      })
+      .catch((err) => {
+        alert("יש למלא את כל השדות על מנת להוסיף את איש הצוות");
+        console.log(err);
+      });
+  };
+
   const fields = [
-    {name:"שם", evenHandler:(event) => {
+    {
+      name: "שם",
+      evenHandler: (event) => {
         setName(event.target.value);
-      } },
-    {name:"מחלקה", evenHandler:(event) => {
-        setSelectedDepartment(departments.filter((department)=> department.name === event)[0].id);
+      },
+    },
+    {
+      name: "מחלקה",
+      evenHandler: (event) => {
+        setSelectedDepartment(
+          departments.filter((department) => department.name === event)[0].id
+        );
         setDepartmentsTitle(event);
-      } },
-    {name:"תפקיד", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "תפקיד",
+      evenHandler: (event) => {
         setRole(event.target.value);
-      } },
-    {name:"תיאור", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "תיאור",
+      evenHandler: (event) => {
         setDescription(event.target.value);
-      } },
-    {name:"טלפון", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "טלפון",
+      evenHandler: (event) => {
         setPhone_number(event.target.value);
-      } },
-    {name:"תחומי עיסוקי קליני", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "תחומי עיסוקי קליני",
+      evenHandler: (event) => {
         setClinical_practice(event.target.value);
-      } },
-    {name:"תחומי עיסוק מדעי", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "תחומי עיסוק מדעי",
+      evenHandler: (event) => {
         setScientific_practice(event.target.value);
-      } },
-    {name:"ניסיון אקדמי", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "ניסיון אקדמי",
+      evenHandler: (event) => {
         setAcademic_experience(event.target.value);
-      } },
-    {name:"חברות באיגודים מקצועיים", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "חברות באיגודים מקצועיים",
+      evenHandler: (event) => {
         setProfessional_unions(event.target.value);
-      } },
-    {name:"השכלה", evenHandler:(event) => {
+      },
+    },
+    {
+      name: "השכלה",
+      evenHandler: (event) => {
         setEducation(event.target.value);
-      } },
-    {name:"תמונה", evenHandler:(event) => {
-        setPicture(event.target.files[0])
-      } }
+      },
+    },
+    {
+      name: "תמונה",
+      evenHandler: (event) => {
+        setPicture(event.target.files[0]);
+      },
+    },
   ];
 
   return (
@@ -139,10 +174,22 @@ const AddTeamMember = () => {
       <AddTeamMemberDiv className="AddTeamMember">
         <div className="leftDiv">
           <div className="title">תצוגה מקדימה:</div>
-          <PresentDoctor className="preview" doctor={{name: name, department: departmentsTitle, role:role, image:picture,
-            phone_number:phone_number, professional_unions:professional_unions, scientific_practice:scientific_practice,
-            academic_experience:academic_experience, clinical_practice:clinical_practice,
-          description:description, education:education}} />
+          <PresentDoctor
+            className="preview"
+            doctor={{
+              name: name,
+              department: departmentsTitle,
+              role: role,
+              image: picture,
+              phone_number: phone_number,
+              professional_unions: professional_unions,
+              scientific_practice: scientific_practice,
+              academic_experience: academic_experience,
+              clinical_practice: clinical_practice,
+              description: description,
+              education: education,
+            }}
+          />
           <Button>סיום</Button>
         </div>
         <div className="rightDiv">
@@ -172,9 +219,12 @@ const AddTeamMember = () => {
                       title={departmentsTitle}
                       dir="rtl"
                     >
-                      {departments.map( (department, index) =>{
+                      {departments.map((department, index) => {
                         return (
-                          <Dropdown.Item key={department.id} eventKey={department.name}>
+                          <Dropdown.Item
+                            key={department.id}
+                            eventKey={department.name}
+                          >
                             {department.name}
                           </Dropdown.Item>
                         );
@@ -193,7 +243,7 @@ const AddTeamMember = () => {
                 );
               })}
             </Form.Group>
-            <Button  type="submit">הוסף חבר צוות</Button>
+            <Button type="submit">הוסף חבר צוות</Button>
             <Button>תצוגה מקדימה</Button>
           </Form>
         </div>
