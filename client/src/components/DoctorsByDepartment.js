@@ -4,21 +4,19 @@ import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
 import { DepartmentsContext, NewsContext, StaffMembersContext } from "../App";
 
-const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
+const DoctorsByDepartment = ({ setData }) => {
   const { staffMembers, setStaffMembers } =
     React.useContext(StaffMembersContext);
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
-
-  doctorsList = doctorsList || ["doc1"];
   let defaultDoctorsTitle = "בחר רופא";
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
   const [doctorsTitle, setDoctorsTitle] = useState(defaultDoctorsTitle);
-  const [value, setValue] = useState(doctorsList);
+  const [value, setValue] = useState(staffMembers);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const departmentSelect = (e) => {
     console.log(e);
     setDepartmentsTitle(e);
-    setValue(doctorsList.filter((doctor) => doctor.department === e));
+    setValue(staffMembers.filter((doctor) => doctor.department_name === e));
     setDoctorsTitle(defaultDoctorsTitle);
     setSelectedDoctor(null);
     setData(null);
@@ -27,13 +25,13 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
     console.log(e);
     setDoctorsTitle(e);
     setSelectedDoctor(e);
-    setData(doctorsList.find((o) => o.name === e));
+    setData(staffMembers.find((o) => o.name === e));
   };
 
   console.log("DoctorsByDepartment render");
 
   return (
-    console.log(departments) ||
+    console.log("value", value) ||
     console.log(staffMembers) || (
       <DoctorsByDepartmentDiv className="DoctorsByDepartment">
         <DropdownButton
@@ -57,7 +55,7 @@ const DoctorsByDepartment = ({ setData, departmentsList, doctorsList }) => {
           title={doctorsTitle}
           dir="rtl"
         >
-          {staffMembers.map(function (staffMember, index) {
+          {value.map(function (staffMember, index) {
             return (
               console.log(staffMember) || (
                 <Dropdown.Item key={index} eventKey={staffMember.member_name}>
