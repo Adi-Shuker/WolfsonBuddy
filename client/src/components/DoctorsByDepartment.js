@@ -14,7 +14,6 @@ const DoctorsByDepartment = ({ setData }) => {
   const [value, setValue] = useState(staffMembers);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const departmentSelect = (e) => {
-    console.log(e);
     setDepartmentsTitle(e);
     setValue(staffMembers.filter((doctor) => doctor.department_name === e));
     setDoctorsTitle(defaultDoctorsTitle);
@@ -25,7 +24,7 @@ const DoctorsByDepartment = ({ setData }) => {
     console.log(e);
     setDoctorsTitle(e);
     setSelectedDoctor(e);
-    setData(staffMembers.find((o) => o.name === e));
+    setData(staffMembers.find((o) => o.member_name === e));
   };
 
   return (
