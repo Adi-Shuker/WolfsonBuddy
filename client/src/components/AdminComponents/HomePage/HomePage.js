@@ -6,7 +6,6 @@ import {
   IsAdminContext,
   IsAuthenticateContext,
   UserDetailsContext,
-  DepartmentsContext,
 } from "../../../App";
 import { Tabs, Tab } from "react-bootstrap";
 import DeleteAndEditTeamMember from "../EditGetToKnowTheTeam/DeleteAndEditTeamMember";
@@ -15,6 +14,7 @@ import SurveyResults from "../Survey/SurveyResults.js";
 import AddTeamMember from "../EditGetToKnowTheTeam/AddTeamMember.js";
 import EditSurvey from "../Survey/EditSurvey.js";
 import "./HomePage.css";
+import Header from "../../UsersComponents/Header";
 
 const AdminHomePage = () => {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
@@ -39,9 +39,7 @@ const AdminHomePage = () => {
 
   return (
     <div className="Admin-home-page">
-      <div className="text-right padding-right">
-        <h2>שלום {userDetails.username}</h2>
-      </div>
+      <Header />
       <Tabs
         defaultActiveKey="AddNewsAndUpdates"
         className="mb-3 tabs"
