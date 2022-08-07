@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { IsAuthenticateContext, UserDetailsContext} from "../../../App";
+import {
+  IsAdminContext,
+  IsAuthenticateContext,
+  UserDetailsContext,
+} from "../../../App";
 import { Redirect } from "react-router-dom";
 import UserIcon from "../Icons/UserIcon";
 import UpcomingAppointment from "./UpcomingAppointment";
@@ -8,9 +12,7 @@ import styled, { css } from "styled-components";
 import "./HomePage.css";
 import Survey from "./Survey";
 import { useHistory } from "react-router-dom";
-import Header from '../Header.js';
-
-export const IsAdminContext = React.createContext({});
+import Header from "../Header.js";
 
 const Hello = styled.div`
   .survey-true {
@@ -51,6 +53,7 @@ const UsersHomePage = () => {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
+  console.log(isAdmin);
   const token = localStorage.getItem("accessToken");
   const { username, email, id } = userDetails;
 
@@ -64,9 +67,7 @@ const UsersHomePage = () => {
         <Hello className="helloDiv">
           <div className={"survey-" + surveyAvailable}>
             <LeftDiv className="leftDivSurvey">
-              {surveyAvailable ? (
-                <Survey />
-              ) : null}
+              {surveyAvailable ? <Survey /> : null}
             </LeftDiv>
             <RightDiv className="rightDiv vertical-center">
               <div className="IconWrapper">
@@ -74,7 +75,6 @@ const UsersHomePage = () => {
               </div>
 
               <div className="helloAndUsername">שלום {username}</div>
-
             </RightDiv>
           </div>
         </Hello>

@@ -1,11 +1,12 @@
 import MenuIcon from "./Icons/MenuIcon.js";
 import styled from "styled-components";
 import SideMenu from "./SideMenu";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
 import NavigationDiv from "./HomePage/NavigationDiv";
+import { IsAdminContext, UserDetailsContext } from "../../App";
 
 const HeaderDiv = styled.div`
   display: grid;
@@ -44,14 +45,16 @@ const MenuLine = styled.div`
     padding-top: 4px;
     font-size: 30px;
     padding-right: 30px;
+    direction: rtl;
   }
 `;
 
 const Header = () => {
   const [buttonNavigationPopup, setButtonNavigationPopup] = useState(false);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
-  const isAdmin = false;
-  const adminName = "מיכל";
+  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
+  const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
+  console.log(isAdmin);
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
   };
@@ -82,7 +85,7 @@ const Header = () => {
         />
         <div>
           {isAdmin ? (
-            <div className="helloAdmin">!שלום {adminName} </div>
+            <div className="helloAdmin">שלום {userDetails.username} </div>
           ) : (
             <MenuIcon onClick={onClickMenu} />
           )}
