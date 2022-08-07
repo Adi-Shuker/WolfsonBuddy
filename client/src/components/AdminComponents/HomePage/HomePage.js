@@ -15,6 +15,7 @@ import AddTeamMember from "../EditGetToKnowTheTeam/AddTeamMember.js";
 import EditSurvey from "../Survey/EditSurvey.js";
 import "./HomePage.css";
 import Header from "../../UsersComponents/Header";
+import Footer from "../../UsersComponents/Footer";
 
 const AdminHomePage = () => {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
@@ -75,6 +76,7 @@ const AdminHomePage = () => {
           <SurveyResults />
         </Tab>
       </Tabs>
+      <Footer />
     </div>
   );
 };
