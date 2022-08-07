@@ -2,9 +2,9 @@ import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import React from "react";
 import styled from "styled-components";
 import DeleteNewAndUpdates from "./DeleteNewAndUpdates";
-import DatePicker from "react-datepicker"
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {DepartmentsContext, NewsContext} from "../../../App";
+import { DepartmentsContext, NewsContext } from "../../../App";
 import PresentOneNews from "../../News/PresentOneNews";
 
 const AddNewAndUpdatesDiv = styled.div`
@@ -43,10 +43,28 @@ const AddNewAndUpdatesDiv = styled.div`
       border: 1px solid black;
     }
   }
+  .date-wrapper {
+    display: flex;
+    direction: rtl;
+    margin-bottom: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    color: #767676;
+
+    .datePickerDiv {
+      cursor: pointer;
+      border: none;
+      width: -webkit-fill-available;
+      direction: ltr;
+    }
+    .react-datepicker-ignore-onclickoutside {
+      border: none;
+    }
+  }
 `;
 
 const AddNewsAndUpdates = () => {
-
   const [title, setTitle] = React.useState(null);
   const [content, setContent] = React.useState(null);
   const [link, setLink] = React.useState(null);
@@ -58,21 +76,21 @@ const AddNewsAndUpdates = () => {
     const token = localStorage.getItem("accessToken");
     fetch(`/api/add-news`, {
       method: "POST",
-      headers: {"Content-Type": "application/json", "x-access-token": token },
-        body: JSON.stringify({
-            "title":title,
-            "postDate":startDate,
-            "content":content,
-            "link":link,
-        }),
+      headers: { "Content-Type": "application/json", "x-access-token": token },
+      body: JSON.stringify({
+        title: title,
+        postDate: startDate,
+        content: content,
+        link: link,
+      }),
     })
-        .then((res) => res.json())
-        .then((res) => {
-          alert("עדכון נשלח בהצלחה")
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .then((res) => res.json())
+      .then((res) => {
+        alert("עדכון נשלח בהצלחה");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -80,49 +98,56 @@ const AddNewsAndUpdates = () => {
       <AddNewAndUpdatesDiv className="AddNewAndUpdates">
         <div className="leftDiv">
           <div className="title">מחיקת עדכון:</div>
-          <DeleteNewAndUpdates news={news} setNews={setNews}/>
-            <PresentOneNews title={title} content={content} link={link} date={startDate.toISOString().split('T')[0]}></PresentOneNews>
+          <DeleteNewAndUpdates news={news} setNews={setNews} />
+          <PresentOneNews
+            title={title}
+            content={content}
+            link={link}
+            date={startDate.toISOString().split("T")[0]}
+          ></PresentOneNews>
         </div>
         <div className="rightDiv">
           <div className="title">הוספת עדכון:</div>
           <Form onSubmit={(e) => submitHandle(e)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-
-                  <div>
-                    <Form.Control
-                      className="text-right"
-                      type="text"
-                      placeholder={"כותרת"}
-                      onChange={(event) => {
-                        setTitle(event.target.value)
-                      }}
-                    />
-                  </div>
-                <div>
-                    <h5>תאריך</h5>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                </div>
-                  <div>
-                    <Form.Control
-                        className="text-right"
-                        type="text"
-                        placeholder={"תוכן"}
-                        onChange={(event) => {
-                          setContent(event.target.value)
-                        }}
-                    />
-                  </div>
-                  <div>
-                    <Form.Control
-                        className="text-right"
-                        type="text"
-                        placeholder={"קישור לאתר חיצוני"}
-                        onChange={(event) => {
-                          setLink(event.target.value)
-                        }}
-                    />
-                  </div>
-
+              <div>
+                <Form.Control
+                  className="text-right"
+                  type="text"
+                  placeholder={"כותרת"}
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                  }}
+                />
+              </div>
+              <div className={"date-wrapper"}>
+                <span>תאריך</span>
+                <DatePicker
+                  className="datePickerDiv"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                />
+              </div>
+              <div>
+                <Form.Control
+                  className="text-right"
+                  type="text"
+                  placeholder={"תוכן"}
+                  onChange={(event) => {
+                    setContent(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <Form.Control
+                  className="text-right"
+                  type="text"
+                  placeholder={"קישור לאתר חיצוני"}
+                  onChange={(event) => {
+                    setLink(event.target.value);
+                  }}
+                />
+              </div>
             </Form.Group>
             <Button type="submit">הוסף עדכון</Button>
           </Form>
