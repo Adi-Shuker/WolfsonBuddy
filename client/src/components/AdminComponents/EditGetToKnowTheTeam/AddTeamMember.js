@@ -66,10 +66,8 @@ const AddTeamMember = () => {
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
   const submitHandle = (event) => {
-    console.log("submitHandel of AddingTeamMember");
     event.preventDefault();
     const token = localStorage.getItem("accessToken");
-    console.log(token);
     const data = new FormData();
     data.append("name", name);
     data.append("department_id", selectedDepartment);
@@ -90,7 +88,6 @@ const AddTeamMember = () => {
       .then((res) => res.json())
       .then((res) => {
         alert("חבר צוות נוסף בהצלחה");
-        console.log(event);
         setSelectedDepartment(1);
         event.target.reset();
       })

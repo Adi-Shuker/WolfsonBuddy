@@ -54,7 +54,6 @@ const Header = () => {
   const adminName = "מיכל";
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
-    console.log("onClickMenu", showSideMenu);
   };
   const history = useHistory();
   const onMenuItemSelection = (path) => {
