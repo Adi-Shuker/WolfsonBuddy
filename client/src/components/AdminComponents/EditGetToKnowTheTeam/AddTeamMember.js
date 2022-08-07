@@ -93,7 +93,6 @@ const AddTeamMember = () => {
       })
       .catch((err) => {
         alert("יש למלא את כל השדות על מנת להוסיף את איש הצוות");
-
         console.log(err);
       });
   };

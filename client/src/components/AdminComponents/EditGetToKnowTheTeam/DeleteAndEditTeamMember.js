@@ -45,35 +45,40 @@ const Title = styled.div`
     display: flex;
     justify-content: space-around;
     direction: rtl;
-}`;
+`;
 
 const DeleteAndEditTeamMember = () => {
   const history = useHistory();
-  const departmentsList = ["doc1", "doc2", "doc3"];
   const [data, setData] = useState("");
   function handleClick(path) {
     history.push(path);
+  }
+  const deleteTeamMember =(data)=>{
+
+  }
+  const editTeamMember = (data)=>{
+
   }
 
   return (
     <div className="allcomponent">
       <DeleteAndEditTeamMemberDiv className="DeleteAndEditTeamMember">
         <div className="leftDiv">
-          <PresentDoctor className="preview" doctor={"doc1"} />
+          <PresentDoctor className="preview" doctor={data} />
         </div>
         <div className="rightDiv">
           <DoctorsByDepartment setData={setData} />
           <div className={"buttonLine"}>
             <Button
               onClick={() => {
-                handleClick("/editGetToKnowTheTeam");
+                editTeamMember(data);
               }}
             >
               {" עריכת איש צוות"}
             </Button>
             <Button
               onClick={() => {
-                //TO-DO delete it from DB
+                deleteTeamMember(data);
               }}
             >
               {"מחיקת איש צוות"}
