@@ -94,66 +94,69 @@ const AddNewsAndUpdates = () => {
   }
 
   return (
-    <div>
-      <AddNewAndUpdatesDiv className="AddNewAndUpdates">
-        <div className="leftDiv">
-          <div className="title">מחיקת עדכון:</div>
-          <DeleteNewAndUpdates news={news} setNews={setNews} />
-          <PresentOneNews
-            title={title}
-            content={content}
-            link={link}
-            date={startDate.toISOString().split("T")[0]}
-          ></PresentOneNews>
-        </div>
-        <div className="rightDiv">
-          <div className="title">הוספת עדכון:</div>
-          <Form onSubmit={(e) => submitHandle(e)}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <div>
-                <Form.Control
-                  className="text-right"
-                  type="text"
-                  placeholder={"כותרת"}
-                  onChange={(event) => {
-                    setTitle(event.target.value);
-                  }}
-                />
-              </div>
-              <div className={"date-wrapper"}>
-                <span>תאריך</span>
-                <DatePicker
-                  className="datePickerDiv"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-              <div>
-                <Form.Control
-                  className="text-right"
-                  type="text"
-                  placeholder={"תוכן"}
-                  onChange={(event) => {
-                    setContent(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <Form.Control
-                  className="text-right"
-                  type="text"
-                  placeholder={"קישור לאתר חיצוני"}
-                  onChange={(event) => {
-                    setLink(event.target.value);
-                  }}
-                />
-              </div>
-            </Form.Group>
-            <Button type="submit">הוסף עדכון</Button>
-          </Form>
-        </div>
-      </AddNewAndUpdatesDiv>
-    </div>
+    console.log(link) || (
+      <div>
+        <AddNewAndUpdatesDiv className="AddNewAndUpdates">
+          <div className="leftDiv">
+            <div className="title">מחיקת עדכון:</div>
+            <DeleteNewAndUpdates news={news} setNews={setNews} />
+
+            <PresentOneNews
+              title={title}
+              content={content}
+              link={link}
+              date={startDate.toISOString().split("T")[0]}
+            ></PresentOneNews>
+          </div>
+          <div className="rightDiv">
+            <div className="title">הוספת עדכון:</div>
+            <Form onSubmit={(e) => submitHandle(e)}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <div>
+                  <Form.Control
+                    className="text-right"
+                    type="text"
+                    placeholder={"כותרת"}
+                    onChange={(event) => {
+                      setTitle(event.target.value);
+                    }}
+                  />
+                </div>
+                <div className={"date-wrapper"}>
+                  <span>תאריך</span>
+                  <DatePicker
+                    className="datePickerDiv"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                  />
+                </div>
+                <div>
+                  <Form.Control
+                    className="text-right"
+                    type="text"
+                    placeholder={"תוכן"}
+                    onChange={(event) => {
+                      setContent(event.target.value);
+                    }}
+                  />
+                </div>
+                <div>
+                  <Form.Control
+                    className="text-right"
+                    type="text"
+                    placeholder={"קישור לאתר חיצוני"}
+                    onChange={(event) => {
+                      setLink(event.target.value);
+                    }}
+                  />
+                </div>
+              </Form.Group>
+              <Button type="submit">הוסף עדכון</Button>
+            </Form>
+          </div>
+        </AddNewAndUpdatesDiv>
+      </div>
+    )
   );
 };
 export default AddNewsAndUpdates;

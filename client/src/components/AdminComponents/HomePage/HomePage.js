@@ -1,59 +1,83 @@
-import { Redirect } from "react-router-dom"
-import 'react-bootstrap/dist/react-bootstrap.min.js';
+import { Redirect } from "react-router-dom";
+import "react-bootstrap/dist/react-bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import {IsAdminContext, IsAuthenticateContext, UserDetailsContext, DepartmentsContext} from "../../../App";
-import { Tabs, Tab} from 'react-bootstrap';
-import DeleteAndEditTeamMember from '../EditGetToKnowTheTeam/DeleteAndEditTeamMember'
-import AddNewsAndUpdates from '../NewsAndUpdates/AddNewsAndUpdates.js';
-import SurveyResults from '../Survey/SurveyResults.js';
-import AddTeamMember from '../EditGetToKnowTheTeam/AddTeamMember.js';
-import EditSurvey from '../Survey/EditSurvey.js';
-import './HomePage.css';
+import {
+  IsAdminContext,
+  IsAuthenticateContext,
+  UserDetailsContext,
+  DepartmentsContext,
+} from "../../../App";
+import { Tabs, Tab } from "react-bootstrap";
+import DeleteAndEditTeamMember from "../EditGetToKnowTheTeam/DeleteAndEditTeamMember";
+import AddNewsAndUpdates from "../NewsAndUpdates/AddNewsAndUpdates.js";
+import SurveyResults from "../Survey/SurveyResults.js";
+import AddTeamMember from "../EditGetToKnowTheTeam/AddTeamMember.js";
+import EditSurvey from "../Survey/EditSurvey.js";
+import "./HomePage.css";
 
 const AdminHomePage = () => {
-    const {isAuthenticated, setIsAuthenticated} = React.useContext(IsAuthenticateContext);
-    const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
-    const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
-    if (!isAuthenticated || !isAdmin){
-        return <Redirect to="/"/>
-    }
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(
+    IsAuthenticateContext
+  );
+  const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
+  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
+  if (!isAuthenticated || !isAdmin) {
+    return <Redirect to="/" />;
+  }
 
-    const tabList = [
-        {title:"הוספת/מחיקת עדכונים", componentName:"AddNewsAndUpdates"},
-        {title:"הוספת איש צוות", componentName:"AddTeamMember"},
-        {title:"מחיקת/עריכת איש צוות", componentName:"DeleteAndEditTeamMember"},
-        {title:"עריכת סקר שביעות רצון", componentName:"EditSurvey"},
-        {title:"תוצאות הסקרים", componentName:"SurveyResults"},
-    ]
-    const tabSelected =(e)=>{
-             console.log(e)
-                console.log(userDetails)
-        }
+  const tabList = [
+    { title: "הוספת/מחיקת עדכונים", componentName: "AddNewsAndUpdates" },
+    { title: "הוספת איש צוות", componentName: "AddTeamMember" },
+    { title: "מחיקת/עריכת איש צוות", componentName: "DeleteAndEditTeamMember" },
+    { title: "עריכת סקר שביעות רצון", componentName: "EditSurvey" },
+    { title: "תוצאות הסקרים", componentName: "SurveyResults" },
+  ];
+  const tabSelected = (e) => {
+    console.log(e);
+  };
 
-    return(
-        <div className="Admin-home-page">
-            <div className="text-right padding-right">
-                <h2>שלום {userDetails.username}</h2>
-            </div>
-            <Tabs defaultActiveKey="AddNewsAndUpdates"  className="mb-3 tabs" onSelect={tabSelected} dir="rtl">
-                <Tab tabClassName="tab" eventKey="AddNewsAndUpdates" title="הוספת/מחיקת עדכונים" color='#00138E;'>
-                        <AddNewsAndUpdates/>
-                </Tab>
-                <Tab tabClassName="tab" eventKey="AddTeamMember" title="הוספת איש צוות" >
-                    <AddTeamMember/>
-                </Tab>
-                <Tab tabClassName="tab" eventKey="DeleteAndEditTeamMember" title="מחיקת/עריכת איש צוות" >
-                    <DeleteAndEditTeamMember/>
-                </Tab>
-                <Tab tabClassName="tab" eventKey="EditSurvey" title="עריכת סקר שביעות רצון" >
-                    <EditSurvey/>
-                </Tab>
-                <Tab tabClassName="tab" eventKey="SurveyResults" title="תוצאות הסקרים" >
-                    <SurveyResults/>
-                </Tab>
-            </Tabs>
-        </div>
-    )
-}
- export default AdminHomePage;
+  return (
+    <div className="Admin-home-page">
+      <div className="text-right padding-right">
+        <h2>שלום {userDetails.username}</h2>
+      </div>
+      <Tabs
+        defaultActiveKey="AddNewsAndUpdates"
+        className="mb-3 tabs"
+        onSelect={tabSelected}
+        dir="rtl"
+      >
+        <Tab
+          tabClassName="tab"
+          eventKey="AddNewsAndUpdates"
+          title="הוספת/מחיקת עדכונים"
+          color="#00138E;"
+        >
+          <AddNewsAndUpdates />
+        </Tab>
+        <Tab tabClassName="tab" eventKey="AddTeamMember" title="הוספת איש צוות">
+          <AddTeamMember />
+        </Tab>
+        <Tab
+          tabClassName="tab"
+          eventKey="DeleteAndEditTeamMember"
+          title="מחיקת/עריכת איש צוות"
+        >
+          <DeleteAndEditTeamMember />
+        </Tab>
+        <Tab
+          tabClassName="tab"
+          eventKey="EditSurvey"
+          title="עריכת סקר שביעות רצון"
+        >
+          <EditSurvey />
+        </Tab>
+        <Tab tabClassName="tab" eventKey="SurveyResults" title="תוצאות הסקרים">
+          <SurveyResults />
+        </Tab>
+      </Tabs>
+    </div>
+  );
+};
+export default AdminHomePage;

@@ -62,18 +62,8 @@ const UpcomingAppointment = () => {
         </div>
       </div>
 
-      <Button
-        className="btn lightGreyBorder"
-        onClick={console.log("nav to office")}
-      >
-        נווט לחדר הטיפול
-      </Button>
-      <Button
-        className="btn lightGreyBorder"
-        onClick={console.log("get to know the doctor", doctorName)}
-      >
-        הכר את הרופא
-      </Button>
+      <Button className="btn lightGreyBorder">נווט לחדר הטיפול</Button>
+      <Button className="btn lightGreyBorder">הכר את הרופא</Button>
     </UpcomingAppointmentDiv>
   );
 };
