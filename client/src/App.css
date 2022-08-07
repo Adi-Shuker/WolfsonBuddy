@@ -12,7 +12,9 @@ body {
 }
 .dropdown-menu {
     transform: translate(431px, 50px);
-    min-width: auto;
+    width: -webkit-fill-available;
+    height: 250px;
+    overflow-y: scroll;
 }
 .dropdown-item {
     text-align: right;
