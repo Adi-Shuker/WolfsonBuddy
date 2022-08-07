@@ -12,40 +12,34 @@ import LinkedInIcon from "./Icons/SocialMedia/LinkedInIcon";
 import TiktokIcon from "./Icons/SocialMedia/TiktokIcon";
 import YoutubeIcon from "./Icons/SocialMedia/YoutubeIcon";
 import { Link } from "@mui/material";
+import { IsAdminContext } from "../../App";
 
 const FooterDiv = styled.div`
   position: fixed;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
-  
-  
+  left: 0;
+  bottom: 0;
+  right: 0;
   display: grid;
 
   direction: rtl;
   .isAdmin-true {
-      background-color: #2e388d;
-      .svgSocialMedia {
-    .path {
-    fill:pink;
+    background-color: #2e388d;
+    path {
+      fill: #feb914;
     }
   }
-  }
   .isAdmin-false {
-      background-color: #feb914;
+    background-color: #feb914;
   }
   .IconLine {
     display: flex;
-        justify-content: center;
-            padding-bottom: 15px;
-    .icon {
-    
+    justify-content: center;
+    padding-bottom: 15px;
   }
 `;
 
 const Footer = () => {
-  const isAdmin = true;
+  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   return (
     <FooterDiv className="Footer">
       <span>בקרו אותנו גם ב:</span>
@@ -70,12 +64,6 @@ const Footer = () => {
           target="_blank"
         >
           <LinkedInIcon />
-        </a>
-        <a
-          href="https://www.tiktok.com/@wolfson.medical?_d=secCgYIASAHKAESMgowbB0W2k24do6x%2BD93sEiZega53ETxdpictsiD7Qp4YxaAoxvyi6LnSjPUjDurYDpcGgA%3D&_r=1&language=he&sec_uid=MS4wLjABAAAA9OjyS5RDOyX_XCcWStSwSXHZbKt2hYyX5n2FNNGq8TLqdmgFz2ckKyi2gKJ99z2d&sec_user_id=MS4wLj"
-          target="_blank"
-        >
-          <TiktokIcon />
         </a>
       </div>
     </FooterDiv>

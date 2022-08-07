@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const PresentOneNewsDiv = styled.div`
@@ -12,18 +12,19 @@ const PresentOneNewsDiv = styled.div`
   }
 `;
 
-const PresentOneNews = ({ title, date,content, link }) => {
-
+const PresentOneNews = ({ title, date, content, link }) => {
   return (
     <PresentOneNewsDiv className="PresentDoctor">
-        <div>
-          <h5> {title} </h5>
-          <h5> {date} </h5>
-          <h5> {content} </h5>
-            <a href={link} target="_blank" rel="noopener noreferrer">
-                <h5> לעוד מידע לחץ כאן </h5>
-            </a>
-        </div>
+      <div>
+        <h5> {title} </h5>
+        <h5> {date} </h5>
+        <h5> {content} </h5>
+        {link ? (
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <h5> לעוד מידע לחץ כאן </h5>
+          </a>
+        ) : null}
+      </div>
     </PresentOneNewsDiv>
   );
 };
