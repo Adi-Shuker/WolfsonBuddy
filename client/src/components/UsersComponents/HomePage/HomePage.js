@@ -53,7 +53,7 @@ const UsersHomePage = () => {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
-  console.log(isAdmin);
+
   const token = localStorage.getItem("accessToken");
   const { username, email, id } = userDetails;
 

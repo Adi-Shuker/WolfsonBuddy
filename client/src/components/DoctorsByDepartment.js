@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
 import { DepartmentsContext, NewsContext, StaffMembersContext } from "../App";
 
-const DoctorsByDepartment = ({ setData }) => {
+const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors }) => {
   const { staffMembers, setStaffMembers } =
     React.useContext(StaffMembersContext);
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
@@ -18,13 +18,17 @@ const DoctorsByDepartment = ({ setData }) => {
     setValue(staffMembers.filter((doctor) => doctor.department_name === e));
     setDoctorsTitle(defaultDoctorsTitle);
     setSelectedDoctor(null);
-    setData(null);
+    setData && setData(null);
+
+    const depId = departments.filter((department) => department.name === e)[0]
+      .id;
+
+    setDepartment(depId);
   };
   const doctorSelect = (e) => {
-    console.log(e);
     setDoctorsTitle(e);
     setSelectedDoctor(e);
-    setData(staffMembers.find((o) => o.member_name === e));
+    setData && setData(e);
   };
 
   return (
@@ -44,20 +48,22 @@ const DoctorsByDepartment = ({ setData }) => {
           );
         })}
       </DropdownButton>
-      <DropdownButton
-        id="dropdown-doctores"
-        onSelect={doctorSelect}
-        title={doctorsTitle}
-        dir="rtl"
-      >
-        {value.map(function (staffMember, index) {
-          return (
-            <Dropdown.Item key={index} eventKey={staffMember.member_name}>
-              {staffMember.member_name}
-            </Dropdown.Item>
-          );
-        })}
-      </DropdownButton>
+      {hideDoctors ? null : (
+        <DropdownButton
+          id="dropdown-doctores"
+          onSelect={doctorSelect}
+          title={doctorsTitle}
+          dir="rtl"
+        >
+          {value.map(function (staffMember, index) {
+            return (
+              <Dropdown.Item key={index} eventKey={staffMember.member_name}>
+                {staffMember.member_name}
+              </Dropdown.Item>
+            );
+          })}
+        </DropdownButton>
+      )}
     </DoctorsByDepartmentDiv>
   );
 };

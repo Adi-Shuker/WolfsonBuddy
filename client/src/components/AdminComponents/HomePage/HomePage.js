@@ -21,7 +21,6 @@ const AdminHomePage = () => {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
-  const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   if (!isAuthenticated || !isAdmin) {
     return <Redirect to="/" />;
@@ -53,27 +52,37 @@ const AdminHomePage = () => {
           title="הוספת/מחיקת עדכונים"
           color="#00138E;"
         >
-          <AddNewsAndUpdates />
+          <div className={"tab-wrapper"}>
+            <AddNewsAndUpdates className={"tabContent"} />
+          </div>
         </Tab>
         <Tab tabClassName="tab" eventKey="AddTeamMember" title="הוספת איש צוות">
-          <AddTeamMember />
+          <div className={"tab-wrapper"}>
+            <AddTeamMember />
+          </div>
         </Tab>
         <Tab
           tabClassName="tab"
           eventKey="DeleteAndEditTeamMember"
           title="מחיקת/עריכת איש צוות"
         >
-          <DeleteAndEditTeamMember />
+          <div className={"tab-wrapper"}>
+            <DeleteAndEditTeamMember />
+          </div>
         </Tab>
         <Tab
           tabClassName="tab"
           eventKey="EditSurvey"
           title="עריכת סקר שביעות רצון"
         >
-          <EditSurvey />
+          <div className={"tab-wrapper"}>
+            <EditSurvey />
+          </div>
         </Tab>
         <Tab tabClassName="tab" eventKey="SurveyResults" title="תוצאות הסקרים">
-          <SurveyResults />
+          <div className={"tab-wrapper"}>
+            <SurveyResults />
+          </div>
         </Tab>
       </Tabs>
       <Footer />

@@ -15,7 +15,6 @@ import { Link } from "@mui/material";
 import { IsAdminContext } from "../../App";
 
 const FooterDiv = styled.div`
-  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
