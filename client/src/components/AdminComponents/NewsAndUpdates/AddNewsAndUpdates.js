@@ -87,8 +87,10 @@ const AddNewsAndUpdates = () => {
       .then((res) => res.json())
       .then((res) => {
         alert("עדכון נשלח בהצלחה");
+        event.target.reset();
       })
       .catch((err) => {
+        alert("התרחשה תקלה, יש לנסות שנית");
         console.log(err);
       });
   }

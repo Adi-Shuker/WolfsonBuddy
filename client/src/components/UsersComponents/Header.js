@@ -54,7 +54,7 @@ const Header = () => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
-  console.log(isAdmin);
+
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
   };

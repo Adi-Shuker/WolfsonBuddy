@@ -35,11 +35,10 @@ const PresentDoctor = ({ doctor }) => {
       })
       .catch((err) => console.log("Error:", err));
   }
-  console.log("present:", doctor)
 
   return (
     <PresentDoctorDiv className="PresentDoctor">
-      {doctor ? (
+      {doctor === "" ? (
         <div>
           <img src={src} alt="img" width={150} height={150} />
           <h5> {doctor.member_name} </h5>
