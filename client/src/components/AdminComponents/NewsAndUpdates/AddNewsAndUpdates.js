@@ -37,11 +37,10 @@ const AddNewAndUpdatesDiv = styled.div`
     }
   }
   .leftDiv {
-    display: grid;
-    margin-top: auto;
-    .PresentDoctor {
-      border: 1px solid black;
-    }
+  }
+  .oneNewsDiv {
+    margin: 5px;
+    min-height: 150px;
   }
   .date-wrapper {
     display: flex;

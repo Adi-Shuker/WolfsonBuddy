@@ -3,14 +3,17 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import UserIcon from "./UsersComponents/Icons/UserIcon";
+import { StaffMembersContext } from "../App";
 
 const PresentDoctorDiv = styled.div`
   max-width: 319px;
   margin-bottom: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  overflow: hidden;
-  height: -webkit-calc(100vh - 422px);
+  overflow-y: auto;
+
+  .presenting {
+    border: 1px solid black;
+    border-radius: 5px;
+  }
   .emptySpace {
   }
 `;
@@ -35,29 +38,40 @@ const PresentDoctor = ({ doctor }) => {
       })
       .catch((err) => console.log("Error:", err));
   }
+  console.log(doctor);
+  const { staffMembers, setStaffMembers } =
+    React.useContext(StaffMembersContext);
 
+  const filtered = staffMembers.filter(
+    (staffMember) => staffMember.member_name === doctor
+  );
+  const doctorData = staffMembers.filter(
+    (staffMember) => staffMember.member_name === doctor
+  )[0];
+  console.log(doctorData);
+  const role = doctorData ? doctorData.role : "heyyy";
+  console.log(role);
   return (
     <PresentDoctorDiv className="PresentDoctor">
-      {doctor === "" ? (
-        <div>
+      {doctorData ? (
+        <div className={"presenting"}>
           <img src={src} alt="img" width={150} height={150} />
-          <h5> {doctor.member_name} </h5>
-          <h5> {doctor.department_name} </h5>
-          <h5> {doctor.role} </h5>
-          <h5> {doctor.description} </h5>
-          <h5> {doctor.phone_number} </h5>
-          <h5> {doctor.clinical_practice} </h5>
-          <h5> {doctor.scientific_practice} </h5>
-          <h5> {doctor.academic_experience} </h5>
-          <h5> {doctor.professional_unions} </h5>
-          <h5> {doctor.education} </h5>
+          <h5> {doctorData.member_name} </h5>
+          <h5> {doctorData.department_name} </h5>
+          <h5> {doctorData.role} </h5>
+          <h5> {doctorData.description} </h5>
+          <h5> {doctorData.phone_number} </h5>
+          <h5> {doctorData.clinical_practice} </h5>
+          <h5> {doctorData.scientific_practice} </h5>
+          <h5> {doctorData.academic_experience} </h5>
+          <h5> {doctorData.professional_unions} </h5>
+          <h5> {doctorData.education} </h5>
         </div>
-      ) : (
-        <img src={src} alt="img" width={150} height={150} />
-        /*
+      ) : null
+      /*
         <div className={"emptySpace"} />
 */
-      )}
+      }
     </PresentDoctorDiv>
   );
 };

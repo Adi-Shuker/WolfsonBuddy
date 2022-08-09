@@ -23,7 +23,7 @@ const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors }) => {
     const depId = departments.filter((department) => department.name === e)[0]
       .id;
 
-    setDepartment(depId);
+    setDepartment && setDepartment(depId);
   };
   const doctorSelect = (e) => {
     setDoctorsTitle(e);
