@@ -22,23 +22,29 @@ const ResultWrapperDiv = styled.div`
 
 const GraphWithText = styled.div`
   direction: rtl;
-  height: 370px;
-  width: 535px;
+  height: 30vw;
+  width: 30vw;
   border: 1px solid #00138e;
   border-radius: 50px;
   overflow: hidden;
   margin: 35px;
-  padding: 50px;
+  padding: 25px;
   h1 {
     font-size: 20px;
   }
   &.type-dropdown {
-    max-width: 535px;
-    padding-right: 120px;
-    padding-bottom: 100px;
-    padding-left: 110px;
-    padding-top: 16px;
+    padding: 10%;
+    padding-top: 6%;
   }
+  &.type-matrix {
+    padding: 10%;
+    padding-top: 20%;
+  }
+  &.type-rating {
+    padding: 10%;
+    padding-top: 15%;
+  }
+
   img {
     height: 100px;
     width: 100px;
