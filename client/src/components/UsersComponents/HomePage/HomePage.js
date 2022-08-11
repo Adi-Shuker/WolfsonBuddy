@@ -13,6 +13,7 @@ import "./HomePage.css";
 import Survey from "./Survey";
 import { useHistory } from "react-router-dom";
 import Header from "../Header.js";
+import Footer from "../Footer";
 
 const Hello = styled.div`
   .survey-true {
@@ -53,7 +54,7 @@ const UsersHomePage = () => {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
-  console.log(isAdmin);
+
   const token = localStorage.getItem("accessToken");
   const { username, email, id } = userDetails;
 
@@ -82,6 +83,7 @@ const UsersHomePage = () => {
           <UpcomingAppointment />
           <VisualMenu className="visualMenuDiv" />
         </Content>
+        <Footer />
       </div>
     )
   );

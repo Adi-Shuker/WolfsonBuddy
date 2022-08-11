@@ -1,3 +1,17 @@
+.sv-root-modern .sv-container-modern__title {
+    color: #00138E !important;
+
+}
+.sv-root-modern .sv-progress__bar {
+    background-color: #00138E !important;
+}
+
+.sv-root-modern .sv-btn--navigation {
+    background-color: #00138E !important;
+}
+
+
+
 body {
     background-color: #FFF;
     font-family: Arial;
@@ -7,14 +21,20 @@ body {
     color: #00138E;
 
 }
+
+.tab-wrapper {
+    min-height:80vh;
+}
+
 .form-control {
     margin-bottom: 10px;
 }
+
 .dropdown-menu {
     transform: translate(431px, 50px);
     width: -webkit-fill-available;
     height: 250px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .dropdown-item {
     text-align: right;
@@ -22,7 +42,9 @@ body {
 .dropdown-toggle::after {
     margin-right: 10px;
 }
-.btn-primary {
+
+
+.btn-primary , .btn-outline-primary{
 
     background-color: white;
     color: #2e388d;
@@ -30,13 +52,19 @@ body {
     box-shadow: 0px 0px;
     width: 309px;
 }
-.btn-primary:hover {
+.small-btn {
+    width:100px;
+    height: 27px;
+    --bs-btn-padding-y: 0;
+}
+
+.btn-primary:hover , .btn-outline-primary:hover{
     color: #fff;
     background-color: #2e388d;
     border-color: #2e388d;
 }
 
-.btn-primary:active {
+.btn-primary:active , .btn-outline-primary:active{
     color: #fff;
     background-color: #2e388d;
     border-color: #2e388d;

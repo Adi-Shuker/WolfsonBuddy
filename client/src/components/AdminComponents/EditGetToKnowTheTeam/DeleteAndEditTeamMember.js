@@ -36,15 +36,14 @@ const DeleteAndEditTeamMemberDiv = styled.div`
   .leftDiv {
     display: grid;
     .PresentDoctor {
-      border: 1px solid black;
     }
   }
 `;
 
 const Title = styled.div`
-    display: flex;
-    justify-content: space-around;
-    direction: rtl;
+  display: flex;
+  justify-content: space-around;
+  direction: rtl;
 `;
 
 const DeleteAndEditTeamMember = () => {
@@ -53,12 +52,8 @@ const DeleteAndEditTeamMember = () => {
   function handleClick(path) {
     history.push(path);
   }
-  const deleteTeamMember =(data)=>{
-
-  }
-  const editTeamMember = (data)=>{
-
-  }
+  const deleteTeamMember = (data) => {};
+  const editTeamMember = (data) => {};
 
   return (
     <div className="allcomponent">

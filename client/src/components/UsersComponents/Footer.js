@@ -13,37 +13,53 @@ import TiktokIcon from "./Icons/SocialMedia/TiktokIcon";
 import YoutubeIcon from "./Icons/SocialMedia/YoutubeIcon";
 import { Link } from "@mui/material";
 import { IsAdminContext } from "../../App";
-
+import BackIcon from "./Icons/BackIcon";
 const FooterDiv = styled.div`
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: grid;
-
   direction: rtl;
-  .isAdmin-true {
-    background-color: #2e388d;
-    path {
-      fill: #feb914;
-    }
+
+  height: 53px;
+  margin-top: calc(10vh - 53px);
+
+  .BackIconDiv {
+    width: 60px;
+    height: 60px;
+    border-radius: 150px;
+    display: block;
+
+    left: 26px;
+    bottom: 85px;
+    right: 0;
   }
-  .isAdmin-false {
-    background-color: #feb914;
-  }
+
   .IconLine {
+    background-color: ${({ isAdmin }) => (isAdmin ? "#2e388d" : " #feb914")};
+    path {
+      fill: ${({ isAdmin }) => (!isAdmin ? "#2e388d" : " #feb914")};
+    }
     display: flex;
     justify-content: center;
     padding-bottom: 15px;
   }
 `;
 
-const Footer = () => {
+const Footer = ({ showBackIcon }) => {
   const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
+  const history = useHistory();
   return (
-    <FooterDiv className="Footer">
+    <FooterDiv className={"Footer isAdmin-" + isAdmin} isAdmin={isAdmin}>
+      {showBackIcon ? (
+        <div
+          className={"BackIconDiv iconWrapper lightGreyBorder"}
+          onClick={() => {
+            window.scrollTo(0, 0);
+            history.push("/usersHomePage");
+          }}
+        >
+          <BackIcon />
+        </div>
+      ) : null}
       <span>בקרו אותנו גם ב:</span>
-      <div className={"IconLine isAdmin-" + isAdmin}>
+      <div className={"IconLine"}>
         <a href="https://www.facebook.com/WolfsonMedicalCenter" target="_blank">
           <FacebookIcon className={"icon"} />
         </a>

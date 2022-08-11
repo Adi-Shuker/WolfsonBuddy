@@ -10,14 +10,20 @@ const PresentOneNewsDiv = styled.div`
   height: -webkit-calc(100vh - 422px);
   .emptySpace {
   }
+  .dateSpan {
+    text-align: initial;
+    padding-left: 10px;
+    padding-top: 8px;
+  }
 `;
 
 const PresentOneNews = ({ title, date, content, link }) => {
   return (
-    <PresentOneNewsDiv className="PresentDoctor">
+    <PresentOneNewsDiv className="oneNewsDiv">
       <div>
+        <div className={"dateSpan"}> {date} </div>
         <h5> {title} </h5>
-        <h5> {date} </h5>
+
         <h5> {content} </h5>
         {link ? (
           <a href={link} target="_blank" rel="noopener noreferrer">

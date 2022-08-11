@@ -1,91 +1,157 @@
-import React, {useEffect, useState} from "react";
-import {Form} from "react-bootstrap";
-import {DepartmentsContext} from "../../../App";
-import QuestionChart from './QuestionChart.js';
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
+import { DepartmentsContext } from "../../../App";
+import QuestionChart from "./QuestionChart.js";
 import UserAnswersTable from "./UserAnswersTable.js";
+import styled from "styled-components";
+import DoctorsByDepartment from "../../DoctorsByDepartment";
 
+const SurveyResultsDiv = styled.div`
+  justify-content: center;
+  .DoctorsByDepartment {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+const ResultWrapperDiv = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: center;
+`;
+
+const GraphWithText = styled.div`
+  direction: rtl;
+  height: 30vw;
+  width: 30vw;
+  border: 1px solid #00138e;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 35px;
+  padding: 25px;
+  h1 {
+    font-size: 20px;
+  }
+  &.type-dropdown {
+    padding: 10%;
+    padding-top: 6%;
+  }
+  &.type-matrix {
+    padding: 10%;
+    padding-top: 20%;
+  }
+  &.type-rating {
+    padding: 10%;
+    padding-top: 15%;
+  }
+
+  img {
+    height: 100px;
+    width: 100px;
+  }
+`;
 
 const SurveyResults = () => {
-    const [selectedDepartment, setSelectedDepartment] = useState(1);
-    const [chartsData, setChartsData] = useState({ items: [] })
-    const [commentUserAnswers, setCommentUserAnswers] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
-    const addCommentUserAnswer = (newCommentUserAnswer) => setCommentUserAnswers(state => [...state, newCommentUserAnswer])
-    let list = [];
-    const { departments, setDepartments } = React.useContext(DepartmentsContext);
-    useEffect(() => {
-        const token = localStorage.getItem("accessToken");
-        fetch(`/api/survey/result/${selectedDepartment}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json", "x-access-token": token },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                setTotalCount(0);
-                setCommentUserAnswers([]);
-                res.forEach((item)=>{
-                    const answers = new Map();
-                    if(item.question_type !== "comment"){
-                        if(item.suggested_answers !==null){
-                            item.suggested_answers.split(',').forEach((ans)=>{
-                                if(!answers.has(ans)){
-                                    answers.set(ans, 0);
-                                }
-                            })
-                        }
-                        if(item.answers !== undefined){
-                            item.answers.split(',').forEach((ans)=>{
-                                if(answers.has(ans)){
-                                    answers.set(ans, answers.get(ans)+1)
-                                }
-                            })
-                            setTotalCount(item.answers.split(',').length);
-                        }
-                        list=[...list, {"title":item.question_text,"question_type":item.question_type,"labels":Array.from(answers.keys()), "values":Array.from(answers.values())}]
+  const [selectedDepartment, setSelectedDepartment] = useState(1);
 
-                    }else{
-                        setTotalCount(item.answers.split(',').length);
-                        addCommentUserAnswer({"title":item.question_text, "answers" : Array.from(item.answers.split(','))});
-                    }
-                })
-                setChartsData(list)
-            })
-            .catch((err) => {
-                console.log(err);
+  const [data, setData] = useState("");
+  const [chartsData, setChartsData] = useState({ items: [] });
+  const [commentUserAnswers, setCommentUserAnswers] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const addCommentUserAnswer = (newCommentUserAnswer) =>
+    setCommentUserAnswers((state) => [...state, newCommentUserAnswer]);
+  let list = [];
+  const { departments, setDepartments } = React.useContext(DepartmentsContext);
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    fetch(`/api/survey/result/${selectedDepartment}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json", "x-access-token": token },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setTotalCount(0);
+        setCommentUserAnswers([]);
+        res.forEach((item) => {
+          const answers = new Map();
+          if (item.question_type !== "comment") {
+            if (item.suggested_answers !== null) {
+              item.suggested_answers.split(",").forEach((ans) => {
+                if (!answers.has(ans)) {
+                  answers.set(ans, 0);
+                }
+              });
+            }
+            if (item.answers !== undefined) {
+              item.answers.split(",").forEach((ans) => {
+                if (answers.has(ans)) {
+                  answers.set(ans, answers.get(ans) + 1);
+                }
+              });
+              setTotalCount(item.answers.split(",").length);
+            }
+            list = [
+              ...list,
+              {
+                title: item.question_text,
+                question_type: item.question_type,
+                labels: Array.from(answers.keys()),
+                values: Array.from(answers.values()),
+              },
+            ];
+          } else {
+            setTotalCount(item.answers.split(",").length);
+            addCommentUserAnswer({
+              title: item.question_text,
+              answers: Array.from(item.answers.split(",")),
             });
-    }, [selectedDepartment]);
+          }
+        });
+        setChartsData(list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [selectedDepartment]);
 
-    return(
-        <div className="SurveyResults">
-            <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>בחר מחלקה</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={(e)=> {
-                        setSelectedDepartment(e.target.value)
-                    }} dir="rtl">
-                        {departments.map((department) =>{
-                            return <option key={department.id} value={department.id}>{department.name}</option>;
-                        })}
-                    </Form.Select>
-                </Form.Group>
-            </Form>
-            <div> סה"כ ענו: {totalCount} מטופלים </div>
-            <div className="d-flex justify-content-around flex-column">
-                {chartsData.length > 0 && chartsData.map((item, index) => {
-                    return <div key={index} className="w-50 col-6 md-6">
-                            <QuestionChart title={item.title} question_type={item.question_type} labels={item.labels} values={item.values===undefined?[]:item.values}/>
-                        </div>
-                    }
-                )}
-                {commentUserAnswers.length>0 && commentUserAnswers.map((ans, i) =>{
-                    return <div key={i} className="w-50 col-6 md-6">
-                            <UserAnswersTable title={ans.title} answers={ans.answers.length>0?ans.answers:[]}/>
-                            </div>
-                    }
-                )}
-            </div>
-        </div>
-
-    )
-}
- export default SurveyResults;
+  return (
+    <SurveyResultsDiv className="SurveyResults">
+      <DoctorsByDepartment
+        hideDoctors={true}
+        setDepartment={setSelectedDepartment}
+      />
+      <div> סה"כ ענו: {totalCount} מטופלים </div>
+      <ResultWrapperDiv className="result-wrapper">
+        {chartsData.length > 0 &&
+          chartsData.map((item, index) => {
+            return (
+              <GraphWithText
+                key={index}
+                className={"graph-wrapper type-" + item.question_type}
+              >
+                <QuestionChart
+                  className={item.question_type}
+                  title={item.title}
+                  question_type={item.question_type}
+                  labels={item.labels}
+                  values={item.values === undefined ? [] : item.values}
+                />
+              </GraphWithText>
+            );
+          })}
+        {commentUserAnswers.length > 0 &&
+          commentUserAnswers.map((ans, i) => {
+            return (
+              <div key={i} className="w-50 col-6 md-6">
+                <UserAnswersTable
+                  title={ans.title}
+                  answers={ans.answers.length > 0 ? ans.answers : []}
+                />
+              </div>
+            );
+          })}
+      </ResultWrapperDiv>
+    </SurveyResultsDiv>
+  );
+};
+export default SurveyResults;
