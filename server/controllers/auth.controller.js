@@ -60,11 +60,43 @@ const verifyToken = (req, res) => {
     }
 }
 
+const getUserDataFromToken = (req, res) => {
+    const token = req.headers["x-access-token"];
+    try {
+        const userEmail = authJwt.verify(token).email
+        if(userEmail !== undefined){
+            return executeQuery("SELECT * FROM users WHERE email ='" + userEmail + "'")
+                .then(user => {
+                    if(user.length === 0){
+                        return res.status(404).send({ message: "User Not found." });
+                    }
+                    const { id, user_name: username, email, role} = user[0]
+                    const token = jwt.sign({  email }, config.secret, {
+                        expiresIn: 86400 // 24 hours
+                    });
+                    return res.status(200).send({
+                        id,
+                        username,
+                        email,
+                        role,
+                        accessToken: token
+                    });
+                })
+                .catch(err => {
+                    return res.status(500).send({ message: err.message });
+                });
+        }
+    } catch (err) {
+        res.send({isAuthenticated: false})
+    }
+}
+
 
 const authController = {
     signup,
     signin,
     verifyToken,
+     getUserDataFromToken,
 };
 
 export default authController;

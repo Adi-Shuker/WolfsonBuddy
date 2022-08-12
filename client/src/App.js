@@ -28,9 +28,9 @@ function App() {
   const [data, setData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const [departments, setDepartments] = useState({});
-  const [staffMembers, setStaffMembers] = useState({});
-  const [news, setNews] = useState({});
+  const [departments, setDepartments] = useState([]);
+  const [staffMembers, setStaffMembers] = useState([]);
+  const [news, setNews] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     fetch("/api/verify-token", {
