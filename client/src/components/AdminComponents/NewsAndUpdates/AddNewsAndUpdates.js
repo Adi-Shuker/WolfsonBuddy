@@ -95,7 +95,7 @@ const AddNewsAndUpdates = () => {
   }
 
   return (
-    console.log(link) || (
+    (
       <div>
         <AddNewAndUpdatesDiv className="AddNewAndUpdates">
           <div className="leftDiv">

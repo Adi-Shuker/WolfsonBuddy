@@ -184,8 +184,6 @@ const UserSurvey = () => {
             });
           }
         }
-        console.log([...answers]);
-        console.log(answers);
         handleSubmit(answers);
         alert(results);
 

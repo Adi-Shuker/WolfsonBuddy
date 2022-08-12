@@ -28,7 +28,6 @@ const Line = styled.div`
 const VisualMenu = () => {
   const history = useHistory();
   const handleMenuItemClick = ({ iconClicked }) => {
-    console.log({ iconClicked });
     if (iconClicked == "CarClicked") {
       setButtonNavigationPopup(true);
     } else {

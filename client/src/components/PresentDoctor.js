@@ -38,7 +38,7 @@ const PresentDoctor = ({ doctor }) => {
       })
       .catch((err) => console.log("Error:", err));
   }
-  console.log(doctor);
+  //console.log(doctor);
   const { staffMembers, setStaffMembers } =
     React.useContext(StaffMembersContext);
 
@@ -48,9 +48,9 @@ const PresentDoctor = ({ doctor }) => {
   const doctorData = staffMembers.filter(
     (staffMember) => staffMember.member_name === doctor
   )[0];
-  console.log(doctorData);
+  //console.log(doctorData);
   const role = doctorData ? doctorData.role : "heyyy";
-  console.log(role);
+  //console.log(role);
   return (
     <PresentDoctorDiv className="PresentDoctor">
       {doctorData ? (

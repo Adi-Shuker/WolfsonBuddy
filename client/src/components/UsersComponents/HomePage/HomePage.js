@@ -46,10 +46,7 @@ const NavModal = styled.div``;
 const UsersHomePage = () => {
   const history = useHistory();
   const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(
-    IsAuthenticateContext
-  );
-  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
