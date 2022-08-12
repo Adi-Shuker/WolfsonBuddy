@@ -4,11 +4,11 @@ import PresentDoctor from "../PresentDoctor";
 import Header from "../UsersComponents/Header";
 import BackIcon from "../UsersComponents/Icons/BackIcon";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import SecretariatInfo from "../UsersComponents/secretariatInfo";
 import { Modal } from "react-bootstrap";
-import { DepartmentsContext, StaffMembersContext } from "../../App";
+import {DepartmentsContext, IsAuthenticateContext, StaffMembersContext, UserDetailsContext} from "../../App";
 import Footer from "../UsersComponents/Footer";
 
 const GetToKnowTheTeamDiv = styled.div`
@@ -24,10 +24,32 @@ const GetToKnowTheTeamDiv = styled.div`
 `;
 
 const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
-  const { departments, setDepartments } = React.useContext(DepartmentsContext);
-  const { staffMembers, setStaffMembers } =
-    React.useContext(StaffMembersContext);
-  const staffMembersList = staffMembers.map((member, index) => {
+  const [showSecretariatInfo, setShowSecretariatInfo] = useState(false);
+  const [data, setData] = useState("");
+  const history = useHistory();
+  const { departments } = React.useContext(DepartmentsContext);
+  const { staffMembers } = React.useContext(StaffMembersContext);
+  const {isAuthenticated} = React.useContext(IsAuthenticateContext);
+  const {setUserDetails} = React.useContext(UserDetailsContext);
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }else{
+    const token = localStorage.getItem("accessToken");
+    fetch("/api/user-data-from-token", {
+      method: "GET",
+      headers: { "Content-Type": "application/json", "x-access-token": token },
+    })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          setUserDetails(res)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+  const staffMembersList =staffMembers.length>0?staffMembers.map((member, index) => {
     return {
       name: member.member_name,
       department: member.department_name,
@@ -41,10 +63,8 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
       professional_unions: member.professional_unions,
       education: member.education,
     };
-  });
-  const [showSecretariatInfo, setShowSecretariatInfo] = useState(false);
-  const [data, setData] = useState("");
-  const history = useHistory();
+  }):[];
+
   return (
     <GetToKnowTheTeamDiv className="GetToKnowTheTeamDiv">
       <Header />
