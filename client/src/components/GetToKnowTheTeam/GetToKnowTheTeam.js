@@ -30,24 +30,26 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
   const { departments } = React.useContext(DepartmentsContext);
   const { staffMembers } = React.useContext(StaffMembersContext);
   const {isAuthenticated} = React.useContext(IsAuthenticateContext);
-  const {setUserDetails} = React.useContext(UserDetailsContext);
+  const {userDetails, setUserDetails} = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }else{
-    const token = localStorage.getItem("accessToken");
-    fetch("/api/user-data-from-token", {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "x-access-token": token },
-    })
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          setUserDetails(res)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if ( Object.keys(userDetails).length === 0) {
+      const token = localStorage.getItem("accessToken");
+      fetch("/api/user-data-from-token", {
+        method: "GET",
+        headers: {"Content-Type": "application/json", "x-access-token": token},
+      })
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            setUserDetails(res)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
   }
   const staffMembersList =staffMembers.length>0?staffMembers.map((member, index) => {
     return {

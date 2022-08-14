@@ -52,7 +52,7 @@ const DeleteAndEditTeamMember = () => {
   function handleClick(path) {
     history.push(path);
   }
-  const deleteTeamMember = (data) => {};
+  const deleteTeamMember = (data) => {console.log(data)};
   const editTeamMember = (data) => {};
 
   return (
