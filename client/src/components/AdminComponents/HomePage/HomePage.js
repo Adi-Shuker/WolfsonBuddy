@@ -26,25 +26,28 @@ const AdminHomePage = () => {
     return <Redirect to="/" />;
   }else{
     const token = localStorage.getItem("accessToken");
-    fetch("/api/user-data-from-token", {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "x-access-token": token },
-    })
-        .then((res) => {
-          return res.json();
+      if ( Object.keys(userDetails).length === 0) {
+        fetch("/api/user-data-from-token", {
+          method: "GET",
+          headers: { "Content-Type": "application/json", "x-access-token": token },
         })
-        .then((res) => {
-          if(res.role !=='admin'){
-            setIsAdmin(false);
-            history.push("/");
-          }else{
-            setIsAdmin(true);
-          }
-          setUserDetails(res)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+            .then((res) => {
+              return res.json();
+            })
+            .then((res) => {
+              if(res.role !=='admin'){
+                setIsAdmin(false);
+                history.push("/");
+              }else{
+                setIsAdmin(true);
+              }
+              setUserDetails(res)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      } else {
+      }
   }
 
   return (

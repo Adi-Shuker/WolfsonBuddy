@@ -51,21 +51,23 @@ const UsersHomePage = () => {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }else{
-    const token = localStorage.getItem("accessToken");
-    fetch("/api/user-data-from-token", {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "x-access-token": token },
-    })
-        .then((res) => {
+      if ( Object.keys(userDetails).length === 0) {
+          const token = localStorage.getItem("accessToken");
+          fetch("/api/user-data-from-token", {
+              method: "GET",
+              headers: {"Content-Type": "application/json", "x-access-token": token},
+          })
+              .then((res) => {
 
-          return res.json();
-        })
-        .then((res) => {
-          setUserDetails(res)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+                  return res.json();
+              })
+              .then((res) => {
+                  setUserDetails(res)
+              })
+              .catch((err) => {
+                  console.log(err);
+              });
+      }
   }
 
   const token = localStorage.getItem("accessToken");
