@@ -4,18 +4,17 @@ import React, { useState } from "react";
 import { DoctorsByDepartmentDiv } from "./style-DoctorsByDepartment";
 import { DepartmentsContext, NewsContext, StaffMembersContext } from "../App";
 
-const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors }) => {
-  const { staffMembers, setStaffMembers } =
-    React.useContext(StaffMembersContext);
+const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors, setSelectedDoctorDetails, membersByDepartment, setMembersByDepartment }) => {
+  const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
   let defaultDoctorsTitle = "בחר רופא";
   const [departmentsTitle, setDepartmentsTitle] = useState("בחר מחלקה");
   const [doctorsTitle, setDoctorsTitle] = useState(defaultDoctorsTitle);
-  const [value, setValue] = useState(staffMembers);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const departmentSelect = (e) => {
     setDepartmentsTitle(e);
-    setValue(staffMembers.filter((doctor) => doctor.department_name === e));
+    setMembersByDepartment(staffMembers.filter((doctor) => doctor.department_name === e));
+    setSelectedDoctorDetails()
     setDoctorsTitle(defaultDoctorsTitle);
     setSelectedDoctor(null);
     setData && setData(null);
@@ -26,6 +25,10 @@ const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors }) => {
     setDepartment && setDepartment(depId);
   };
   const doctorSelect = (e) => {
+    const selectedDoctor= membersByDepartment.filter((doctor) => doctor.member_name === e);
+    if(selectedDoctor && selectedDoctor.length>0){
+      setSelectedDoctorDetails(selectedDoctor[0])
+    }
     setDoctorsTitle(e);
     setSelectedDoctor(e);
     setData && setData(e);
@@ -55,7 +58,7 @@ const DoctorsByDepartment = ({ setData, setDepartment, hideDoctors }) => {
           title={doctorsTitle}
           dir="rtl"
         >
-          {value.map(function (staffMember, index) {
+          {membersByDepartment.map(function (staffMember, index) {
             return (
               <Dropdown.Item key={index} eventKey={staffMember.member_name}>
                 {staffMember.member_name}

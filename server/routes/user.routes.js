@@ -90,6 +90,11 @@ const userRoutes = function (app) {
     [authJwt.verifyTokenMiddleware],
     userController.deleteNews
   );
+  app.delete(
+      "/api/staff-member/:member_id",
+      [authJwt.verifyTokenMiddleware],
+      userController.deleteStaffMember
+  );
 };
 
 export default userRoutes;

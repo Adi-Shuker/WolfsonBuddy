@@ -153,7 +153,7 @@ const addStaffMember =(req, res) => {
 }
 
 const getStaffMembers = (req, res) => {
-    executeQuery("select s.name as member_name, d.name as department_name, s.role,description, s.picture as picture," +
+    executeQuery("select s.id as id, s.name as member_name, d.name as department_name, s.role,description, s.picture as picture," +
         " s.phone_number,s.clinical_practice,s.scientific_practice, s.academic_experience, s.professional_unions, s.education " +
         "from departments as d join staff as s where d.id=s.department_id;")
         .then(staffMembers => {
@@ -193,6 +193,16 @@ const deleteNews =(req, res) => {
         .catch(err => console.log(err))
 }
 
+const deleteStaffMember =(req, res) => {
+    const member_id = req.params.member_id;
+    const query = "delete from staff where id="+member_id+";";
+    executeQuery(query)
+        .then(resData => {
+            res.status(200).json(resData);
+        })
+        .catch(err => console.log(err))
+}
+
 const userController = {
     updatePassword,
     getAllDepartments,
@@ -206,7 +216,8 @@ const userController = {
     getStaffMembers,
     addUpdate,
     getAllUpdates,
-    deleteNews
+    deleteNews,
+    deleteStaffMember
 };
 
 
