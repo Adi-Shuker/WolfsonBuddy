@@ -16,6 +16,7 @@ import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
 import DoctorsByDepartment from "../../DoctorsByDepartment";
 import LogoutIcon from "../../UsersComponents/Icons/LogoutIcon";
+import {StaffMembersContext} from "../../../App";
 
 const DeleteAndEditTeamMemberDiv = styled.div`
   justify-content: space-evenly;
@@ -47,12 +48,29 @@ const Title = styled.div`
 `;
 
 const DeleteAndEditTeamMember = () => {
-  const history = useHistory();
+  const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
   const [data, setData] = useState("");
-  function handleClick(path) {
-    history.push(path);
-  }
-  const deleteTeamMember = (data) => {console.log(data)};
+  const [selectedDoctorDetails, setSelectedDoctorDetails] = useState(null);
+  const [membersByDepartment, setMembersByDepartment] = useState(staffMembers);
+
+  const deleteTeamMember = (data) => {
+    if(selectedDoctorDetails.id !== undefined){
+      const token = localStorage.getItem("accessToken");
+      fetch(`/api/staff-member/${selectedDoctorDetails.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", "x-access-token": token },
+      })
+          .then((res) => {
+            if(res.status===200){
+              setMembersByDepartment(staffMembers.filter((member) => member.id !==  selectedDoctorDetails.id));
+              alert("חבר צוות הוסר בהצלחה")
+            }
+          }).catch((err) => {
+            console.log(err);
+          });
+    }
+    console.log(selectedDoctorDetails)
+  };
   const editTeamMember = (data) => {};
 
   return (
@@ -62,7 +80,8 @@ const DeleteAndEditTeamMember = () => {
           <PresentDoctor className="preview" doctor={data} />
         </div>
         <div className="rightDiv">
-          <DoctorsByDepartment setData={setData} />
+          <DoctorsByDepartment setData={setData} setSelectedDoctorDetails={setSelectedDoctorDetails}
+                               membersByDepartment={membersByDepartment} setMembersByDepartment={setMembersByDepartment}/>
           <div className={"buttonLine"}>
             <Button
               onClick={() => {
