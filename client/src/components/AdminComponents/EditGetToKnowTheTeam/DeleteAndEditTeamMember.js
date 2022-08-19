@@ -7,7 +7,7 @@ import {
   Container,
   Dropdown,
   DropdownButton,
-  Form,
+  Form, Modal,
   Row,
 } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
@@ -16,7 +16,9 @@ import GetToKnowTheTeam from "../../GetToKnowTheTeam/GetToKnowTheTeam";
 import PresentDoctor from "../../PresentDoctor";
 import DoctorsByDepartment from "../../DoctorsByDepartment";
 import LogoutIcon from "../../UsersComponents/Icons/LogoutIcon";
-import { StaffMembersContext } from "../../../App";
+import {StaffMembersContext} from "../../../App";
+import EditTeamMemberModal from "./EditTeamMemberModal";
+import NavigationDiv from "../../UsersComponents/HomePage/NavigationDiv";
 
 const DeleteAndEditTeamMemberDiv = styled.div`
   justify-content: space-evenly;
@@ -48,39 +50,36 @@ const Title = styled.div`
 `;
 
 const DeleteAndEditTeamMember = () => {
-  const { staffMembers, setStaffMembers } =
-    React.useContext(StaffMembersContext);
+  const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
   const [data, setData] = useState("");
   const [selectedDoctorDetails, setSelectedDoctorDetails] = useState(null);
-  const [membersByDepartment, setMembersByDepartment] = useState(staffMembers);
+  const [editStaffMemberModal, setEditStaffMemberModal] = useState(false);
 
-  const deleteTeamMember = (data) => {
-    if (selectedDoctorDetails.id !== undefined) {
+  const deleteTeamMember = () => {
+    if(selectedDoctorDetails && selectedDoctorDetails.id !== undefined){
       const token = localStorage.getItem("accessToken");
       fetch(`/api/staff-member/${selectedDoctorDetails.id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": token,
-        },
+        headers: { "Content-Type": "application/json", "x-access-token": token },
       })
-        .then((res) => {
-          if (res.status === 200) {
-            setMembersByDepartment(
-              staffMembers.filter(
-                (member) => member.id !== selectedDoctorDetails.id
-              )
-            );
-            alert("חבר צוות הוסר בהצלחה");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            if(res.status===200){
+              setStaffMembers(staffMembers.filter((member) => member.member_name !==  data));
+              alert("חבר צוות הוסר בהצלחה")
+            }
+          }).catch((err) => {
+            console.log(err);
+          });
     }
-    console.log(selectedDoctorDetails);
   };
-  const editTeamMember = (data) => {};
+  const editTeamMember = () => {
+    if(selectedDoctorDetails && selectedDoctorDetails.id !== undefined){
+      setEditStaffMemberModal(true)
+    }else{
+      alert("יש לבחור מחלקה + רופא")
+    }
+    console.log(selectedDoctorDetails)
+  };
 
   return (
     <div className="allcomponent">
@@ -89,12 +88,8 @@ const DeleteAndEditTeamMember = () => {
           <PresentDoctor className="preview" doctor={data} />
         </div>
         <div className="rightDiv">
-          <DoctorsByDepartment
-            setData={setData}
-            setSelectedDoctorDetails={setSelectedDoctorDetails}
-            membersByDepartment={membersByDepartment}
-            setMembersByDepartment={setMembersByDepartment}
-          />
+          <DoctorsByDepartment setData={setData} setSelectedDoctorDetails={setSelectedDoctorDetails}
+                              />
           <div className={"buttonLine"}>
             <Button
               onClick={() => {
@@ -112,6 +107,15 @@ const DeleteAndEditTeamMember = () => {
             </Button>
           </div>
         </div>
+        <Modal
+            className="navModal"
+            show={editStaffMemberModal}
+            onHide={() => setEditStaffMemberModal(false)}
+            centered
+        >
+          <Modal.Header className="border-0" closeButton></Modal.Header>
+          <EditTeamMemberModal setTrigger={setEditStaffMemberModal} selectedDoctorDetails={selectedDoctorDetails} />
+        </Modal>
       </DeleteAndEditTeamMemberDiv>
     </div>
   );
