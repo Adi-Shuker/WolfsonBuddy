@@ -135,26 +135,6 @@ const EditTeamMemberModal =({selectedDoctorDetails})=>{
 
         return (
             <div className="allcomponent">
-                    <div className="leftDiv">
-                        <div className="title">תצוגה מקדימה:</div>
-                        <PresentDoctor
-                            className="preview"
-                            doctor={{
-                                name: name,
-                                department:
-                                    departmentsTitle === "בחר מחלקה" ? "" : departmentsTitle,
-                                role: role,
-                                image: picture,
-                                phone_number: phone_number,
-                                professional_unions: professional_unions,
-                                scientific_practice: scientific_practice,
-                                academic_experience: academic_experience,
-                                clinical_practice: clinical_practice,
-                                description: description,
-                                education: education,
-                            }}
-                        />
-                    </div>
                     <Form onSubmit={(e) => submitHandle(e)}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             {fields.map((item, i) => {
