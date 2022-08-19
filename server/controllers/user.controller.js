@@ -203,6 +203,33 @@ const deleteStaffMember =(req, res) => {
         .catch(err => console.log(err))
 }
 
+const updateStaffMember = (req, res) => {
+    const member_id = req.params.member_id;
+    const {name, department_id, role, description, phone_number, clinical_practice,
+        scientific_practice, academic_experience, professional_unions,education } = req.body;
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.');
+
+    const file = req.files.picture;
+    const img_name = uuidv4().toString() + "." + file.name.split(".")[1];
+    if(file.mimetype === "image/jpeg" ||file.mimetype === "image/png"||file.mimetype === "image/gif" ){
+        file.mv('./images/teamMembersImages/'+img_name, function(err) {
+            if (err)
+                return res.status(500).send(err);
+            var query = `update staff set name = "${name}", department_id = "${department_id}", role="${role}", description="${description}", picture="${img_name}",
+                     phone_number="${phone_number}", clinical_practice="${clinical_practice}",scientific_practice="${scientific_practice}", 
+                        academic_experience="${academic_experience}", professional_unions="${professional_unions}",education="${education}" where id="${member_id}"`
+            executeQuery(query)
+                .then(resData => {
+                    res.status(200).json(resData);
+                })
+                .catch(err => console.log(err))
+        });
+    } else {
+        res.status(400).send("This format is not allowed , please upload file with '.png','.gif','.jpg'");
+    }
+}
+
 const userController = {
     updatePassword,
     getAllDepartments,
@@ -217,7 +244,8 @@ const userController = {
     addUpdate,
     getAllUpdates,
     deleteNews,
-    deleteStaffMember
+    deleteStaffMember,
+    updateStaffMember,
 };
 
 

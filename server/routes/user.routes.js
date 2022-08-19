@@ -95,6 +95,11 @@ const userRoutes = function (app) {
       [authJwt.verifyTokenMiddleware],
       userController.deleteStaffMember
   );
+  app.post(
+      "/api/staff-member/:member_id",
+      [authJwt.verifyTokenMiddleware],
+      userController.updateStaffMember
+  );
 };
 
 export default userRoutes;

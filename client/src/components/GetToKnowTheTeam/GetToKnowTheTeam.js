@@ -79,7 +79,7 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
             doctorsList={staffMembersList}
           />
           <div className={"PresentDoctorWrapper"}>
-            <PresentDoctor doctor={data} />
+            <PresentDoctor doctor={data}/>
           </div>
         </div>
         <Button
