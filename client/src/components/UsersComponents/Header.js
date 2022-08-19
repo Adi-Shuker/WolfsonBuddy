@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
 import NavigationDiv from "./HomePage/NavigationDiv";
 import { IsAdminContext, UserDetailsContext } from "../../App";
+import LogoutIcon from "./Icons/LogoutIcon";
 
 const HeaderDiv = styled.div`
   display: grid;
@@ -17,16 +18,31 @@ const HeaderDiv = styled.div`
       margin-left: 500px;
     }
   }
-  .title {
-    padding: 10px;
+  &.isAdmin-false {
+    .title {
+      padding: 10px;
+      background-color: #feb914;
+      color: #00138e;
+    }
   }
-  .isAdmin-false {
-    background-color: #feb914;
-    color: #00138e;
+  &.isAdmin-true {
+    .title {
+      padding: 10px;
+      background-color: #00138e;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    path {
+      stroke: white;
+      fill: white;
+    }
   }
-  .isAdmin-true {
-    background-color: #00138e;
-    color: white;
+  .iconAndText {
+    display: flex;
+    align-items: baseline;
+    cursor: pointer;
   }
 `;
 
@@ -54,7 +70,6 @@ const Header = () => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
-
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
   };
@@ -69,13 +84,21 @@ const Header = () => {
       }
     }
   };
-
+  const handleLogout = () => {
+    console.log("need to logout");
+  };
   return (
-    <HeaderDiv className="Header">
-      <div className={"title isAdmin-" + isAdmin}>
+    <HeaderDiv className={"Header isAdmin-" + isAdmin}>
+      <div className={"title"}>
         <div>המרכז הרפואי על שם אדית וולפסון</div>
-      </div>
 
+        {isAdmin ? (
+          <div className={"iconAndText"} onClick={handleLogout}>
+            <LogoutIcon withoutTopMargin={true} />
+            <span>התנתקות</span>
+          </div>
+        ) : null}
+      </div>
       <MenuLine className="MenuLineDiv">
         <img
           className="logoInHeader"
