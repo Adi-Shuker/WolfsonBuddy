@@ -6,6 +6,7 @@ const Back = styled.div`
   fill: #2e388d;
   margin-top: 8px;
   margin-left: 10px;
+  display: unset;
   &:hover svg {
     cursor: pointer;
   }

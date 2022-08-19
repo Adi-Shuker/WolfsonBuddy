@@ -24,11 +24,8 @@ const FooterDiv = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 150px;
-    display: block;
-
-    left: 26px;
-    bottom: 85px;
-    right: 0;
+    padding: 8px;
+    margin-right: calc(100vw - 100px);
   }
 
   .IconLine {

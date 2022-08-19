@@ -6,8 +6,8 @@ const PresentOneNewsDiv = styled.div`
   margin-bottom: 5px;
   border: 1px solid black;
   border-radius: 5px;
-  overflow: hidden;
-  height: -webkit-calc(100vh - 422px);
+  overflow: auto;
+
   .emptySpace {
   }
   .dateSpan {
