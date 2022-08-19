@@ -26,8 +26,7 @@ const EditSurvey = () => {
   const [addQuestionModal, setAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [questionTypes, setQuestionTypes] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState(1);
-  const { departments, setDepartments } = React.useContext(DepartmentsContext);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -68,18 +67,8 @@ const EditSurvey = () => {
         hideDoctors={true}
         setDepartment={setSelectedDepartment}
       />
-
-      <Button
-        onClick={() => {
-          setShowUserSurvey(!showUserSurvey);
-        }}
-        className="button"
-        variant="outline-primary"
-      >
-        תצוגה מקדימה
-      </Button>
       <Container>
-        {showUserSurvey ? (
+        {selectedDepartment ? (
           <MDBContainer className="text-center" style={{ height: "500px" }}>
             <MDBIframe
               src={"/userSurvey/" + selectedDepartment}
@@ -88,7 +77,6 @@ const EditSurvey = () => {
           </MDBContainer>
         ) : null}
       </Container>
-
       <div>
         <AddQuestion
           questionTypes={questionTypes}
