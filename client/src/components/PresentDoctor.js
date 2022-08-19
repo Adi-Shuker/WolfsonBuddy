@@ -30,13 +30,19 @@ const PresentDoctor = ({ doctor, inModal }) => {
   const [src, setSrc] = useState(
     "http://localhost:3001/images/teamMembersImages/default_profile.png"
   );
-  if (doctor && doctor.image) {
-    fetch(`/images/teamMembersImages/${doctor.image}`, { method: "HEAD" })
+  const { staffMembers, setStaffMembers } =
+      React.useContext(StaffMembersContext);
+
+  const doctorData = staffMembers.filter(
+      (staffMember) => staffMember.member_name === doctor
+  )[0];
+  if (doctorData && doctorData.picture) {
+    fetch(`/images/teamMembersImages/${doctorData.picture}`, { method: "HEAD" })
       .then((res) => {
         if (res.ok) {
           //case Image exists.
           setSrc(
-            `http://localhost:3001/images/teamMembersImages/${doctor.image}`
+            `http://localhost:3001/images/teamMembersImages/${doctorData.picture}`
           );
         } else {
           setSrc(
@@ -46,21 +52,7 @@ const PresentDoctor = ({ doctor, inModal }) => {
       })
       .catch((err) => console.log("Error:", err));
   }
-  console.log(doctor);
-  const { staffMembers, setStaffMembers } =
-    React.useContext(StaffMembersContext);
 
-  const filtered = staffMembers.filter(
-    (staffMember) => staffMember.member_name === doctor
-  );
-  console.log(staffMembers);
-  console.log(filtered);
-  const doctorData = staffMembers.filter(
-    (staffMember) => staffMember.member_name === doctor
-  )[0];
-  console.log(doctorData);
-  const role = doctorData ? doctorData.role : "heyyy";
-  //console.log(role);
   return (
     <PresentDoctorDiv className={"PresentDoctor inModal-" + inModal}>
       {doctorData ? (

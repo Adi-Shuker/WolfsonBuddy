@@ -19,7 +19,6 @@ const EditTeamMemberModal =({selectedDoctorDetails})=>{
         const [education, setEducation] = useState(selectedDoctorDetails.education);
         const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
-
         const submitHandle = (event) => {
             event.preventDefault();
             const token = localStorage.getItem("accessToken");
@@ -35,7 +34,7 @@ const EditTeamMemberModal =({selectedDoctorDetails})=>{
             data.append("academic_experience", academic_experience);
             data.append("professional_unions", professional_unions);
             data.append("education", education);
-            fetch(`/api/staff`, {
+            fetch(`/api/staff-member/${selectedDoctorDetails.id}`, {
                 method: "POST",
                 headers: { "x-access-token": token },
                 body: data,

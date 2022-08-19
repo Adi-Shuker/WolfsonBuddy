@@ -4,16 +4,11 @@ import PresentDoctor from "../PresentDoctor";
 import Header from "../UsersComponents/Header";
 import BackIcon from "../UsersComponents/Icons/BackIcon";
 import styled from "styled-components";
-import { Redirect, useHistory } from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import SecretariatInfo from "../UsersComponents/secretariatInfo";
 import { Modal } from "react-bootstrap";
-import {
-  DepartmentsContext,
-  IsAuthenticateContext,
-  StaffMembersContext,
-  UserDetailsContext,
-} from "../../App";
+import {DepartmentsContext, IsAuthenticateContext, StaffMembersContext, UserDetailsContext} from "../../App";
 import Footer from "../UsersComponents/Footer";
 
 const GetToKnowTheTeamDiv = styled.div`
@@ -38,45 +33,40 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
-  } else {
-    if (Object.keys(userDetails).length === 0) {
+  }else{
+    if ( Object.keys(userDetails).length === 0) {
       const token = localStorage.getItem("accessToken");
       fetch("/api/user-data-from-token", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": token,
-        },
+        headers: {"Content-Type": "application/json", "x-access-token": token},
       })
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          setUserDetails(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            setUserDetails(res)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     }
   }
-  const staffMembersList =
-    staffMembers.length > 0
-      ? staffMembers.map((member, index) => {
-          return {
-            name: member.member_name,
-            department: member.department_name,
-            image: member.picture,
-            role: member.role,
-            description: member.description,
-            phone_number: member.phone_number,
-            clinical_practice: member.clinical_practice,
-            scientific_practice: member.scientific_practice,
-            academic_experience: member.academic_experience,
-            professional_unions: member.professional_unions,
-            education: member.education,
-          };
-        })
-      : [];
+
+  const staffMembersList =staffMembers.length>0?staffMembers.map((member, index) => {
+    return {
+      name: member.member_name,
+      department: member.department_name,
+      image: member.picture,
+      role: member.role,
+      description: member.description,
+      phone_number: member.phone_number,
+      clinical_practice: member.clinical_practice,
+      scientific_practice: member.scientific_practice,
+      academic_experience: member.academic_experience,
+      professional_unions: member.professional_unions,
+      education: member.education,
+    };
+  }):[];
 
   return (
     <GetToKnowTheTeamDiv className="GetToKnowTheTeamDiv">
