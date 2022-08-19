@@ -15,11 +15,15 @@ import { useHistory } from "react-router-dom";
 import Header from "../Header.js";
 import Footer from "../Footer";
 
+const UsersHomePageDiv = styled.div`
+  width: fit-content;
+  display: inline-block;
+`;
+
 const Hello = styled.div`
   .survey-true {
-    padding: 10px;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -34,49 +38,50 @@ const LeftDiv = styled.div`
   width: 50%;
 `;
 const Content = styled.div`
-  margin-right: 5%;
-  margin-left: 5%;
   .visualMenuDiv {
     display: flex;
     justify-content: center;
   }
 `;
-const NavModal = styled.div``;
 
 const UsersHomePage = () => {
   const history = useHistory();
   const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(
+    IsAuthenticateContext
+  );
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
-  }else{
-      if ( Object.keys(userDetails).length === 0) {
-          const token = localStorage.getItem("accessToken");
-          fetch("/api/user-data-from-token", {
-              method: "GET",
-              headers: {"Content-Type": "application/json", "x-access-token": token},
-          })
-              .then((res) => {
-
-                  return res.json();
-              })
-              .then((res) => {
-                  setUserDetails(res)
-              })
-              .catch((err) => {
-                  console.log(err);
-              });
-      }
+  } else {
+    if (Object.keys(userDetails).length === 0) {
+      const token = localStorage.getItem("accessToken");
+      fetch("/api/user-data-from-token", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          setUserDetails(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   const token = localStorage.getItem("accessToken");
   const { username, email, id } = userDetails;
 
   return (
-    (
-      <div className="UsersHomePage">
-        <Header />
+    <div>
+      <Header />
+      <UsersHomePageDiv className="UsersHomePage">
         <Hello className="helloDiv">
           <div className={"survey-" + surveyAvailable}>
             <LeftDiv className="leftDivSurvey">
@@ -95,9 +100,9 @@ const UsersHomePage = () => {
           <UpcomingAppointment />
           <VisualMenu className="visualMenuDiv" />
         </Content>
-        <Footer />
-      </div>
-    )
+      </UsersHomePageDiv>
+      <Footer />
+    </div>
   );
 };
 

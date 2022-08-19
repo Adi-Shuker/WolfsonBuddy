@@ -14,13 +14,6 @@ const UpcomingAppointmentDiv = styled.div`
     align-items: center;
     justify-content: space-around;
   }
-  .btn {
-    background-color: white;
-    color: #2e388d;
-  }
-  .span {
-    color: pink;
-  }
   .doctorName-appointment {
     font-weight: bold;
   }
@@ -29,6 +22,8 @@ const UpcomingAppointmentDiv = styled.div`
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: white;
+    color: #2e388d;
   }
   .btn-primary:focus {
     color: #2e388d;
