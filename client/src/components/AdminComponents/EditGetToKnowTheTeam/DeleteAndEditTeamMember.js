@@ -49,6 +49,7 @@ const Title = styled.div`
   direction: rtl;
 `;
 
+
 const DeleteAndEditTeamMember = () => {
   const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
   const [data, setData] = useState("");

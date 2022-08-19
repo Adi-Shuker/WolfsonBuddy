@@ -51,6 +51,7 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
           });
     }
   }
+
   const staffMembersList =staffMembers.length>0?staffMembers.map((member, index) => {
     return {
       name: member.member_name,
