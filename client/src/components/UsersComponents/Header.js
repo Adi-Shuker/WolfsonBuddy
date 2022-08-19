@@ -73,6 +73,10 @@ const Header = () => {
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
   };
+
+  const handleLogout = () => {
+    console.log("need to logout");
+  };
   const history = useHistory();
   const onMenuItemSelection = (path) => {
     if (path !== "/car" && path !== "/logout") {
@@ -81,11 +85,9 @@ const Header = () => {
       if (path === "/car") {
         setButtonNavigationPopup(true);
       } else if (path === "/logout") {
+        handleLogout();
       }
     }
-  };
-  const handleLogout = () => {
-    console.log("need to logout");
   };
   return (
     <HeaderDiv className={"Header isAdmin-" + isAdmin}>
