@@ -97,7 +97,12 @@ const UsersHomePage = () => {
           </div>
         </Hello>
         <Content>
-          <UpcomingAppointment />
+          <UpcomingAppointment
+            doctorName="חגית ששון"
+            departmentName="אף אוזן גרון"
+            time="18:30"
+            date="14.12.2022"
+          />
           <VisualMenu className="visualMenuDiv" />
         </Content>
       </UsersHomePageDiv>
