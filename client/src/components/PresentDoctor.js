@@ -6,13 +6,15 @@ import UserIcon from "./UsersComponents/Icons/UserIcon";
 import { StaffMembersContext } from "../App";
 
 const PresentDoctorDiv = styled.div`
-  max-width: 319px;
   margin-bottom: 10px;
   overflow-y: auto;
-
+  margin-top: 5px;
   .presenting {
-    border: 1px solid black;
+    border: 1px solid #2e388d;
     border-radius: 5px;
+    padding-top: 20px;
+    width: 450px;
+    height: 450px;
   }
   .emptySpace {
   }
@@ -67,11 +69,9 @@ const PresentDoctor = ({ doctor }) => {
           <h5> {doctorData.professional_unions} </h5>
           <h5> {doctorData.education} </h5>
         </div>
-      ) : null
-      /*
-        <div className={"emptySpace"} />
-*/
-      }
+      ) : (
+        <div className={"presenting"}>יש לבחור איש צוות</div>
+      )}
     </PresentDoctorDiv>
   );
 };
