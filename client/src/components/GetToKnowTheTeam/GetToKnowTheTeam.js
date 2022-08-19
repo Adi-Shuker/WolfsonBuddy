@@ -29,8 +29,8 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
   const history = useHistory();
   const { departments } = React.useContext(DepartmentsContext);
   const { staffMembers } = React.useContext(StaffMembersContext);
-  const {isAuthenticated} = React.useContext(IsAuthenticateContext);
-  const {userDetails, setUserDetails} = React.useContext(UserDetailsContext);
+  const { isAuthenticated } = React.useContext(IsAuthenticateContext);
+  const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }else{
@@ -69,38 +69,40 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
 
   return (
     <GetToKnowTheTeamDiv className="GetToKnowTheTeamDiv">
-      <Header />
-      <div className={"content"}>
-        <div className={"upperDiv"}>
-          <DoctorsByDepartment
-            id="something"
-            setData={setData}
-            departmentsList={departments}
-            doctorsList={staffMembersList}
-          />
-          <div className={"PresentDoctorWrapper"}>
-            <PresentDoctor doctor={data}/>
+      <div className={"wrapper-above-footer"}>
+        <Header />
+        <div className={"content"}>
+          <div className={"upperDiv"}>
+            <DoctorsByDepartment
+              id="something"
+              setData={setData}
+              departmentsList={departments}
+              doctorsList={staffMembersList}
+            />
+            <div className={"PresentDoctorWrapper"}>
+              <PresentDoctor doctor={data} />
+            </div>
           </div>
+          <Button
+            className={"secretariatInfoButton"}
+            onClick={() => {
+              //setShowSecretariatInfo(true);
+            }}
+            href="https://www.gov.il/he/service/wolfson-book-medical-appointment"
+            target="_blank"
+          >
+            לזימון תור
+          </Button>
+          <Modal
+            className="secretariatInfoModal"
+            show={showSecretariatInfo}
+            onHide={() => setShowSecretariatInfo(false)}
+            centered
+          >
+            <Modal.Header className="border-0" closeButton />
+            <SecretariatInfo />
+          </Modal>
         </div>
-        <Button
-          className={"secretariatInfoButton"}
-          onClick={() => {
-            //setShowSecretariatInfo(true);
-          }}
-          href="https://www.gov.il/he/service/wolfson-book-medical-appointment"
-          target="_blank"
-        >
-          לזימון תור
-        </Button>
-        <Modal
-          className="secretariatInfoModal"
-          show={showSecretariatInfo}
-          onHide={() => setShowSecretariatInfo(false)}
-          centered
-        >
-          <Modal.Header className="border-0" closeButton />
-          <SecretariatInfo />
-        </Modal>
       </div>
       <Footer showBackIcon={true} />
     </GetToKnowTheTeamDiv>

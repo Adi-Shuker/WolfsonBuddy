@@ -130,7 +130,7 @@ function App() {
                           />
                           <Route
                             exact
-                            path="/GetToKnowTheTeam"
+                            path="/getToKnowTheTeam"
                             component={GetToKnowTheTeam}
                           />
                           <Route
@@ -145,8 +145,7 @@ function App() {
                             path="/userSurvey/:department_id"
                             component={UserSurvey}
                           />
-                          <Route exact path="/" component={LoginPage} />
-                          `{" "}
+                          <Route exact path="/" component={LoginPage} />`{" "}
                           <Route
                             exact
                             path="/deleteAndEditTeamMember"

@@ -9,18 +9,24 @@ const PresentDoctorDiv = styled.div`
   margin-bottom: 10px;
   overflow-y: auto;
   margin-top: 5px;
+
+  :not(&.inModal-true) {
+    .presenting {
+      border: 1px solid #2e388d;
+      width: 450px;
+    }
+  }
   .presenting {
-    border: 1px solid #2e388d;
     border-radius: 5px;
     padding-top: 20px;
-    width: 450px;
+
     height: 450px;
   }
   .emptySpace {
   }
 `;
 
-const PresentDoctor = ({ doctor }) => {
+const PresentDoctor = ({ doctor, inModal }) => {
   const [src, setSrc] = useState(
     "http://localhost:3001/images/teamMembersImages/default_profile.png"
   );
@@ -48,7 +54,7 @@ const PresentDoctor = ({ doctor }) => {
   }
 
   return (
-    <PresentDoctorDiv className="PresentDoctor">
+    <PresentDoctorDiv className={"PresentDoctor inModal-" + inModal}>
       {doctorData ? (
         <div className={"presenting"}>
           <img src={src} alt="img" width={150} height={150} />
