@@ -4,7 +4,7 @@ const Logout = styled.div`
   width: 40px;
   height: 40px;
   fill: #2e388d;
-  margin-top: 8px;
+  margin-top: ${({ withoutTopMargin }) => (withoutTopMargin ? 0 : 8)}px;
   margin-left: 10px;
   &:hover svg {
     cursor: pointer;
@@ -14,9 +14,9 @@ const Logout = styled.div`
   stroke-width: 1px;
 `;
 
-const LogoutIcon = () => {
+const LogoutIcon = (withoutTopMargin) => {
   return (
-    <Logout>
+    <Logout withoutTopMargin={withoutTopMargin ? withoutTopMargin : false}>
       <svg viewBox="10 0 70 70" xmlns="http://www.w3.org/2000/svg">
         <title />
         <path
