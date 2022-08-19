@@ -10,6 +10,11 @@ body {
 
 }
 
+.wrapper-above-footer {
+    min-height: 82.5vh;
+}
+
+
 .tab-wrapper {
     min-height:80vh;
 }

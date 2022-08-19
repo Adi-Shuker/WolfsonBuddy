@@ -80,32 +80,34 @@ const UsersHomePage = () => {
 
   return (
     <div>
-      <Header />
-      <UsersHomePageDiv className="UsersHomePage">
-        <Hello className="helloDiv">
-          <div className={"survey-" + surveyAvailable}>
-            <LeftDiv className="leftDivSurvey">
-              {surveyAvailable ? <Survey /> : null}
-            </LeftDiv>
-            <RightDiv className="rightDiv vertical-center">
-              <div className="IconWrapper">
-                <UserIcon />
-              </div>
+      <div className={"wrapper-above-footer"}>
+        <Header />
+        <UsersHomePageDiv className="UsersHomePage">
+          <Hello className="helloDiv">
+            <div className={"survey-" + surveyAvailable}>
+              <LeftDiv className="leftDivSurvey">
+                {surveyAvailable ? <Survey /> : null}
+              </LeftDiv>
+              <RightDiv className="rightDiv vertical-center">
+                <div className="IconWrapper">
+                  <UserIcon />
+                </div>
 
-              <div className="helloAndUsername">שלום {username}</div>
-            </RightDiv>
-          </div>
-        </Hello>
-        <Content>
-          <UpcomingAppointment
-            doctorName="חגית ששון"
-            departmentName="אף אוזן גרון"
-            time="18:30"
-            date="14.12.2022"
-          />
-          <VisualMenu className="visualMenuDiv" />
-        </Content>
-      </UsersHomePageDiv>
+                <div className="helloAndUsername">שלום {username}</div>
+              </RightDiv>
+            </div>
+          </Hello>
+          <Content>
+            <UpcomingAppointment
+              doctorName="חגית ששון"
+              departmentName="אף אוזן גרון"
+              time="18:30"
+              date="14.12.2022"
+            />
+            <VisualMenu className="visualMenuDiv" />
+          </Content>
+        </UsersHomePageDiv>
+      </div>
       <Footer />
     </div>
   );
