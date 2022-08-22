@@ -52,7 +52,6 @@ function App() {
     })
       .then((res) => {
         if (!(res.status === 200 || res.status === 304)) {
-          alert("אירעה שגיאה");
           return;
         }
         return res.json();
@@ -79,7 +78,6 @@ function App() {
     })
       .then((res) => {
         if (!(res.status === 200 || res.status === 304)) {
-          alert("אירעה שגיאה");
           return;
         }
         return res.json();
