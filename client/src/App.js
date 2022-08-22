@@ -15,6 +15,16 @@ import GetToKnowTheTeam from "./components/GetToKnowTheTeam/GetToKnowTheTeam";
 import Game from "./components/Game/Game";
 import News from "./components/News/News";
 import UserSurvey from "./components/AdminComponents/Survey/UserSurvey";
+
+import SwaggerUI from "swagger-ui-react"
+import "swagger-ui-react/swagger-ui.css"
+
+
+// import petstoreJson from './swggerUI.yaml';
+
+// const swaggerUi = SwaggerUi({ spec: petstoreJson })
+// const UI = swaggerUi.getComponent('App', 'root')
+
 import DeleteAndEditTeamMember from "./components/AdminComponents/EditGetToKnowTheTeam/DeleteAndEditTeamMember";
 export const IsAuthenticateContext = React.createContext({});
 export const IsAdminContext = React.createContext({});
@@ -22,6 +32,7 @@ export const UserDetailsContext = React.createContext({});
 export const DepartmentsContext = React.createContext({});
 export const NewsContext = React.createContext({});
 export const StaffMembersContext = React.createContext({});
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
