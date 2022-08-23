@@ -7,13 +7,7 @@ import {
 import PresentOneNews from "./PresentOneNews.js";
 import { Redirect, useHistory } from "react-router-dom";
 import Header from "../UsersComponents/Header";
-import Footer from "../UsersComponents/Footer";
-import styled from "styled-components";
 
-const NewsDiv = styled.div`
-  .newsList {
-  }
-`;
 
 const News = () => {
   const { news, setNews } = React.useContext(NewsContext);
@@ -40,6 +34,7 @@ const News = () => {
       });
   }
   return (
+
     <NewsDiv className="newsDiv">
       <div className={"wrapper-above-footer"}>
         <Header />

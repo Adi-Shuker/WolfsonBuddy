@@ -3,10 +3,10 @@ module.exports = function() {
     return {
         flywayArgs: {
             url: 'jdbc:mysql://localhost:3306',
-            schemas: 'wolfson_buddy',
+            schemas: 'wolfson_db',
             locations: 'conf/sql',
             user: 'root',
-            password: 'abc',
+            password: '123456',
             sqlMigrationSuffixes: '.sql',
             baselineOnMigrate: false,
             // baselineVersion: '0.0'
