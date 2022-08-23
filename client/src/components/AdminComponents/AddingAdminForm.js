@@ -45,7 +45,7 @@ const AddingAdminForm = () => {
   return (
     <>
       <Container>
-        <Row className="LoginPage">
+        <Row className="text-center">
           <Col
             lg={5}
             md={6}
@@ -59,17 +59,25 @@ const AddingAdminForm = () => {
                 height="100%"
                 alt="wolfsonBuddyLogo"
               />
+              <p>יש להכניס את פרטי איש הצוות עבורו יווצר משתמש</p>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                  className="text-right"
+                  type="text"
+                  placeholder="שם מלא"
+                  onChange={(e) =>
+                    setUserInput({ ...userInput, username: e.target.value })
+                  }
+                />
+              </Form.Group>
 
-              <p className="text-center">
-                הכנס את פרטי איש הצוות עבורו תרצה ליצור משתמש
-              </p>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   className="text-right"
                   type="email"
                   placeholder="דואר אלקטרוני"
                   onChange={(e) =>
-                    setLoginData({ ...loginData, email: e.target.value })
+                    setUserInput({ ...userInput, email: e.target.value })
                   }
                 />
               </Form.Group>
@@ -80,16 +88,24 @@ const AddingAdminForm = () => {
                   type="password"
                   placeholder="סיסמא"
                   onChange={(e) =>
-                    setLoginData({ ...loginData, password: e.target.value })
+                    setUserInput({ ...userInput, password: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                  className="text-right"
+                  type="password"
+                  placeholder="אימות סיסמא"
+                  onChange={(e) =>
+                    setUserInput({ ...userInput, password: e.target.value })
                   }
                 />
               </Form.Group>
 
               <Button variant="success btn-block" type="submit">
-                צור משתמש
+                צור משתמש חדש
               </Button>
-              <br />
-              <br />
             </Form>
           </Col>
         </Row>
