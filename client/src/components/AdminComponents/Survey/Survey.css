@@ -1,6 +1,12 @@
-.sv-question__num{
-    color:white;
+.sv-list__item--selected {
+    background-color: #193db3 !important;
 }
+.sv-list__item--selected:focus {
+    background-color: #193db3 !important;
+}
+
+
+
 .sv-question__title{
     float: right;
     display: block;

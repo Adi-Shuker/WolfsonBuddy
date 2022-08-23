@@ -39,9 +39,9 @@ function App() {
   const [data, setData] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const [departments, setDepartments] = useState({});
-  const [staffMembers, setStaffMembers] = useState({});
-  const [news, setNews] = useState({});
+  const [departments, setDepartments] = useState([]);
+  const [staffMembers, setStaffMembers] = useState([]);
+  const [news, setNews] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     fetch("/api/verify-token", {
@@ -63,7 +63,6 @@ function App() {
     })
       .then((res) => {
         if (!(res.status === 200 || res.status === 304)) {
-          alert("אירעה שגיאה");
           return;
         }
         return res.json();
@@ -90,7 +89,6 @@ function App() {
     })
       .then((res) => {
         if (!(res.status === 200 || res.status === 304)) {
-          alert("אירעה שגיאה");
           return;
         }
         return res.json();
@@ -141,7 +139,7 @@ function App() {
                           />
                           <Route
                             exact
-                            path="/GetToKnowTheTeam"
+                            path="/getToKnowTheTeam"
                             component={GetToKnowTheTeam}
                           />
                           <Route
@@ -156,8 +154,7 @@ function App() {
                             path="/userSurvey/:department_id"
                             component={UserSurvey}
                           />
-                          <Route exact path="/" component={LoginPage} />
-                          `{" "}
+                          <Route exact path="/" component={LoginPage} />`{" "}
                           <Route
                             exact
                             path="/deleteAndEditTeamMember"

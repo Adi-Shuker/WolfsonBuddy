@@ -1,4 +1,4 @@
-import { Redirect } from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import "react-bootstrap/dist/react-bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
@@ -18,24 +18,37 @@ import Header from "../../UsersComponents/Header";
 import Footer from "../../UsersComponents/Footer";
 
 const AdminHomePage = () => {
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(
-    IsAuthenticateContext
-  );
-  const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
-  if (!isAuthenticated || !isAdmin) {
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
+  const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
+  const {isAdmin, setIsAdmin} = React.useContext(IsAdminContext);
+  const history = useHistory();
+  if (!isAuthenticated) {
     return <Redirect to="/" />;
+  }else{
+    const token = localStorage.getItem("accessToken");
+      if ( Object.keys(userDetails).length === 0) {
+        fetch("/api/user-data-from-token", {
+          method: "GET",
+          headers: { "Content-Type": "application/json", "x-access-token": token },
+        })
+            .then((res) => {
+              return res.json();
+            })
+            .then((res) => {
+              if(res.role !=='admin'){
+                setIsAdmin(false);
+                history.push("/");
+              }else{
+                setIsAdmin(true);
+              }
+              setUserDetails(res)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      } else {
+      }
   }
-
-  const tabList = [
-    { title: "הוספת/מחיקת עדכונים", componentName: "AddNewsAndUpdates" },
-    { title: "הוספת איש צוות", componentName: "AddTeamMember" },
-    { title: "מחיקת/עריכת איש צוות", componentName: "DeleteAndEditTeamMember" },
-    { title: "עריכת סקר שביעות רצון", componentName: "EditSurvey" },
-    { title: "תוצאות הסקרים", componentName: "SurveyResults" },
-  ];
-  const tabSelected = (e) => {
-    console.log(e);
-  };
 
   return (
     <div className="Admin-home-page">
@@ -43,7 +56,6 @@ const AdminHomePage = () => {
       <Tabs
         defaultActiveKey="AddNewsAndUpdates"
         className="mb-3 tabs"
-        onSelect={tabSelected}
         dir="rtl"
       >
         <Tab

@@ -9,9 +9,20 @@ import {
 } from "../../../App";
 import { useHistory } from "react-router-dom";
 
+Survey.StylesManager.ThemeColors["modern"]["$answer-background-color"] =
+  "#00138E20";
+Survey.StylesManager.ThemeColors["modern"]["$main-color"] = "#00138E";
+Survey.StylesManager.ThemeColors["modern"]["$main-hover-color"] = "#00138E";
+Survey.StylesManager.ThemeColors["modern"]["$text-color"] = "#000000";
+Survey.StylesManager.ThemeColors["modern"]["$progress-buttons-color"] =
+  "#00138E20";
+
+Survey.StylesManager.ThemeColors["modern"]["$header-background-color"] =
+  "#00138E";
 Survey.StylesManager.applyTheme("modern");
 
 const DropdownQuestion = (name, title, choices) => {
+  console.log(Survey.StylesManager.ThemeColors["modern"]);
   return {
     type: "dropdown",
     name: name,
@@ -184,8 +195,6 @@ const UserSurvey = () => {
             });
           }
         }
-        console.log([...answers]);
-        console.log(answers);
         handleSubmit(answers);
         alert(results);
 
