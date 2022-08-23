@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateNewAccount from "./components/LoginPage/CreateNewAccount";
 import ForgotPassword from "./components/LoginPage/ForgotPassword";
 import "./App.css";
-
+import AddingAdminForm from "./components/AdminComponents/AddingAdminForm";
 import GetToKnowTheTeam from "./components/GetToKnowTheTeam/GetToKnowTheTeam";
 
 import Game from "./components/Game/Game";
@@ -136,6 +136,11 @@ function App() {
                             exact
                             path="/forgotPassword"
                             component={ForgotPassword}
+                          />
+                          <Route
+                            exact
+                            path="/addingAdmin"
+                            component={AddingAdminForm}
                           />
                           <Route
                             exact
