@@ -20,6 +20,9 @@ const authRoutes = function (app) {
     app.get("/api/verify-token", (req, res) => {
         authController.verifyToken(req,res)
     })
+    app.get("/api/user-data-from-token", (req, res) => {
+        authController.getUserDataFromToken(req,res)
+    })
 };
 
 export default authRoutes;

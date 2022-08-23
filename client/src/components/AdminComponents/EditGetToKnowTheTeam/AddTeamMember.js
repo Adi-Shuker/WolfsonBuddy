@@ -3,7 +3,6 @@ import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import styled from "styled-components";
 import PresentDoctor from "../../PresentDoctor";
 import { DepartmentsContext } from "../../../App";
-import Footer from "../../UsersComponents/Footer";
 
 const AddTeamMemberDiv = styled.div`
   justify-content: space-evenly;

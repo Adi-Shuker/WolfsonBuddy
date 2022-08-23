@@ -2,8 +2,14 @@ import styled, { css } from "styled-components";
 import CalendarIcon from "../Icons/CaIendarcon";
 import { Button } from "react-bootstrap";
 import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
+import { useHistory } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import React, { useState } from "react";
+import NavigationDiv from "./NavigationDiv";
+import PresentDoctor from "../../PresentDoctor";
 
 const UpcomingAppointmentDiv = styled.div`
+  overflow-y: auto;
   .textInfo-appointment {
     display: grid;
     text-align: right;
@@ -14,13 +20,6 @@ const UpcomingAppointmentDiv = styled.div`
     align-items: center;
     justify-content: space-around;
   }
-  .btn {
-    background-color: white;
-    color: #2e388d;
-  }
-  .span {
-    color: pink;
-  }
   .doctorName-appointment {
     font-weight: bold;
   }
@@ -29,6 +28,8 @@ const UpcomingAppointmentDiv = styled.div`
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: white;
+    color: #2e388d;
   }
   .btn-primary:focus {
     color: #2e388d;
@@ -41,13 +42,18 @@ const WrapperCalendarIcon = styled.div`
   justify-content: center;
 `;
 
-const UpcomingAppointment = () => {
-  const doctorName = 'ד"ר שגית שושן';
-  const departmentName = "אף אוזן גרון";
-  const time = "18:30";
-  const date = "14.12.2022";
+const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
+  const [showDoctor, setShowDoctor] = useState(false);
+
+  const handleClick = () => {
+    console.log("need to present the doctor");
+    setShowDoctor(true);
+  };
+
   return (
-    <UpcomingAppointmentDiv className="UpcomingAppointmentDiv lightGreyBorder">
+    <UpcomingAppointmentDiv
+      className={"UpcomingAppointmentDiv lightGreyBorder"}
+    >
       <div className="InfoAndCalenderDiv">
         <WrapperCalendarIcon>
           <AddGoogleCalenderEvent />
@@ -63,7 +69,22 @@ const UpcomingAppointment = () => {
       </div>
 
       <Button className="btn lightGreyBorder">נווט לחדר הטיפול</Button>
-      <Button className="btn lightGreyBorder">הכר את הרופא</Button>
+      <Button className="btn lightGreyBorder" onClick={handleClick}>
+        הכר את הרופא
+      </Button>
+      <Modal
+        className="navModal"
+        show={showDoctor}
+        onHide={() => setShowDoctor(false)}
+        centered
+      >
+        <Modal.Header className="border-0" closeButton></Modal.Header>
+        <PresentDoctor
+          setTrigger={setShowDoctor}
+          doctor={doctorName}
+          inModal={true}
+        />
+      </Modal>
     </UpcomingAppointmentDiv>
   );
 };

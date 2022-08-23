@@ -6,29 +6,43 @@ import UserIcon from "./UsersComponents/Icons/UserIcon";
 import { StaffMembersContext } from "../App";
 
 const PresentDoctorDiv = styled.div`
-  max-width: 319px;
   margin-bottom: 10px;
   overflow-y: auto;
-
-  .presenting {
-    border: 1px solid black;
+  margin-top: 5px;
+  img {
     border-radius: 5px;
   }
-  .emptySpace {
+  :not(&.inModal-true) {
+    .presenting {
+      border: 1px solid #2e388d;
+      width: 450px;
+    }
+  }
+  .presenting {
+    border-radius: 5px;
+    padding-top: 20px;
+
+    height: 450px;
   }
 `;
 
-const PresentDoctor = ({ doctor }) => {
+const PresentDoctor = ({ doctor, inModal }) => {
   const [src, setSrc] = useState(
     "http://localhost:3001/images/teamMembersImages/default_profile.png"
   );
-  if (doctor && doctor.image) {
-    fetch(`/images/teamMembersImages/${doctor.image}`, { method: "HEAD" })
+  const { staffMembers, setStaffMembers } =
+    React.useContext(StaffMembersContext);
+
+  const doctorData = staffMembers.filter(
+    (staffMember) => staffMember.member_name === doctor
+  )[0];
+  if (doctorData && doctorData.picture) {
+    fetch(`/images/teamMembersImages/${doctorData.picture}`, { method: "HEAD" })
       .then((res) => {
         if (res.ok) {
           //case Image exists.
           setSrc(
-            `http://localhost:3001/images/teamMembersImages/${doctor.image}`
+            `http://localhost:3001/images/teamMembersImages/${doctorData.picture}`
           );
         } else {
           setSrc(
@@ -38,21 +52,9 @@ const PresentDoctor = ({ doctor }) => {
       })
       .catch((err) => console.log("Error:", err));
   }
-  console.log(doctor);
-  const { staffMembers, setStaffMembers } =
-    React.useContext(StaffMembersContext);
 
-  const filtered = staffMembers.filter(
-    (staffMember) => staffMember.member_name === doctor
-  );
-  const doctorData = staffMembers.filter(
-    (staffMember) => staffMember.member_name === doctor
-  )[0];
-  console.log(doctorData);
-  const role = doctorData ? doctorData.role : "heyyy";
-  console.log(role);
   return (
-    <PresentDoctorDiv className="PresentDoctor">
+    <PresentDoctorDiv className={"PresentDoctor inModal-" + inModal}>
       {doctorData ? (
         <div className={"presenting"}>
           <img src={src} alt="img" width={150} height={150} />
@@ -67,11 +69,9 @@ const PresentDoctor = ({ doctor }) => {
           <h5> {doctorData.professional_unions} </h5>
           <h5> {doctorData.education} </h5>
         </div>
-      ) : null
-      /*
-        <div className={"emptySpace"} />
-*/
-      }
+      ) : (
+        <div className={"presenting"}>יש לבחור איש צוות</div>
+      )}
     </PresentDoctorDiv>
   );
 };
