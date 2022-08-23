@@ -43,8 +43,6 @@ const WrapperCalendarIcon = styled.div`
 `;
 
 const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
-  const history = useHistory();
-
   const [showDoctor, setShowDoctor] = useState(false);
 
   const handleClick = () => {

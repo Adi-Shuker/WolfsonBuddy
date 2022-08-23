@@ -1,46 +1,12 @@
-
-.sv-root-modern .sv-container-modern__title {
-    color: #00138E !important;
-
+.sv-list__item--selected {
+    background-color: #193db3 !important;
 }
-.sv-root-modern .sv-progress__bar {
-    background-color: #00138E !important;
-}
-
-.sv-root-modern .sv-btn--navigation {
-    background-color: #00138E !important;
-}
-.sv-root-modern ::-webkit-scrollbar-thumb {
-    background-color: #00138E !important;
-}
-
-.sv-title sv-question__title sv-question__title--answer {
-    background-color: #00138E !important;
+.sv-list__item--selected:focus {
+    background-color: #193db3 !important;
 }
 
 
-.sv-root-modern .sv-question__title.sv-question__title--answer {
-    background-color: #00138E20;
-}
 
-.sv-root-modern .sv-rating__item--selected .sv-rating__item-text {
-    background-color: #00138E !important;;
-    border-color: #00138E !important;;
-}
-
-.sv-root-modern .sv-rating input:focus + .sv-rating__min-text + .sv-rating__item-text, .sv-rating input:focus + .sv-rating__item-text {
-    outline-color: #00138E;
-}
-
-.sv-rating input:focus + .sv-rating__item-text {
-    outline: 1px solid #00138E !important;
-    outline-offset: 2px;
-}
-
-
-.sv-question__num{
-    color:white;
-}
 .sv-question__title{
     float: right;
     display: block;
