@@ -10,6 +10,8 @@ import Header from "../UsersComponents/Header";
 import Footer from "../UsersComponents/Footer";
 import styled from "styled-components";
 
+
+
 const NewsDiv = styled.div`
   .newsList {
   }
@@ -40,6 +42,7 @@ const News = () => {
       });
   }
   return (
+
     <NewsDiv className="newsDiv">
       <div className={"wrapper-above-footer"}>
         <Header />

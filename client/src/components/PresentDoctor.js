@@ -9,7 +9,9 @@ const PresentDoctorDiv = styled.div`
   margin-bottom: 10px;
   overflow-y: auto;
   margin-top: 5px;
-
+  img {
+    border-radius: 5px;
+  }
   :not(&.inModal-true) {
     .presenting {
       border: 1px solid #2e388d;
@@ -22,8 +24,6 @@ const PresentDoctorDiv = styled.div`
 
     height: 450px;
   }
-  .emptySpace {
-  }
 `;
 
 const PresentDoctor = ({ doctor, inModal }) => {
@@ -31,10 +31,10 @@ const PresentDoctor = ({ doctor, inModal }) => {
     "http://localhost:3001/images/teamMembersImages/default_profile.png"
   );
   const { staffMembers, setStaffMembers } =
-      React.useContext(StaffMembersContext);
+    React.useContext(StaffMembersContext);
 
   const doctorData = staffMembers.filter(
-      (staffMember) => staffMember.member_name === doctor
+    (staffMember) => staffMember.member_name === doctor
   )[0];
   if (doctorData && doctorData.picture) {
     fetch(`/images/teamMembersImages/${doctorData.picture}`, { method: "HEAD" })
