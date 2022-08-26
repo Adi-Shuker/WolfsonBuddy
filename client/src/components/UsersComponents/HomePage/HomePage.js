@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   IsAdminContext,
   IsAuthenticateContext,
@@ -44,38 +44,62 @@ const Content = styled.div`
   }
 `;
 
+const getUserAppointment = (userId, setUserAppointmentDetails)=>{
+  const token = localStorage.getItem("accessToken");
+  fetch(`/api/appointment/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "x-access-token": token },
+  })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        setUserAppointmentDetails(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+}
+
 const UsersHomePage = () => {
   const history = useHistory();
   const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
+  const [userAppointmentDetails, setUserAppointmentDetails] = useState([]);
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
   );
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
-  if (!isAuthenticated) {
-    return <Redirect to="/" />;
-  } else {
-    if (Object.keys(userDetails).length === 0) {
-      const token = localStorage.getItem("accessToken");
-      fetch("/api/user-data-from-token", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": token,
-        },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          setUserDetails(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
-
   const token = localStorage.getItem("accessToken");
+  useEffect(()=>{
+    if (!isAuthenticated) {
+      return <Redirect to="/" />;
+    } else {
+      if (Object.keys(userDetails).length === 0) {
+        fetch("/api/user-data-from-token", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        })
+            .then((res) => {
+              return res.json();
+            })
+            .then((res) => {
+              setUserDetails(res);
+              getUserAppointment(res.id, setUserAppointmentDetails)
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      }
+    }
+    getUserAppointment(userDetails.id, setUserAppointmentDetails)
+  },[])
+
+
+
+
+
   const { username, email, id } = userDetails;
 
   return (
@@ -98,12 +122,14 @@ const UsersHomePage = () => {
             </div>
           </Hello>
           <Content>
-            <UpcomingAppointment
-              doctorName="חגית ששון"
-              departmentName="אף אוזן גרון"
-              time="18:30"
-              date="14.12.2022"
-            />
+            {userAppointmentDetails.length>0?<UpcomingAppointment
+                doctorName={userAppointmentDetails[0].doctor_name.replace("/","")}
+                departmentName={userAppointmentDetails[0].department_name}
+                time={userAppointmentDetails[0].time.substring(0,5)}
+                date={userAppointmentDetails[0].date.split("-")[2]+ "."+
+                userAppointmentDetails[0].date.split("-")[1]+ "."+
+                userAppointmentDetails[0].date.split("-")[0]}
+            />:""}
             <VisualMenu className="visualMenuDiv" />
           </Content>
         </UsersHomePageDiv>
