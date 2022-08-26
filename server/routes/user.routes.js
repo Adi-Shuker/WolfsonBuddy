@@ -100,6 +100,11 @@ const userRoutes = function (app) {
       [authJwt.verifyTokenMiddleware],
       userController.updateStaffMember
   );
+  app.get(
+      "/api/appointment/:user_id",
+      [authJwt.verifyTokenMiddleware],
+      userController.getUserAppointment
+  );
 };
 
 export default userRoutes;
