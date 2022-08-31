@@ -9,6 +9,9 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 );
 
+insert into users (user_name, email, password)
+values ('admin', 'admin@gmail.com', 'U2FsdGVkX18EMwAAN0hPFs2kJQ7SJDFQCo+8SpplXe0=');
+
 CREATE TABLE announcements_and_updates (
     id int NOT NULL AUTO_INCREMENT,
     title varchar(2048) NOT NULL,
