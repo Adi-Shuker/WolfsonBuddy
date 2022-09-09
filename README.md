@@ -14,6 +14,7 @@ The swgger app can help the developers to understand how the app is design and w
 ## How to use it
 To run this app you need to go to the swagger app folder and run npm install, and then run npm start.
 The app will open in the browser after that.
+Now you can see the differnt API request, add parameters if need and test the differnt requests. Note that the 'post' and 'delete' requests can change your local database!
  
  
 # WolfsonBuddy App
