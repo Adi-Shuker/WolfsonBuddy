@@ -589,7 +589,9 @@
 						}
 					}
 				}
-			},
+			}
+		},
+		"/api/news:news_id": {
 			"delete": {
 				"tags": [
 					"user"
@@ -613,7 +615,7 @@
 				}
 			}
 		},
-		"/api/staff-member": {
+		"/api/staff-member/:member_id": {
 			"post": {
 				"tags": [
 					"user"
@@ -758,7 +760,7 @@
 				}
 			}
 		},
-		"/api/appointment": {
+		"/api/appointment/:user_id": {
 			"get": {
 				"tags": [
 					"user"
@@ -803,14 +805,6 @@
 		"description": "Find out more about Swagger",
 		"url": "http://swagger.io"
 	},
-	"servers": [
-		{
-			"url": "https://dev-virtserver.swaggerhub.com/gerldOrg/newPetstore/1.0.0"
-		},
-		{
-			"url": "http://dev-virtserver.swaggerhub.com/gerldOrg/newPetstore/1.0.0"
-		}
-	],
 	"components": {
 		"requestBodies": {
 			"UserArray": {
