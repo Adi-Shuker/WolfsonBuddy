@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./HeaderStyle.css";
 import NavigationDiv from "./HomePage/NavigationDiv";
-import { IsAdminContext, UserDetailsContext } from "../../App";
+import {IsAdminContext, IsAuthenticateContext, UserDetailsContext} from "../../App";
 import LogoutIcon from "./Icons/LogoutIcon";
 
 const HeaderDiv = styled.div`
@@ -70,12 +70,17 @@ const Header = () => {
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const { isAdmin, setIsAdmin } = React.useContext(IsAdminContext);
   const { userDetails, setUserDetails } = React.useContext(UserDetailsContext);
+    const { isAuthenticated, setIsAuthenticated } = React.useContext(IsAuthenticateContext);
   const onClickMenu = () => {
     setShowSideMenu(!showSideMenu);
   };
 
   const handleLogout = () => {
-    console.log("need to logout");
+    setIsAuthenticated(false);
+    if (isAdmin) {
+        setIsAdmin(false);
+    }
+    history.push('/');
   };
   const history = useHistory();
   const onMenuItemSelection = (path) => {
