@@ -1,0 +1,1092 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"description": "This is a sample of WolfsonBuddy server. It can help to understand how WolfsonBuddy App is working\n",
+		"version": "1.0.0-oas3",
+		"title": "Swagger WolfsonBuddy",
+		"termsOfService": "http://swagger.io/terms/",
+		"contact": {
+			"email": "apiteam@swagger.io"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"tags": [
+		{
+			"name": "user",
+			"description": "Operations about user",
+			"externalDocs": {
+				"description": "Find out more about our store",
+				"url": "http://swagger.io"
+			}
+		}
+	],
+	"paths": {
+		"/api/update_password": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Update new password",
+
+				"parameters": [
+					{
+						"name": "email",
+						"in": "body",
+						"description": "user's email",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "password",
+						"in": "body",
+						"description": "user's new password",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				},
+				"security": [
+					{
+						"api_key": []
+					}
+				]
+			}
+		},
+		"/api/departments": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Return all departments",
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							},
+							"application/xml": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid Order"
+					}
+				},
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Order"
+							}
+						}
+					},
+					"description": "order placed for purchasing the pet",
+					"required": true
+				}
+			}
+		},
+		"/api/survey/question_types": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get all question types",
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/question_types"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/survey/:department_id": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get department survey",
+				"parameters": [
+					{
+						"name": "department_id",
+						"in": "url",
+						"description": "department's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"question_id": "",
+										"question_text": "",
+										"question_type":"",
+										"suggested_answers": ""
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/survey/result/:department_id": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get survey's answers",
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"question_id": "",
+										"question_text": "",
+										"question_type":"",
+										"suggested_answers": "",
+										"answers": ""
+									}
+								}
+							}
+						}
+					}
+				},
+				"parameters": [
+					{
+						"name": "department_id",
+						"in": "body",
+						"description": "department's unique ID",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "question_type_id",
+						"in": "body",
+						"description": "Question type unique ID",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "text",
+						"in": "body",
+						"description": "Question content",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "suggested_answers",
+						"in": "body",
+						"description": "Suggested answers",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/survey/questions": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Logs user into the system",
+				"operationId": "loginUser",
+				"parameters": [
+					{
+						"name": "department_id",
+						"in": "body",
+						"description": "department's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "password",
+						"in": "query",
+						"description": "The password for login in clear text",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"headers": {
+							"X-Rate-Limit": {
+								"description": "calls per hour allowed by the user",
+								"schema": {
+									"type": "integer",
+									"format": "int32"
+								}
+							},
+							"X-Expires-After": {
+								"description": "date in UTC when token expires",
+								"schema": {
+									"type": "string",
+									"format": "date-time"
+								}
+							}
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/xml": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid username/password supplied"
+					}
+				}
+			}
+		},
+		"/api/survey/questions/:question_id": {
+			"delete": {
+				"tags": [
+					"user"
+				],
+				"summary": "Delete question",
+				"parameters": [
+					{
+						"name": "department_id",
+						"in": "params",
+						"description": "department's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			}
+		},
+		"/api/survey/result": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Add the answers of a user",
+				"parameters": [
+					{
+						"name": "answers",
+						"in": "body",
+						"description": "Question's unique id",
+						"required": true,
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"example": {
+									"question_id":  "",
+									"answer": ""
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			}
+		},
+		"/api/staff": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Add the staff memmber",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "body",
+						"description": "Staff member's name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "department_id",
+						"in": "body",
+						"description": "Staff member's department's id",
+						"required": true,
+						"schema": {
+						"type": "integer"
+						}
+					},
+					{
+						"name": "role",
+						"in": "body",
+						"description": "Staff member's role",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "description",
+						"in": "body",
+						"description": "Short description on the new staff member",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "phone_number",
+						"in": "body",
+						"description": "Staff member's phone number",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "clinical_practice",
+						"in": "body",
+						"description": "Staff member's clinical practice",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "scientific_practice",
+						"in": "body",
+						"description": "Staff member's scientific practice",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "academic_experience",
+						"in": "body",
+						"description": "Staff member's academic experience",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "professional_unions",
+						"in": "body",
+						"description": "Staff member's professional unions",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "education",
+						"in": "body",
+						"description": "Staff member's education",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "picture",
+						"in": "files",
+						"description": "Staff member's picture",
+						"required": true,
+						"schema": {
+							"type": "image"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "no picture files were uploaded, or wrong file's type"
+					},
+					"500": {
+						"description": "problem with one of the pictures uploaded"
+					}
+				}
+			}
+		},
+		"/api/staffMembers": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get all staff members",
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/departments"
+									}
+								},
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/staff"
+									} 
+								}
+							}
+						}
+
+					}
+				}
+			}
+		},
+		"/images/teamMembersImages/:filename": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get image",
+				"parameters": [
+					{
+						"name": "filename",
+						"in": "params",
+						"description": "Image name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/add-news": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Add news message",
+				"parameters": [
+					{
+						"name": "title",
+						"in": "body",
+						"description": "Title of the message",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "postDate",
+						"in": "body",
+						"description": "Date when the message posted",
+						"required": true,
+						"schema": {
+							"type": "date"
+						}
+					},
+					{
+						"name": "content",
+						"in": "body",
+						"description": "The message",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "link",
+						"in": "body",
+						"description": "Link to another source",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			}
+		},
+		"/api/news": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get all news",
+				"parameters": [
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/announcements_and_updates"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/news:news_id": {
+			"delete": {
+				"tags": [
+					"user"
+				],
+				"summary": "Delete news message",
+				"parameters": [
+					{
+						"name": "news_id",
+						"in": "params",
+						"description": "A news's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			}
+		},
+		"/api/staff-member/:member_id": {
+			"post": {
+				"tags": [
+					"user"
+				],
+				"summary": "Update the staff memmber",
+				"parameters": [
+					{
+						"name": "member_id",
+						"in": "body",
+						"description": "Staff member's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "name",
+						"in": "body",
+						"description": "Staff member's name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "department_id",
+						"in": "body",
+						"description": "Staff member's department's id",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"name": "role",
+						"in": "body",
+						"description": "Staff member's role",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "description",
+						"in": "body",
+						"description": "Short description on the new staff member",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "phone_number",
+						"in": "body",
+						"description": "Staff member's phone number",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "clinical_practice",
+						"in": "body",
+						"description": "Staff member's clinical practice",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "scientific_practice",
+						"in": "body",
+						"description": "Staff member's scientific practice",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "academic_experience",
+						"in": "body",
+						"description": "Staff member's academic experience",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "professional_unions",
+						"in": "body",
+						"description": "Staff member's professional unions",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "education",
+						"in": "body",
+						"description": "Staff member's education",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "picture",
+						"in": "files",
+						"description": "Staff member's picture",
+						"required": true,
+						"schema": {
+							"type": "image"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"user"
+				],
+				"summary": "Delete the staff memmber",
+				"parameters": [
+					{
+						"name": "member_id",
+						"in": "body",
+						"description": "Staff member's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation"
+					}
+				}
+			}
+		},
+		"/api/appointment/:user_id": {
+			"get": {
+				"tags": [
+					"user"
+				],
+				"summary": "Get an appointment's details",
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "params",
+						"description": "Staff member's unique ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/departments"
+									}
+								},
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/appointments"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"externalDocs": {
+		"description": "Find out more about Swagger",
+		"url": "http://swagger.io"
+	},
+	"components": {
+		"requestBodies": {
+			"UserArray": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/components/schemas/User"
+							}
+						}
+					}
+				},
+				"description": "List of user object",
+				"required": true
+			},
+			"Pet": {
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/Pet"
+						}
+					},
+					"application/xml": {
+						"schema": {
+							"$ref": "#/components/schemas/Pet"
+						}
+					}
+				},
+				"description": "Pet object that needs to be added to the store",
+				"required": true
+			}
+		},
+		"securitySchemes": {
+			"petstore_auth": {
+				"type": "oauth2",
+				"flows": {
+					"implicit": {
+						"authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+						"scopes": {
+							"write:pets": "modify pets in your account",
+							"read:pets": "read your pets"
+						}
+					}
+				}
+			},
+			"api_key": {
+				"type": "apiKey",
+				"name": "api_key",
+				"in": "header"
+			}
+		},
+		"schemas": {
+			"users": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"user_name": {
+						"type": "varchar",
+						"format": "255"
+					},
+					"email": {
+						"type": "varchar",
+						"format": "255"
+					},
+					"password": {
+						"type": "varchar",
+						"format": "255"
+					},
+					"role": {
+						"type": "varchar",
+						"format": "255"
+					},
+					"created_at": {
+						"type": "datetime"
+					},
+					"updated_at": {
+						"type": "datetime"
+					}
+				},
+				"xml": {
+					"name": "users"
+				}
+			},
+			"staff": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"name": {
+						"type": "text"
+					},
+					"department_id": {
+						"type": "integer"
+					},
+					"role": {
+						"type": "text"
+					},
+					"description": {
+						"type": "text"
+					},
+					"picture": {
+						"type": "text"
+					},
+					"phone_number": {
+						"type": "text"
+					},
+					"clinical_practice": {
+						"type": "text"
+					},
+					"scientific_practice": {
+						"type": "text"
+					},
+					"academic_experience": {
+						"type": "text"
+					}
+				},
+				"xml": {
+					"name": "staff"
+				}
+			},
+			"departments": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "varchar",
+						"format": "45"
+					},
+					"id": {
+						"type": "integer",
+						"format": "integer"
+					}
+				},
+				"xml": {
+					"name": "departments"
+				}
+			},
+			"announcements_and_updates": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"title": {
+						"type": "varchar",
+						"format": "2048"
+					},
+					"post_date": {
+						"type": "varchar",
+						"format": "2048"
+					},
+					"content": {
+						"type": "mediumtext"
+					},
+					"link": {
+						"type": "varchar",
+						"format": "2048"
+					}
+				},
+				"xml": {
+					"name": "announcements_and_updates"
+				}
+			},
+			"appointments": {
+				"type": "object",
+				"properties": {
+					"user_id": {
+						"type": "integer"
+					},
+					"department_id": {
+						"type": "integer"
+					},
+					"date": {
+						"type": "date"
+					},
+					"time": {
+						"type": "time"
+					},
+					"color_id": {
+						"type": "integer"
+					}
+				},
+				"xml": {
+					"name": "appointments"
+				}
+			},
+			"surveys": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"title": {
+						"type": "varchar",
+						"format": "500"
+					},
+					"department_id": {
+						"type": "integer"
+					}
+				},
+				"xml": {
+					"name": "surveys"
+				}
+			},
+			"users_answers": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"question_id": {
+						"type": "integer"
+					},
+					"answer": {
+						"type": "varchar",
+						"format": "2000"
+					}
+				},
+				"xml": {
+					"name": "users_answers"
+				}
+			},
+			"questions": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"type_id": {
+						"type": "integer"
+					},
+					"survey_id": {
+						"type": "integer"
+					},
+					"text": {
+						"type": "varchar",
+						"format": "500"
+					}
+				},
+				"xml": {
+					"name": "questions"
+				}
+			},
+			"question_types": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"type": {
+						"type": "varchar",
+						"format": "255"
+					},
+					"name": {
+						"type": "varchar",
+						"format": "255"					}
+				},
+				"xml": {
+					"name": "question_types"
+				}
+			},
+			"question_suggested_answers": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"question_id": {
+						"type": "integer"
+					},
+					"suggested_answer": {
+						"type": "varchar",
+						"format": "255"
+					}
+				},
+				"xml": {
+					"name": "question_suggested_answers"
+				}
+			}
+		}
+	}
+}

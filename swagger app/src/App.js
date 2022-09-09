@@ -5,7 +5,7 @@ import SwaggerUi from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
 
 // API Definitions
-import petstoreJson from './examples/petstore.json';
+import petstoreJson from './examples/WolfsonBuddySwagger.json';
 
 const swaggerUi = SwaggerUi({ spec: petstoreJson })
 const UI = swaggerUi.getComponent('App', 'root')
