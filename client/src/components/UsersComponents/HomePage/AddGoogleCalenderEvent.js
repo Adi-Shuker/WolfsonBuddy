@@ -17,9 +17,12 @@ const LinkBuilder = (title, startDatetime)=>{
 }
 
 const AddGoogleCalenderEvent = (props) => {
-    //todo read the data from the db
-    const title = 'ד"ר+שגית+שושן+-+אף+אוזן+גרון';
-    const startDatetime = moment('20220506T132520Z');
+    const title = props.title.replace(" ","+")
+    const day = props.date.split(".")[0]
+    const month = props.date.split(".")[1]
+    const year = "20"+props.date.split(".")[2]
+    const time = props.time.split(":")[0]+props.time.split(":")[1]
+    const startDatetime = moment(year+month+day+'T'+time);
     return (
         <div>
             <WrapperCalendarIcon>
