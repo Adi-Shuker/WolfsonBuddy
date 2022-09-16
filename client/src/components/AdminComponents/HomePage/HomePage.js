@@ -13,6 +13,7 @@ import AddNewsAndUpdates from "../NewsAndUpdates/AddNewsAndUpdates.js";
 import SurveyResults from "../Survey/SurveyResults.js";
 import AddTeamMember from "../EditGetToKnowTheTeam/AddTeamMember.js";
 import EditSurvey from "../Survey/EditSurvey.js";
+import AddingAdminForm from "../AddingAdminForm.js";
 import "./HomePage.css";
 import Header from "../../UsersComponents/Header";
 import Footer from "../../UsersComponents/Footer";
@@ -94,6 +95,15 @@ const AdminHomePage = () => {
         <Tab tabClassName="tab" eventKey="SurveyResults" title="תוצאות הסקרים">
           <div className={"tab-wrapper"}>
             <SurveyResults />
+          </div>
+        </Tab>
+        <Tab
+          tabClassName="tab"
+          eventKey="AddingAdminForm"
+          title="הוספת משתמש אדמין"
+        >
+          <div className={"tab-wrapper"}>
+            <AddingAdminForm />
           </div>
         </Tab>
       </Tabs>

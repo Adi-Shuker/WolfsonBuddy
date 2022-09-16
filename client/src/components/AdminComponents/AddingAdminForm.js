@@ -53,12 +53,6 @@ const AddingAdminForm = () => {
             className="p-5 m-auto shadow-sm rounded-lg"
           >
             <Form onSubmit={submitHandle}>
-              <img
-                src={require("../../images/wolfsonBuddyLogo.jpg")}
-                width="100%"
-                height="100%"
-                alt="wolfsonBuddyLogo"
-              />
               <p>יש להכניס את פרטי איש הצוות עבורו יווצר משתמש</p>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
@@ -104,7 +98,7 @@ const AddingAdminForm = () => {
               </Form.Group>
 
               <Button variant="success btn-block" type="submit">
-                צור משתמש חדש
+                צור משתמש אדמין חדש
               </Button>
             </Form>
           </Col>
