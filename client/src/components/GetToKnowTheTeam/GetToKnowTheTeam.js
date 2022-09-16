@@ -84,16 +84,15 @@ const GetToKnowTheTeam = ({ departmentsList, doctorsList }) => {
               <PresentDoctor doctor={data} />
             </div>
           </div>
+          <div style={{"justifyContent": "center"}}>
           <Button
             className={"secretariatInfoButton"}
-            onClick={() => {
-              //setShowSecretariatInfo(true);
-            }}
             href="https://www.gov.il/he/service/wolfson-book-medical-appointment"
             target="_blank"
           >
             לזימון תור
           </Button>
+          </div>
           <Modal
             className="secretariatInfoModal"
             show={showSecretariatInfo}
