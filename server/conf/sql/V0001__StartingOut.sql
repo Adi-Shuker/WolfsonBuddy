@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id int NOT NULL AUTO_INCREMENT,
     user_name varchar(255),
 	email varchar(255),
@@ -9,7 +9,7 @@ CREATE TABLE users (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE announcements_and_updates (
+CREATE TABLE IF NOT EXISTS announcements_and_updates (
     id int NOT NULL AUTO_INCREMENT,
     title varchar(2048) NOT NULL,
     post_date date NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE announcements_and_updates (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE departments (
+CREATE TABLE IF NOT EXISTS departments (
   id int NOT NULL,
   name varchar(45) NOT NULL,
   PRIMARY KEY (id)
@@ -53,7 +53,7 @@ values (1 ,'אגף ילדים'),
 (26, 'מרפאה ראומטולוגית');
 
 
-CREATE TABLE staff (
+CREATE TABLE IF NOT EXISTS staff (
   id int NOT NULL AUTO_INCREMENT,
   name text(4048) NOT NULL,
   department_id int NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE staff (
   FOREIGN KEY (department_id) REFERENCES departments (id)
 );
 
-CREATE TABLE appointments (
+CREATE TABLE IF NOT EXISTS appointments (
   user_id int NOT NULL,
   department_id int NOT NULL,
   date date NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE appointments (
 );
 
 
-create table question_types(
+create table IF NOT EXISTS question_types(
     id int NOT NULL AUTO_INCREMENT,
 	type varchar(255),
 	name varchar(255),
@@ -96,7 +96,7 @@ insert into question_types values
 (null, 'rating', 'דירוג 1-5'),
 (null, 'comment', 'שאלה פתוחה');
 
-create table surveys(
+create table IF NOT EXISTS surveys(
 	id int NOT NULL AUTO_INCREMENT,
 	title varchar(500),
 	department_id int,
@@ -133,7 +133,7 @@ insert into surveys values
 (null, 'סקר שביעות רצון מרפאה ראומטולוגית',26);
 
 
-create table questions(
+create table IF NOT EXISTS questions(
     id int NOT NULL AUTO_INCREMENT,
 	type_id int,
 	survey_id int,
@@ -161,7 +161,7 @@ insert into questions values (null,2,1, "מה המגדר שלך?"),
 
 
 
-create table question_suggested_answers(
+create table IF NOT EXISTS question_suggested_answers(
 	id int NOT NULL AUTO_INCREMENT,
 	question_id int,
 	suggested_answer varchar(255),
@@ -237,7 +237,7 @@ insert into question_suggested_answers values
 (null, 14, 'לא רלוונטי');
 
 
-create table users_answers(
+create table IF NOT EXISTS users_answers(
 	id int NOT NULL AUTO_INCREMENT,
 	question_id int,
 	answer varchar(2000),
