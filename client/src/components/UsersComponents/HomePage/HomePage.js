@@ -107,7 +107,7 @@ const UsersHomePage = () => {
           <Hello className="helloDiv">
             <div className={"survey-" + surveyAvailable}>
               <LeftDiv className="leftDivSurvey">
-                {surveyAvailable ? <Survey /> : null}
+                {surveyAvailable  ? <Survey id={userAppointmentDetails?userAppointmentDetails[0].department_id : 1}/> : null}
               </LeftDiv>
               <RightDiv className="rightDiv vertical-center">
                 <div className="IconWrapper">
