@@ -205,7 +205,7 @@ const UserSurvey = () => {
   }, [surveyQuestions]);
 
   return (
-    <div>{surveyModel ? <Survey.Survey model={surveyModel} /> : null}</div> //TO-DO maybe if there isn't a survey put a div that says that?
+    <div>{surveyModel ? <Survey.Survey model={surveyModel} /> : null}</div>
   );
 };
 
