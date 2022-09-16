@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS departments (
   PRIMARY KEY (id)
 );
 
-insert into departments
+insert ignore into departments
 values (1 ,'אגף ילדים'),
 (2,'היחידה לאולטרסאוד נשים'),
 (3, 'היחידה לאורוגינקולוגיה וכירורגית רצפת האגן'),
@@ -90,7 +90,7 @@ create table IF NOT EXISTS question_types(
 	PRIMARY KEY (id)
 );
 
-insert into question_types values
+insert ignore into question_types values
 (null, 'matrix', 'מטריצה'),
 (null, 'dropdown', 'בחירה מתוך רשימה'),
 (null, 'rating', 'דירוג 1-5'),
@@ -104,7 +104,7 @@ create table IF NOT EXISTS surveys(
 	FOREIGN KEY (department_id) REFERENCES departments (id)
 );
 
-insert into surveys values
+insert ignore into surveys values
 (null, 'אגף ילדים', 1),
 (null, 'סקר שביעות רצון היחידה לאולטרסאוד נשים',2),
 (null, 'סקר שביעות רצון היחידה לאורוגינקולוגיה וכירורגית רצפת האגן',3),
@@ -143,7 +143,7 @@ create table IF NOT EXISTS questions(
 	FOREIGN KEY (survey_id) REFERENCES surveys (id)
 );
 
-insert into questions values (null,2,1, "מה המגדר שלך?"),
+insert ignore into questions values (null,2,1, "מה המגדר שלך?"),
 (null,1,1, 'באיזו מידה הרגשת שהאחיות התייחסו אליך באדיבות ובכבוד?'),
 (null,1,1, 'באיזו מידה האחיות הקשיבו לך והתייחסו לשאלות ולחששות שלך?'),
 (null,1,1, 'באיזו מידה ההסברים שקיבלת במהלך הביקור מהאחיות היו ברורים ומובנים לך?'),
@@ -169,7 +169,7 @@ create table IF NOT EXISTS question_suggested_answers(
 	FOREIGN KEY (question_id) REFERENCES questions (id)
 );
 
-insert into question_suggested_answers values
+insert ignore into question_suggested_answers values
 (null, 1, 'גבר'),
 (null, 1, 'אישה'),
 (null, 2, 'בכלל לא'),
@@ -245,7 +245,7 @@ create table IF NOT EXISTS users_answers(
 	FOREIGN KEY (question_id) REFERENCES questions (id)
 );
 
-insert into users_answers values
+insert ignore into users_answers values
 (null, 1, 'גבר'),
 (null, 1, 'אישה'),
 (null, 1, 'גבר'),
