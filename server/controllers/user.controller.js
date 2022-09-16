@@ -240,7 +240,7 @@ const updateStaffMember = (req, res) => {
 
 const getUserAppointment =(req, res) => {
     const user_id = req.params.user_id;
-    const query = `select a.department_id, a.date, a.time , a.doctor_id, s.name as doctor_name, d.name as department_name from appointments as a join departments as d on d.id=department_id and user_id=${user_id} left join staff as s on a.doctor_id=s.id`;
+    const query = `select a.department_id, DATE_FORMAT(a.date, '%d.%m.%y') as date, a.time , a.doctor_id, s.name as doctor_name, d.name as department_name from appointments as a join departments as d on d.id=department_id and user_id=${user_id} left join staff as s on a.doctor_id=s.id`;
     executeQuery(query)
         .then(resData => {
             res.status(200).json(resData);

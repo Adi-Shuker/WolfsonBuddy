@@ -57,7 +57,7 @@ const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
     >
       <div className="InfoAndCalenderDiv">
         <WrapperCalendarIcon>
-          <AddGoogleCalenderEvent />
+          <AddGoogleCalenderEvent title={doctorName+" "+departmentName} date={date} time={time}/>
         </WrapperCalendarIcon>
 
         <div className="textInfo-appointment">

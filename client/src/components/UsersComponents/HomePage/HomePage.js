@@ -123,9 +123,7 @@ const UsersHomePage = () => {
                 doctorName={userAppointmentDetails[0].doctor_name.replace("/","")}
                 departmentName={userAppointmentDetails[0].department_name}
                 time={userAppointmentDetails[0].time.substring(0,5)}
-                date={userAppointmentDetails[0].date.split("-")[2]+ "."+
-                userAppointmentDetails[0].date.split("-")[1]+ "."+
-                userAppointmentDetails[0].date.split("-")[0]}
+                date={userAppointmentDetails[0].date}
             />:""}
             <VisualMenu className="visualMenuDiv" />
           </Content>
