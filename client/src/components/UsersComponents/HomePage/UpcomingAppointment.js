@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 import CalendarIcon from "../Icons/CaIendarcon";
-import { Button } from "react-bootstrap";
+// import {Button} from "react-bootstrap";
 import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
 import { useHistory } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
 import NavigationDiv from "./NavigationDiv";
 import PresentDoctor from "../../PresentDoctor";
@@ -79,11 +80,13 @@ const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
         centered
       >
         <Modal.Header className="border-0" closeButton></Modal.Header>
+        <Modal.Body>
         <PresentDoctor
           setTrigger={setShowDoctor}
           doctor={doctorName}
           inModal={true}
         />
+        </Modal.Body>
       </Modal>
     </UpcomingAppointmentDiv>
   );

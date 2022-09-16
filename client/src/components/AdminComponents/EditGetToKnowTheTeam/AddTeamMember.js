@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import styled from "styled-components";
-import PresentDoctor from "../../PresentDoctor";
 import { DepartmentsContext } from "../../../App";
+import PresentDoctorModal from "../../PresentDoctorModal";
 
 const AddTeamMemberDiv = styled.div`
   justify-content: space-evenly;
@@ -35,8 +35,8 @@ const AddTeamMemberDiv = styled.div`
   }
   .leftDiv {
     display: grid;
-    width: 319px;
-    .PresentDoctor {
+    width: 350px;
+    .PresentDoctorModal {
       border: 1px solid black;
     }
   }
@@ -56,7 +56,7 @@ const AddTeamMember = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState("http://localhost:3001/images/teamMembersImages/default_profile.png");
   const [phone_number, setPhone_number] = useState("");
   const [clinical_practice, setClinical_practice] = useState("");
   const [scientific_practice, setScientific_practice] = useState("");
@@ -172,16 +172,20 @@ const AddTeamMember = () => {
   return (
     <div className="allcomponent">
       <AddTeamMemberDiv className="AddTeamMember">
-        <div className="leftDiv">
+        <div className="leftDiv" >
           <div className="title">תצוגה מקדימה:</div>
-          <PresentDoctor
+          <div style={{"border": "1px solid",
+            "padding": "15px",
+            "borderRadius": "10px", "height": "500px",
+            "width": "100%"}}>
+          <PresentDoctorModal
             className="preview"
-            doctor={{
-              name: name,
-              department:
+            imageUrl={picture}
+              doctorData={{
+                member_name: name,
+                department_name:
                 departmentsTitle === "בחר מחלקה" ? "" : departmentsTitle,
               role: role,
-              image: picture,
               phone_number: phone_number,
               professional_unions: professional_unions,
               scientific_practice: scientific_practice,
@@ -191,6 +195,7 @@ const AddTeamMember = () => {
               education: education,
             }}
           />
+          </div>
         </div>
         <div className="rightDiv">
           <div className="title">הוספת איש צוות:</div>
@@ -203,7 +208,6 @@ const AddTeamMember = () => {
                     <Form.Control
                       className="text-right"
                       type="file"
-                      // id="picture"
                       label="abc"
                       title="efg"
                       placeholder="hij"

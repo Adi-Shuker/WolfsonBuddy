@@ -44,7 +44,7 @@ const Content = styled.div`
   }
 `;
 
-const getUserAppointment = (userId, setUserAppointmentDetails)=>{
+const getUserAppointment = (userId, setUserAppointmentDetails, setSurveyAvailable)=>{
   const token = localStorage.getItem("accessToken");
   fetch(`/api/appointment/${userId}`, {
     method: "GET",
@@ -54,6 +54,7 @@ const getUserAppointment = (userId, setUserAppointmentDetails)=>{
       .then((res) => {
         console.log(res)
         setUserAppointmentDetails(res);
+        setSurveyAvailable(true)
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +63,7 @@ const getUserAppointment = (userId, setUserAppointmentDetails)=>{
 
 const UsersHomePage = () => {
   const history = useHistory();
-  const [surveyAvailable, setSurveyAvailable] = useState(true); //TODO need to be taken from DB
+  const [surveyAvailable, setSurveyAvailable] = useState(false);
   const [userAppointmentDetails, setUserAppointmentDetails] = useState([]);
   const { isAuthenticated, setIsAuthenticated } = React.useContext(
     IsAuthenticateContext
@@ -86,7 +87,7 @@ const UsersHomePage = () => {
             })
             .then((res) => {
               setUserDetails(res);
-              getUserAppointment(res.id, setUserAppointmentDetails)
+              getUserAppointment(res.id, setUserAppointmentDetails, setSurveyAvailable)
             })
             .catch((err) => {
               console.log(err);
@@ -95,10 +96,6 @@ const UsersHomePage = () => {
     }
     getUserAppointment(userDetails.id, setUserAppointmentDetails)
   },[])
-
-
-
-
 
   const { username, email, id } = userDetails;
 
