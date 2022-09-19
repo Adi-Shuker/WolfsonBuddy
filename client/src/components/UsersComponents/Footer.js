@@ -16,7 +16,6 @@ import { IsAdminContext } from "../../App";
 import BackIcon from "./Icons/BackIcon";
 const FooterDiv = styled.div`
   direction: rtl;
-  padding-top: 35px;
   height: 53px;
   margin-top: calc(10vh - 53px);
 

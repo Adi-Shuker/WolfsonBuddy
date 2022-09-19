@@ -37,6 +37,7 @@ const AddNewAndUpdatesDiv = styled.div`
     }
   }
   .leftDiv {
+    width: 350px;
   }
   .oneNewsDiv {
     margin: 5px;

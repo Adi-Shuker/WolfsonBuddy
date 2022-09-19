@@ -89,7 +89,7 @@ useEffect(()=>{
 
         </div>
       ) : (
-        <div className={"presenting"}>יש לבחור איש צוות</div>
+        <div className={"presenting"} style={{"width": "317px", "height": "330px"}}>יש לבחור איש צוות</div>
       )}
     </PresentDoctorDiv>
       </>

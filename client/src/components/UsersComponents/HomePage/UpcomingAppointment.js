@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
 import CalendarIcon from "../Icons/CaIendarcon";
-// import {Button} from "react-bootstrap";
 import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
-import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import React, { useState } from "react";
@@ -11,6 +9,8 @@ import PresentDoctor from "../../PresentDoctor";
 
 const UpcomingAppointmentDiv = styled.div`
   overflow-y: auto;
+  margin-left: 20px;
+  margin-right: 20px;
   .textInfo-appointment {
     display: grid;
     text-align: right;
