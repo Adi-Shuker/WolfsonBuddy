@@ -24,7 +24,7 @@ const PresentOneNews = ({ title, date, content, link }) => {
         <div className={"dateSpan"}> {date} </div>
         <h5> {title} </h5>
 
-        <h5> {content} </h5>
+        <h5 style={{ "word-wrap": "break-word" }}> {content} </h5>
         {link ? (
           <a href={link} target="_blank" rel="noopener noreferrer">
             <h5> לעוד מידע לחץ כאן </h5>

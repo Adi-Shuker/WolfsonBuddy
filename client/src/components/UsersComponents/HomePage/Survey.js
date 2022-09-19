@@ -5,12 +5,10 @@ import { useHistory } from "react-router-dom";
 const SurveyDiv = styled.div`
   padding: 5px;
   cursor: pointer;
+  margin-left: 20px;
 `;
 const Survey = (props) => {
   const history = useHistory();
-  const handleMenuItemClick = ({ iconClicked }) => {
-    console.log({ iconClicked });
-  };
   const clickedSurvey = () => {
     history.push(`/userSurvey/${props.id}`);
   };
