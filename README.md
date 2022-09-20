@@ -24,9 +24,11 @@ Options to download the app: <br>
 
 ### Create the database
 
-- Create schema called "wolfson_db" in your mysql
-- Run "npm run migrate" on the terminal
-- Run "npm run migrate" on the terminal again
+Go to the file https://github.com/Adi-Shuker/WolfsonBuddy/blob/2f131de8886863d903cca292afe94c534b01041a/server/config/db.config.js, you can change there the configuration to your user in mysql
+
+1) Create schema called "wolfson_db" in your mysql
+2) Run "npm run migrate" on the terminal (for download flyway)
+3) Run "npm run migrate" on the terminal again (for create all the tables)
 
 
 ### Usage
