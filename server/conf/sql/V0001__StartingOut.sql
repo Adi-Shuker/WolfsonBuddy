@@ -9,8 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
 	PRIMARY KEY (id)
 );
 
-insert ignore into users("user_name", "email", "password", "role") values("עדי שוקר", "user@gmail.com", "U2FsdGVkX1/yx3eCOnR6oCOaFcgtUGj6c/mlIVrjCBU=","user"),("עדי שוקר", "admin@gmail.com", "U2FsdGVkX197y6lHt6dg5dg7hF5I6y6XXhxGHbmQ1/I=", "admin")
-
+insert ignore into users(user_name, email, password, role)
+ values ('עדי שוקר', 'user@gmail.com', 'U2FsdGVkX1/yx3eCOnR6oCOaFcgtUGj6c/mlIVrjCBU=','user'),
+ ('עדי שוקר', 'admin@gmail.com', 'U2FsdGVkX197y6lHt6dg5dg7hF5I6y6XXhxGHbmQ1/I=', 'admin');
 
 CREATE TABLE IF NOT EXISTS announcements_and_updates (
     id int NOT NULL AUTO_INCREMENT,
@@ -85,7 +86,8 @@ CREATE TABLE IF NOT EXISTS appointments (
   FOREIGN KEY doctors_fkey (doctor_id) REFERENCES staff (id)
 );
 
-insert ignore into appointments values('1', '7', '2022-11-04', '19:30:10', '1')
+insert ignore into appointments (user_id, department_id, date, time, doctor_id)
+values('1', '7', '2022-11-04', '19:30:10', '1');
 
 
 create table IF NOT EXISTS question_types(
