@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
 	PRIMARY KEY (id)
 );
 
+insert ignore into users("user_name", "email", "password", "role") values("עדי שוקר", "user@gmail.com", "U2FsdGVkX1/yx3eCOnR6oCOaFcgtUGj6c/mlIVrjCBU=","user"),("עדי שוקר", "admin@gmail.com", "U2FsdGVkX197y6lHt6dg5dg7hF5I6y6XXhxGHbmQ1/I=", "admin")
+
+
 CREATE TABLE IF NOT EXISTS announcements_and_updates (
     id int NOT NULL AUTO_INCREMENT,
     title varchar(2048) NOT NULL,
@@ -81,6 +84,8 @@ CREATE TABLE IF NOT EXISTS appointments (
   FOREIGN KEY department_fkey (department_id) REFERENCES departments (id),
   FOREIGN KEY doctors_fkey (doctor_id) REFERENCES staff (id)
 );
+
+insert ignore into appointments values('1', '7', '2022-11-04', '19:30:10', '1')
 
 
 create table IF NOT EXISTS question_types(
@@ -344,6 +349,7 @@ values
 (14, 'במידה רבה'),
 (14, 'במידה רבה מאוד'),
 (14, 'לא רלוונטי');
+
 
 
 
