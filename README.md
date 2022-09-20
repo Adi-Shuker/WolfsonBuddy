@@ -21,6 +21,14 @@ Options to download the app: <br>
 - Clone the repository https://github.com/Adi-Shuker/WolfsonBuddy.
 - Download the zip.
 
+
+### Create the database
+
+- Create schema called "wolfson_db" in your mysql
+- Run "npm run migrate" on the terminal
+- Run "npm run migrate" on the terminal again
+
+
 ### Usage
 
 1) Enter in the command line of the cloned repository <br>
