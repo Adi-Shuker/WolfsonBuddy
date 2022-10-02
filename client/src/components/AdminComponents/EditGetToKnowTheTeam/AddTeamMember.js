@@ -36,9 +36,6 @@ const AddTeamMemberDiv = styled.div`
   .leftDiv {
     display: grid;
     width: 319px;
-    .PresentDoctor {
-      border: 1px solid black;
-    }
   }
 `;
 

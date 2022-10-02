@@ -15,6 +15,9 @@ const PresentOneNewsDiv = styled.div`
     padding-left: 10px;
     padding-top: 8px;
   }
+  h5 {
+    direction: rtl;
+  }
 `;
 
 const PresentOneNews = ({ title, date, content, link }) => {

@@ -7,7 +7,7 @@ import { StaffMembersContext } from "../App";
 
 const PresentDoctorDiv = styled.div`
   margin-bottom: 10px;
-  overflow-y: auto;
+
   margin-top: 5px;
   img {
     border-radius: 5px;
