@@ -3,9 +3,11 @@ import CalendarIcon from "../Icons/CaIendarcon";
 import AddGoogleCalenderEvent from "./AddGoogleCalenderEvent";
 import { Button } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import NavigationDiv from "./NavigationDiv";
 import PresentDoctor from "../../PresentDoctor";
+import PresentDoctorModal from "../../PresentDoctorModal";
+import {StaffMembersContext} from "../../../App";
 
 const UpcomingAppointmentDiv = styled.div`
   overflow-y: auto;
@@ -45,11 +47,37 @@ const WrapperCalendarIcon = styled.div`
 
 const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
   const [showDoctor, setShowDoctor] = useState(false);
-
+  const [doctorData, setDoctorData] = useState({})
+  const [src, setSrc] = useState(
+      "images/teamMembersImages/default_profile.png"
+  )
   const handleClick = () => {
-    console.log("need to present the doctor");
     setShowDoctor(true);
   };
+  const { staffMembers, setStaffMembers } = React.useContext(StaffMembersContext);
+  useEffect(()=>{
+    const selectedDoctor = staffMembers.filter(
+        (staffMember) => staffMember.member_name === doctorName
+    )[0];
+    setDoctorData(selectedDoctor)
+    if (selectedDoctor && selectedDoctor.picture) {
+      fetch(`/images/teamMembersImages/${selectedDoctor.picture}`, { method: "HEAD" })
+          .then((res) => {
+            console.log(res)
+            if (res.ok) {
+              //case Image exists.
+              setSrc(
+                  `images/teamMembersImages/${selectedDoctor.picture}`
+              );
+            } else {
+              setSrc(
+                  "images/teamMembersImages/default_profile.png"
+              );
+            }
+          })
+          .catch((err) => console.log("Error:", err));
+    }
+  },[doctorName])
 
   return (
     <UpcomingAppointmentDiv
@@ -81,11 +109,12 @@ const UpcomingAppointment = ({ doctorName, departmentName, time, date }) => {
       >
         <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
-        <PresentDoctor
-          setTrigger={setShowDoctor}
-          doctor={doctorName}
-          inModal={true}
-        />
+          <PresentDoctorModal setTrigger={setShowDoctor} doctorData={doctorData} imageUrl={src}/>
+        {/*<PresentDoctor*/}
+        {/*  setTrigger={setShowDoctor}*/}
+        {/*  doctor={doctorName}*/}
+        {/*  inModal={true}*/}
+        {/*/>*/}
         </Modal.Body>
       </Modal>
     </UpcomingAppointmentDiv>
