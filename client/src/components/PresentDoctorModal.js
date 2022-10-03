@@ -20,7 +20,7 @@ const PresentDoctorModal = (props) => {
                     <h2> {props.doctorData.member_name} </h2>
                     <h3> {props.doctorData.department_name} </h3>
                     <h3> {props.doctorData.role} </h3>
-                    <h5> {props.doctorData.description} </h5>
+                    <h5 dir="rtl"> {props.doctorData.description} </h5>
                     <h5> {props.doctorData.phone_number} </h5>
                     {props.doctorData.clinical_practice?(
                         <div>
