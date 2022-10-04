@@ -63,7 +63,6 @@ const AddTeamMember = () => {
   const { departments, setDepartments } = React.useContext(DepartmentsContext);
 
   const submitHandle = (event) => {
-    event.preventDefault();
     const token = localStorage.getItem("accessToken");
     const data = new FormData();
     data.append("name", name);
